@@ -50,7 +50,7 @@
 		let btn = document.getElementById("btn");
 		let forgetPassword = document.getElementById("forgetPassword");
 
-		// ===== Simple Login Logic =====
+		// ===== Login Logic with Specific Credentials =====
 		btn.addEventListener("click", () => {
 			let uname = email.value.trim();
 			let uPass = password.value.trim();
@@ -61,11 +61,15 @@
 				return;
 			}
 
-			// If both fields have any value, login is successful
-			alert("Login Successful!");
-			email.value = "";
-			password.value = "";
-			window.location.href = "supervisor.html";
+			// Check for specific credentials
+			if (uname === "EMP123" && uPass === "test@123") {
+				alert("Login Successful!");
+				email.value = "";
+				password.value = "";
+				window.location.href = "supervisor.html";
+			} else {
+				alert("Invalid Employee ID or Password. Please try again.");
+			}
 		});
 
 		// ===== Enter Key Login =====
