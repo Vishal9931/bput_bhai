@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings & Access Control - HO Safety Management</title>
+    <link rel="stylesheet" href="../css2/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhosafety1834back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-card border-b border-secondary-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 16l-2-2-1.41 1.41L14 18.83l6-6L18.59 11.41 14 16z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-semibold text-text-primary">HO Safety Management</h1>
+                        <p class="text-sm text-text-secondary">Settings & Access Control</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="dashboard_overview.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="sector_view.html" class="text-text-secondary hover:text-primary transition-colors">Sectors</a>
+                    <a href="project_overview.html" class="text-text-secondary hover:text-primary transition-colors">Projects</a>
+                    <a href="site_safety_officer_detail.html" class="text-text-secondary hover:text-primary transition-colors">Officers</a>
+                    <a href="comparison_analysis.html" class="text-text-secondary hover:text-primary transition-colors">Analysis</a>
+                    <a href="settings_access_control.html" class="text-primary font-medium border-b-2 border-primary pb-1">Settings</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-text-secondary hover:text-primary transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 h-4 w-4 bg-error text-white text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://images.unsplash.com/photo-1599182002081-60947de0356b" 
+                             alt="Profile picture of Arjun Sharma, Head Office Manager" 
+                             class="h-8 w-8 rounded-full object-cover"
+                             onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                        <span class="text-sm font-medium text-text-primary">Arjun Sharma</span>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-text-secondary hover:text-primary">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-surface border-t border-secondary-200">
+            <div class="px-4 py-2 space-y-2">
+                <a href="dashboard_overview.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Dashboard</a>
+                <a href="sector_view.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Sectors</a>
+                <a href="project_overview.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Projects</a>
+                <a href="site_safety_officer_detail.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Officers</a>
+                <a href="comparison_analysis.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Analysis</a>
+                <a href="settings_access_control.html" class="block px-3 py-2 text-primary font-medium bg-primary-50 rounded">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Header Section -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+            <div>
+                <h2 class="text-2xl font-bold text-text-primary">Settings & Access Control</h2>
+                <p class="text-text-secondary mt-1">Manage your profile, security settings, and system preferences</p>
+                <div class="flex items-center mt-2 text-sm text-text-secondary">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span>Last updated: November 1, 2025 at 2:51 PM</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button id="save-all-btn" class="flex items-center px-4 py-2 bg-primary text-white rounded-button hover:bg-primary-700 transition-colors">
+                    <i class="fas fa-save mr-2"></i>
+                    Save All Changes
+                </button>
+                <button id="reset-btn" class="flex items-center px-4 py-2 bg-secondary-200 text-text-secondary rounded-button hover:bg-secondary-300 transition-colors">
+                    <i class="fas fa-undo mr-2"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="bg-surface rounded-card shadow-card mb-6">
+            <div class="border-b border-secondary-200">
+                <nav class="flex space-x-8 px-6" aria-label="Settings tabs">
+                    <button class="tab-button active" data-tab="profile">
+                        <i class="fas fa-user mr-2"></i>
+                        Profile
+                    </button>
+                    <button class="tab-button" data-tab="security">
+                        <i class="fas fa-shield-alt mr-2"></i>
+                        Security
+                    </button>
+                    <button class="tab-button" data-tab="notifications">
+                        <i class="fas fa-bell mr-2"></i>
+                        Notifications
+                    </button>
+                    <button class="tab-button" data-tab="access">
+                        <i class="fas fa-key mr-2"></i>
+                        Access Control
+                    </button>
+                    <button class="tab-button" data-tab="preferences">
+                        <i class="fas fa-cog mr-2"></i>
+                        Preferences
+                    </button>
+                    <button class="tab-button" data-tab="data">
+                        <i class="fas fa-database mr-2"></i>
+                        Data Management
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="p-6">
+                <!-- Profile Tab -->
+                <div id="profile-tab" class="tab-content active">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Profile Picture Section -->
+                        <div class="lg:col-span-1">
+                            <div class="text-center">
+                                <div class="relative inline-block">
+                                    <img src="https://images.unsplash.com/photo-1687256457585-3608dfa736c5" 
+                                         alt="Current profile picture of Arjun Sharma" 
+                                         class="w-32 h-32 rounded-full object-cover mx-auto border-4 border-secondary-200"
+                                         onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                    <button class="absolute bottom-0 right-0 bg-primary text-white rounded-full p-2 hover:bg-primary-700 transition-colors">
+                                        <i class="fas fa-camera text-sm"></i>
+                                    </button>
+                                </div>
+                                <h3 class="mt-4 text-lg font-semibold text-text-primary">Arjun Sharma</h3>
+                                <p class="text-text-secondary">Head Office Manager</p>
+                                <button class="mt-2 text-sm text-primary hover:text-primary-700 transition-colors">
+                                    Change Photo
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Profile Information Form -->
+                        <div class="lg:col-span-2">
+                            <form class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">First Name</label>
+                                        <input type="text" value="Arjun" class="form-input w-full px-3 py-2" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Last Name</label>
+                                        <input type="text" value="Sharma" class="form-input w-full px-3 py-2" required>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Email Address</label>
+                                    <input type="email" value="arjun.sharma@hosafety.in" class="form-input w-full px-3 py-2" required>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Phone Number</label>
+                                        <input type="tel" value="+91 98765 43210" class="form-input w-full px-3 py-2">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Employee ID</label>
+                                        <input type="text" value="HO-2024-001" class="form-input w-full px-3 py-2" readonly>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Job Title</label>
+                                    <input type="text" value="Head Office Safety Manager" class="form-input w-full px-3 py-2">
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Address</label>
+                                        <textarea class="form-input w-full px-3 py-2" rows="3">A-123, Sector 15, Noida
+Uttar Pradesh, 201301
+India</textarea>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Emergency Contact</label>
+                                        <input type="text" value="Sunita Sharma (Wife)" class="form-input w-full px-3 py-2">
+                                        <input type="tel" value="+91 87654 32109" class="form-input w-full px-3 py-2 mt-2">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Department</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>Safety Management</option>
+                                        <option>Operations</option>
+                                        <option>Engineering</option>
+                                        <option>Administration</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Assigned Sectors</label>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 text-primary">
+                                            <span class="text-sm">Construction</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 text-primary">
+                                            <span class="text-sm">Manufacturing</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 text-primary">
+                                            <span class="text-sm">Energy</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="mr-2 text-primary">
+                                            <span class="text-sm">Infrastructure</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Date of Joining</label>
+                                        <input type="date" value="2024-01-15" class="form-input w-full px-3 py-2" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Reporting Manager</label>
+                                        <input type="text" value="Priya Nair - Safety Director" class="form-input w-full px-3 py-2" readonly>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Tab -->
+                <div id="security-tab" class="tab-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Password Management -->
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-4">Password Management</h3>
+                                <form class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Current Password</label>
+                                        <input type="password" class="form-input w-full px-3 py-2" placeholder="Enter current password">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">New Password</label>
+                                        <input type="password" id="new-password" class="form-input w-full px-3 py-2" placeholder="Enter new password">
+                                        <div class="mt-2">
+                                            <div class="flex items-center space-x-2 text-xs">
+                                                <div class="flex space-x-1">
+                                                    <div class="w-2 h-2 bg-error rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-secondary-200 rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-secondary-200 rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-secondary-200 rounded-full"></div>
+                                                </div>
+                                                <span class="text-error">Weak</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Confirm New Password</label>
+                                        <input type="password" class="form-input w-full px-3 py-2" placeholder="Confirm new password">
+                                    </div>
+                                    <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-button hover:bg-primary-700 transition-colors">
+                                        Update Password
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Two-Factor Authentication -->
+                            <div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-4">Two-Factor Authentication</h3>
+                                <div class="bg-secondary-50 p-4 rounded-lg">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-text-primary">2FA Status</p>
+                                            <p class="text-sm text-text-secondary">Currently disabled</p>
+                                        </div>
+                                        <button class="bg-success text-white px-4 py-2 rounded-button hover:bg-success-600 transition-colors">
+                                            Enable 2FA
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Information -->
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-4">Session Information</h3>
+                                <div class="bg-surface border border-secondary-200 rounded-lg p-4 space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-text-secondary">Current Session</span>
+                                        <span class="text-sm font-medium text-success">Active</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-text-secondary">Login Time</span>
+                                        <span class="text-sm font-medium text-text-primary">Nov 1, 2025 8:30 AM</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-text-secondary">IP Address</span>
+                                        <span class="text-sm font-medium text-text-primary">192.168.1.100</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-text-secondary">Device</span>
+                                        <span class="text-sm font-medium text-text-primary">Chrome on Windows</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Login History</h3>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between p-3 bg-secondary-50 rounded-lg">
+                                        <div>
+                                            <p class="text-sm font-medium text-text-primary">Nov 1, 2025 8:30 AM</p>
+                                            <p class="text-xs text-text-secondary">Chrome on Windows - 192.168.1.100</p>
+                                        </div>
+                                        <div class="status-indicator status-success"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-secondary-50 rounded-lg">
+                                        <div>
+                                            <p class="text-sm font-medium text-text-primary">Oct 31, 2025 5:45 PM</p>
+                                            <p class="text-xs text-text-secondary">Chrome on Windows - 192.168.1.100</p>
+                                        </div>
+                                        <div class="status-indicator status-success"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-secondary-50 rounded-lg">
+                                        <div>
+                                            <p class="text-sm font-medium text-text-primary">Oct 31, 2025 8:15 AM</p>
+                                            <p class="text-xs text-text-secondary">Safari on iPhone - 192.168.1.105</p>
+                                        </div>
+                                        <div class="status-indicator status-success"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Tab -->
+                <div id="notifications-tab" class="tab-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Email Notifications -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Email Notifications</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                                    <div>
+                                        <p class="font-medium text-text-primary">Critical Safety Alerts</p>
+                                        <p class="text-sm text-text-secondary">Immediate notifications for high-risk incidents</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                                    <div>
+                                        <p class="font-medium text-text-primary">Daily Reports Summary</p>
+                                        <p class="text-sm text-text-secondary">Daily digest of safety reports and metrics</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                                    <div>
+                                        <p class="font-medium text-text-primary">Weekly Analytics</p>
+                                        <p class="text-sm text-text-secondary">Weekly performance and compliance reports</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                                    <div>
+                                        <p class="font-medium text-text-primary">System Updates</p>
+                                        <p class="text-sm text-text-secondary">Platform updates and maintenance notifications</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SMS & In-App Notifications -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">SMS & In-App Notifications</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                                    <div>
+                                        <p class="font-medium text-text-primary">Emergency Alerts (SMS)</p>
+                                        <p class="text-sm text-text-secondary">Critical incidents requiring immediate attention</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                                    <div>
+                                        <p class="font-medium text-text-primary">Report Submissions</p>
+                                        <p class="text-sm text-text-secondary">New safety reports from officers</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                                    <div>
+                                        <p class="font-medium text-text-primary">Compliance Reminders</p>
+                                        <p class="text-sm text-text-secondary">Overdue reports and pending actions</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-medium text-text-primary mb-3">Notification Frequency</h4>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>Real-time (Immediate)</option>
+                                        <option>Every 15 minutes</option>
+                                        <option>Hourly digest</option>
+                                        <option>Daily digest</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-medium text-text-primary mb-3">Quiet Hours</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm text-text-secondary mb-1">From</label>
+                                            <input type="time" value="22:00" class="form-input w-full px-3 py-2">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm text-text-secondary mb-1">To</label>
+                                            <input type="time" value="07:00" class="form-input w-full px-3 py-2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Access Control Tab -->
+                <div id="access-tab" class="tab-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Current Permissions -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Current Permissions</h3>
+                            <div class="space-y-4">
+                                <div class="bg-success-50 border border-success-100 rounded-lg p-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-text-primary">Dashboard Access</p>
+                                            <p class="text-sm text-text-secondary">Full dashboard viewing and interaction</p>
+                                        </div>
+                                        <i class="fas fa-check-circle text-success text-xl"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bg-success-50 border border-success-100 rounded-lg p-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-text-primary">Report Management</p>
+                                            <p class="text-sm text-text-secondary">View, download, and analyze reports</p>
+                                        </div>
+                                        <i class="fas fa-check-circle text-success text-xl"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bg-success-50 border border-success-100 rounded-lg p-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-text-primary">Officer Oversight</p>
+                                            <p class="text-sm text-text-secondary">Monitor officer performance and activities</p>
+                                        </div>
+                                        <i class="fas fa-check-circle text-success text-xl"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bg-warning-50 border border-warning-100 rounded-lg p-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-text-primary">User Management</p>
+                                            <p class="text-sm text-text-secondary">Limited to profile updates only</p>
+                                        </div>
+                                        <i class="fas fa-exclamation-triangle text-warning text-xl"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bg-error-50 border border-error-100 rounded-lg p-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-text-primary">System Administration</p>
+                                            <p class="text-sm text-text-secondary">No administrative privileges</p>
+                                        </div>
+                                        <i class="fas fa-times-circle text-error text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Role Information -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Role Information</h3>
+                            <div class="bg-surface border border-secondary-200 rounded-lg p-6 space-y-4">
+                                <div>
+                                    <p class="text-sm text-text-secondary">Current Role</p>
+                                    <p class="text-lg font-semibold text-text-primary">Head Office Manager</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-text-secondary">Role Level</p>
+                                    <p class="font-medium text-text-primary">Level 3 - Senior Management</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-text-secondary">Assigned Since</p>
+                                    <p class="font-medium text-text-primary">January 15, 2024</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-text-secondary">Reporting To</p>
+                                    <p class="font-medium text-text-primary">Priya Nair - Safety Director</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-text-secondary">Office Location</p>
+                                    <p class="font-medium text-text-primary">Gurugram Corporate Office, Haryana</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-6">
+                                <h4 class="font-medium text-text-primary mb-3">Sector Access</h4>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="flex items-center p-2 bg-success-50 rounded">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span class="text-sm">Construction</span>
+                                    </div>
+                                    <div class="flex items-center p-2 bg-success-50 rounded">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span class="text-sm">Manufacturing</span>
+                                    </div>
+                                    <div class="flex items-center p-2 bg-success-50 rounded">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span class="text-sm">Energy</span>
+                                    </div>
+                                    <div class="flex items-center p-2 bg-secondary-100 rounded">
+                                        <i class="fas fa-times text-secondary mr-2"></i>
+                                        <span class="text-sm text-secondary">Infrastructure</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-6">
+                                <button class="w-full bg-accent text-white py-2 px-4 rounded-button hover:bg-accent-600 transition-colors">
+                                    Request Access Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferences Tab -->
+                <div id="preferences-tab" class="tab-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Dashboard Preferences -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Dashboard Preferences</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Default Dashboard View</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>Overview Summary</option>
+                                        <option>Sector Comparison</option>
+                                        <option>Recent Alerts</option>
+                                        <option>Performance Metrics</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Default Time Range</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>Last 7 days</option>
+                                        <option>Last 30 days</option>
+                                        <option>Last 90 days</option>
+                                        <option>Current month</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Language Preference</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>English</option>
+                                        <option>हिंदी (Hindi)</option>
+                                        <option>मराठी (Marathi)</option>
+                                        <option>தமிழ் (Tamil)</option>
+                                        <option>తెలుగు (Telugu)</option>
+                                        <option>ಕನ್ನಡ (Kannada)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Time Zone</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>India Standard Time (IST)</option>
+                                        <option>UTC +05:30</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Date Format</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>DD/MM/YYYY</option>
+                                        <option>MM/DD/YYYY</option>
+                                        <option>YYYY-MM-DD</option>
+                                        <option>DD Month YYYY</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-medium text-text-primary mb-3">Display Options</h4>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 text-primary">
+                                            <span class="text-sm">Show sector summary cards</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 text-primary">
+                                            <span class="text-sm">Display recent alerts</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="mr-2 text-primary">
+                                            <span class="text-sm">Show performance trends</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2 text-primary">
+                                            <span class="text-sm">Enable quick filters</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Preferences -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">System Preferences</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Currency Format</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>₹ 1,00,000 (Indian Rupees)</option>
+                                        <option>$ 1,000.00 (US Dollars)</option>
+                                        <option>€ 1.000,00 (Euros)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Number Format</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>1,00,000 (Indian)</option>
+                                        <option>1,000.00 (US)</option>
+                                        <option>1.000,00 (EU)</option>
+                                        <option>1 000,00 (FR)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Auto-refresh Interval</label>
+                                    <select class="form-input w-full px-3 py-2">
+                                        <option>30 seconds</option>
+                                        <option>1 minute</option>
+                                        <option>5 minutes</option>
+                                        <option>Manual only</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-medium text-text-primary mb-3">Theme Preferences</h4>
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <button class="p-3 border-2 border-primary bg-primary-50 rounded-lg text-center">
+                                            <div class="w-full h-8 bg-primary rounded mb-2"></div>
+                                            <span class="text-xs font-medium">Default</span>
+                                        </button>
+                                        <button class="p-3 border border-secondary-200 rounded-lg text-center hover:border-secondary-300">
+                                            <div class="w-full h-8 bg-secondary-800 rounded mb-2"></div>
+                                            <span class="text-xs">Dark</span>
+                                        </button>
+                                        <button class="p-3 border border-secondary-200 rounded-lg text-center hover:border-secondary-300">
+                                            <div class="w-full h-8 bg-gradient-to-r from-primary to-accent rounded mb-2"></div>
+                                            <span class="text-xs">Auto</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Management Tab -->
+                <div id="data-tab" class="tab-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Export Options -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Data Export</h3>
+                            <div class="space-y-4">
+                                <div class="bg-surface border border-secondary-200 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <p class="font-medium text-text-primary">Activity Logs</p>
+                                            <p class="text-sm text-text-secondary">Your login history and system activities</p>
+                                        </div>
+                                        <i class="fas fa-history text-accent text-xl"></i>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-success text-white py-2 px-3 rounded-button hover:bg-success-600 transition-colors text-sm">
+                                            <i class="fas fa-file-excel mr-1"></i>
+                                            Excel
+                                        </button>
+                                        <button class="flex-1 bg-error text-white py-2 px-3 rounded-button hover:bg-error-600 transition-colors text-sm">
+                                            <i class="fas fa-file-pdf mr-1"></i>
+                                            PDF
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-surface border border-secondary-200 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <p class="font-medium text-text-primary">Dashboard Configurations</p>
+                                            <p class="text-sm text-text-secondary">Your personalized settings and preferences</p>
+                                        </div>
+                                        <i class="fas fa-cog text-accent text-xl"></i>
+                                    </div>
+                                    <button class="w-full bg-accent text-white py-2 px-3 rounded-button hover:bg-accent-600 transition-colors text-sm">
+                                        <i class="fas fa-download mr-1"></i>
+                                        Export Settings
+                                    </button>
+                                </div>
+
+                                <div class="bg-surface border border-secondary-200 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <p class="font-medium text-text-primary">Report History</p>
+                                            <p class="text-sm text-text-secondary">All reports you've accessed and downloaded</p>
+                                        </div>
+                                        <i class="fas fa-file-alt text-accent text-xl"></i>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-success text-white py-2 px-3 rounded-button hover:bg-success-600 transition-colors text-sm">
+                                            <i class="fas fa-file-excel mr-1"></i>
+                                            Excel
+                                        </button>
+                                        <button class="flex-1 bg-error text-white py-2 px-3 rounded-button hover:bg-error-600 transition-colors text-sm">
+                                            <i class="fas fa-file-pdf mr-1"></i>
+                                            PDF
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Backup & Storage -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Backup & Storage</h3>
+                            <div class="space-y-4">
+                                <div class="bg-surface border border-secondary-200 rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-3">Storage Usage</h4>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1">
+                                                <span class="text-text-secondary">Profile Data</span>
+                                                <span class="font-medium">2.4 MB</span>
+                                            </div>
+                                            <div class="w-full bg-secondary-200 rounded-full h-2">
+                                                <div class="bg-primary h-2 rounded-full" style="width: 15%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1">
+                                                <span class="text-text-secondary">Cached Reports</span>
+                                                <span class="font-medium">45.7 MB</span>
+                                            </div>
+                                            <div class="w-full bg-secondary-200 rounded-full h-2">
+                                                <div class="bg-warning h-2 rounded-full" style="width: 60%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1">
+                                                <span class="text-text-secondary">Activity Logs</span>
+                                                <span class="font-medium">12.1 MB</span>
+                                            </div>
+                                            <div class="w-full bg-secondary-200 rounded-full h-2">
+                                                <div class="bg-success h-2 rounded-full" style="width: 25%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-3 border-t border-secondary-200">
+                                        <div class="flex justify-between">
+                                            <span class="text-sm font-medium text-text-primary">Total Used</span>
+                                            <span class="text-sm font-bold text-text-primary">60.2 MB / 500 MB</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-surface border border-secondary-200 rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-3">Automatic Backup</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-text-secondary">Enable Auto Backup</span>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" checked class="sr-only peer">
+                                                <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm text-text-secondary mb-1">Backup Frequency</label>
+                                            <select class="form-input w-full px-3 py-2">
+                                                <option>Daily</option>
+                                                <option>Weekly</option>
+                                                <option>Monthly</option>
+                                            </select>
+                                        </div>
+                                        <div class="text-xs text-text-secondary">
+                                            <p>Last backup: November 1, 2025 at 12:00 AM</p>
+                                            <p>Next backup: November 2, 2025 at 12:00 AM</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-surface border border-secondary-200 rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-3">Data Management</h4>
+                                    <div class="space-y-2">
+                                        <button class="w-full bg-warning text-white py-2 px-3 rounded-button hover:bg-warning-600 transition-colors text-sm">
+                                            <i class="fas fa-broom mr-1"></i>
+                                            Clear Cache
+                                        </button>
+                                        <button class="w-full bg-error text-white py-2 px-3 rounded-button hover:bg-error-600 transition-colors text-sm">
+                                            <i class="fas fa-trash mr-1"></i>
+                                            Delete All Data
+                                        </button>
+                                    </div>
+                                    <p class="text-xs text-text-secondary mt-2">
+                                        Warning: These actions cannot be undone. Please backup your data first.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <div id="success-message" class="hidden fixed top-4 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-modal z-50">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle mr-2"></i>
+                <span>Settings saved successfully!</span>
+            </div>
+        </div>
+
+        <div id="error-message" class="hidden fixed top-4 right-4 bg-error text-white px-6 py-3 rounded-lg shadow-modal z-50">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <span>Error saving settings. Please try again.</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab and show content
+                this.classList.add('active');
+                const tabContent = document.getElementById(tabId + '-tab');
+                tabContent.classList.remove('hidden');
+                tabContent.classList.add('active');
+            });
+        });
+
+        // Save all changes
+        document.getElementById('save-all-btn').addEventListener('click', function() {
+            // Simulate saving
+            const successMessage = document.getElementById('success-message');
+            successMessage.classList.remove('hidden');
+            
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 3000);
+        });
+
+        // Reset changes
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to reset all changes? This action cannot be undone.')) {
+                // Reset form logic would go here
+                console.log('Resetting all changes...');
+            }
+        });
+
+        // Password strength indicator
+        document.getElementById('new-password')?.addEventListener('input', function() {
+            const password = this.value;
+            const strengthIndicator = this.parentNode.querySelector('.flex.space-x-1');
+            const strengthText = this.parentNode.querySelector('span');
+            
+            // Simple password strength logic
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            const indicators = strengthIndicator.querySelectorAll('div');
+            const colors = ['bg-error', 'bg-warning', 'bg-accent', 'bg-success'];
+            const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+            const textColors = ['text-error', 'text-warning', 'text-accent', 'text-success'];
+            
+            indicators.forEach((indicator, index) => {
+                indicator.className = 'w-2 h-2 rounded-full ' + (index < strength ? colors[strength - 1] : 'bg-secondary-200');
+            });
+            
+            strengthText.textContent = strength > 0 ? texts[strength - 1] : 'Weak';
+            strengthText.className = strength > 0 ? textColors[strength - 1] : 'text-error';
+        });
+
+        // Toggle switches functionality
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                console.log('Preference changed:', this.checked);
+            });
+        });
+
+        // Form validation
+        document.querySelectorAll('input[required]').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.classList.add('error');
+                } else {
+                    this.classList.remove('error');
+                    this.classList.add('success');
+                }
+            });
+        });
+
+        // Auto-save functionality (simulated)
+        let autoSaveTimeout;
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('input', function() {
+                clearTimeout(autoSaveTimeout);
+                autoSaveTimeout = setTimeout(() => {
+                    console.log('Auto-saving changes...');
+                }, 2000);
+            });
+        });
+    </script>
+
+    <style>
+        .tab-button {
+            @apply py-4 px-1 border-b-2 border-transparent font-medium text-sm text-text-secondary hover:text-text-primary hover:border-secondary-300 transition-colors;
+        }
+        
+        .tab-button.active {
+            @apply border-primary text-primary;
+        }
+        
+        .tab-content {
+            @apply transition-opacity duration-200;
+        }
+        
+        .tab-content.hidden {
+            @apply opacity-0;
+        }
+        
+        .tab-content.active {
+            @apply opacity-100;
+        }
+
+        .project-officers {
+            @apply transition-opacity duration-300;
+        }
+
+        .project-officers.hidden {
+            @apply opacity-0;
+        }
+
+        .project-officers.active {
+            @apply opacity-100;
+        }
+    </style>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

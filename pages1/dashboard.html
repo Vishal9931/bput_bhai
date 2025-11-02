@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TopManagement Dashboard</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ftopmanagem2294back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Sidebar -->
+    <div class="flex">
+        <nav class="w-64 bg-surface shadow-lg min-h-screen fixed left-0 top-0 z-50">
+            <div class="p-6">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-text-primary">TopManagement</h1>
+                        <p class="text-sm text-text-secondary">Dashboard</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <ul class="space-y-2">
+                    <li>
+                        <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 bg-primary-50 text-primary rounded-lg font-medium">
+                            <i class="fas fa-tachometer-alt w-5"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="projects.html" class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                            <i class="fas fa-project-diagram w-5"></i>
+                            Projects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="employees.html" class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                            <i class="fas fa-users w-5"></i>
+                            Employees
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reports.html" class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                            <i class="fas fa-file-alt w-5"></i>
+                            Reports
+                        </a>
+                    </li>
+                    <li>
+                        <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                            <i class="fas fa-cog w-5"></i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-secondary-200">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1580128636806-b29892ddbb48" 
+                         alt="Executive profile photo" 
+                         class="w-10 h-10 rounded-full object-cover"
+                         onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-text-primary">John Executive</p>
+                        <p class="text-xs text-text-secondary">CEO</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64 p-8">
+            <!-- Header -->
+            <header class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-text-primary mb-2">Executive Dashboard</h1>
+                        <p class="text-text-secondary">Real-time overview of multi-sector operations and safety metrics</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-right">
+                            <p class="text-sm text-text-secondary">Last Updated</p>
+                            <p class="text-sm font-medium text-text-primary">Nov 02, 2025 - 03:41 AM</p>
+                        </div>
+                        <button class="p-2 text-text-secondary hover:text-text-primary hover:bg-secondary-50 rounded-lg transition-colors">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Summary Cards -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Total Projects Card -->
+                <div class="card hover-lift">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-primary text-xl"></i>
+                        </div>
+                        <div class="flex items-center gap-1 text-success-600 text-sm font-medium">
+                            <i class="fas fa-arrow-up text-xs"></i>
+                            +12%
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-text-primary mb-1">47</h3>
+                    <p class="text-text-secondary text-sm mb-2">Total Projects</p>
+                    <div class="flex gap-2 text-xs">
+                        <span class="px-2 py-1 bg-primary-50 text-primary rounded">Infra: 18</span>
+                        <span class="px-2 py-1 bg-accent-50 text-accent-600 rounded">Energy: 15</span>
+                        <span class="px-2 py-1 bg-secondary-100 text-secondary-600 rounded">O&G: 14</span>
+                    </div>
+                </div>
+
+                <!-- Total Employees Card -->
+                <div class="card hover-lift">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-users text-success-600 text-xl"></i>
+                        </div>
+                        <div class="flex items-center gap-1 text-success-600 text-sm font-medium">
+                            <i class="fas fa-arrow-up text-xs"></i>
+                            +8%
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-text-primary mb-1">1,247</h3>
+                    <p class="text-text-secondary text-sm mb-2">Total Employees</p>
+                    <div class="flex gap-2 text-xs">
+                        <span class="px-2 py-1 bg-success-50 text-success-600 rounded">Active: 1,189</span>
+                        <span class="px-2 py-1 bg-warning-50 text-warning-600 rounded">Leave: 58</span>
+                    </div>
+                </div>
+
+                <!-- Safety Incidents Card -->
+                <div class="card hover-lift">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-warning-600 text-xl"></i>
+                        </div>
+                        <div class="flex items-center gap-1 text-error-600 text-sm font-medium">
+                            <i class="fas fa-arrow-down text-xs"></i>
+                            -23%
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-text-primary mb-1">12</h3>
+                    <p class="text-text-secondary text-sm mb-2">Safety Incidents</p>
+                    <div class="flex gap-2 text-xs">
+                        <span class="px-2 py-1 bg-error-50 text-error-600 rounded">Critical: 2</span>
+                        <span class="px-2 py-1 bg-warning-50 text-warning-600 rounded">Minor: 10</span>
+                    </div>
+                </div>
+
+                <!-- Near Miss Events Card -->
+                <div class="card hover-lift">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-exclamation-triangle text-accent-600 text-xl"></i>
+                        </div>
+                        <div class="flex items-center gap-1 text-success-600 text-sm font-medium">
+                            <i class="fas fa-arrow-up text-xs"></i>
+                            +15%
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-text-primary mb-1">89</h3>
+                    <p class="text-text-secondary text-sm mb-2">Near Miss Reports</p>
+                    <div class="flex gap-2 text-xs">
+                        <span class="px-2 py-1 bg-accent-50 text-accent-600 rounded">This Month: 89</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Safety Observations Chart -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Safety Observations</h3>
+                        <div class="flex gap-2">
+                            <button class="px-3 py-1 text-xs bg-primary text-white rounded-full">7D</button>
+                            <button class="px-3 py-1 text-xs text-text-secondary hover:bg-secondary-50 rounded-full">30D</button>
+                            <button class="px-3 py-1 text-xs text-text-secondary hover:bg-secondary-50 rounded-full">90D</button>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="safetyChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Sector Performance Chart -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Project Progress by Sector</h3>
+                        <button class="text-text-secondary hover:text-text-primary">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="sectorChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activity Feed and KPIs -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Recent Activity Feed -->
+                <div class="lg:col-span-2 card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Recent Activity</h3>
+                        <a href="reports.html" class="text-primary hover:text-primary-700 text-sm font-medium">View All</a>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- Activity Item 1 -->
+                        <div class="flex items-start gap-4 p-4 bg-secondary-50 rounded-lg">
+                            <div class="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-user-plus text-success-600 text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-text-primary"><strong>Sarah Johnson</strong> assigned as Site Safety Officer to <strong>Metro Rail Phase 3</strong></p>
+                                <p class="text-xs text-text-secondary mt-1">Infrastructure Sector • 2 hours ago</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item 2 -->
+                        <div class="flex items-start gap-4 p-4 bg-secondary-50 rounded-lg">
+                            <div class="w-8 h-8 bg-warning-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-warning-600 text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-text-primary">Near miss incident reported at <strong>Offshore Platform Alpha</strong></p>
+                                <p class="text-xs text-text-secondary mt-1">Oil & Gas Sector • 4 hours ago</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item 3 -->
+                        <div class="flex items-start gap-4 p-4 bg-secondary-50 rounded-lg">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-chart-line text-primary text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-text-primary"><strong>Wind Farm Project Delta</strong> reached 85% completion milestone</p>
+                                <p class="text-xs text-text-secondary mt-1">Energy Sector • 6 hours ago</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item 4 -->
+                        <div class="flex items-start gap-4 p-4 bg-secondary-50 rounded-lg">
+                            <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-file-alt text-accent-600 text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-text-primary">Monthly safety report generated for <strong>Q4 2025</strong></p>
+                                <p class="text-xs text-text-secondary mt-1">All Sectors • 8 hours ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Performance Indicators -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-6">Key Performance Indicators</h3>
+                    <div class="space-y-6">
+                        <!-- Project Completion Rate -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-text-secondary">Project Completion Rate</span>
+                                <span class="text-sm font-medium text-text-primary">87%</span>
+                            </div>
+                            <div class="w-full bg-secondary-200 rounded-full h-2">
+                                <div class="bg-success-500 h-2 rounded-full" style="width: 87%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Employee Utilization -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-text-secondary">Employee Utilization</span>
+                                <span class="text-sm font-medium text-text-primary">92%</span>
+                            </div>
+                            <div class="w-full bg-secondary-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Safety Score -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-text-secondary">Safety Score</span>
+                                <span class="text-sm font-medium text-text-primary">94%</span>
+                            </div>
+                            <div class="w-full bg-secondary-200 rounded-full h-2">
+                                <div class="bg-success-500 h-2 rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Budget Utilization -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-text-secondary">Budget Utilization</span>
+                                <span class="text-sm font-medium text-text-primary">76%</span>
+                            </div>
+                            <div class="w-full bg-secondary-200 rounded-full h-2">
+                                <div class="bg-accent-500 h-2 rounded-full" style="width: 76%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="pt-4 border-t border-secondary-200">
+                            <h4 class="text-sm font-medium text-text-primary mb-3">Quick Actions</h4>
+                            <div class="space-y-2">
+                                <a href="employees.html" class="block w-full text-left px-3 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                                    <i class="fas fa-user-plus w-4 mr-2"></i>
+                                    Add Employee
+                                </a>
+                                <a href="projects.html" class="block w-full text-left px-3 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                                    <i class="fas fa-project-diagram w-4 mr-2"></i>
+                                    View Projects
+                                </a>
+                                <a href="reports.html" class="block w-full text-left px-3 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                                    <i class="fas fa-download w-4 mr-2"></i>
+                                    Generate Report
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Safety Observations Chart
+        const safetyCtx = document.getElementById('safetyChart').getContext('2d');
+        new Chart(safetyCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Safety Observations',
+                    data: [12, 19, 15, 25, 22, 18, 24],
+                    borderColor: '#1E40AF',
+                    backgroundColor: 'rgba(30, 64, 175, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Near Miss Reports',
+                    data: [8, 12, 10, 15, 13, 11, 16],
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#E2E8F0'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+
+        // Sector Performance Chart
+        const sectorCtx = document.getElementById('sectorChart').getContext('2d');
+        new Chart(sectorCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Infrastructure', 'Energy', 'Oil & Gas'],
+                datasets: [{
+                    data: [38, 32, 30],
+                    backgroundColor: ['#1E40AF', '#F59E0B', '#64748B'],
+                    borderWidth: 0,
+                    cutout: '70%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // Auto-refresh functionality
+        setInterval(() => {
+            const timestamp = document.querySelector('header p:last-child');
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            };
+            timestamp.textContent = now.toLocaleDateString('en-US', options);
+        }, 60000); // Update every minute
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

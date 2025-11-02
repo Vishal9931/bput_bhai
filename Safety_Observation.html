@@ -322,6 +322,11 @@
 
         let submitBtn = document.querySelector(".submit");
         let cancelBtn = document.querySelector(".cancel");
+        let backBtn = document.querySelector(".back-arrow");
+
+        backBtn.addEventListener("click", () => {
+            window.location.href = "dashboard.html";
+        });
 
         submitBtn.addEventListener("click", () => {
             window.location.href = "dashboard.html";

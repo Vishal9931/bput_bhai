@@ -12,7 +12,7 @@
     <div class="container">
         <div class="header">
             <span class="back-arrow">&#8592;</span>
-            <h2>Safety Observation</h2>
+            <h2>Good Practices</h2>
         </div>
 
         <form class="form">
@@ -288,6 +288,12 @@
 
         let submitBtn = document.querySelector(".submit");
         let cancelBtn = document.querySelector(".cancel");
+        let backBtn = document.querySelector(".back-arrow");
+
+        backBtn.addEventListener("click", () => {
+            window.location.href = "dashboard.html";
+        });
+
 
         submitBtn.addEventListener("click", () => {
             window.location.href = "dashboard.html";

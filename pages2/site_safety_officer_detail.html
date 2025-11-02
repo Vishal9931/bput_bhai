@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Safety Officer Detail - HO Safety Management</title>
+    <link rel="stylesheet" href="../css2/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* All your existing CSS remains the same */
+        :root {
+            --primary: #3b82f6;
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --success: #10b981;
+            --success-100: #d1fae5;
+            --success-600: #059669;
+            --warning: #f59e0b;
+            --warning-100: #fef3c7;
+            --warning-600: #d97706;
+            --error: #ef4444;
+            --error-100: #fee2e2;
+            --accent: #8b5cf6;
+            --accent-100: #ede9fe;
+            --accent-600: #7c3aed;
+            --surface: #ffffff;
+            --background: #f8fafc;
+            --secondary-50: #f8fafc;
+            --secondary-100: #f1f5f9;
+            --secondary-200: #e2e8f0;
+            --secondary-300: #cbd5e1;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+        }
+
+        .shadow-card {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .rounded-card {
+            border-radius: 0.5rem;
+        }
+
+        .rounded-button {
+            border-radius: 0.375rem;
+        }
+
+        .form-input {
+            border: 1px solid var(--secondary-300);
+            border-radius: 0.375rem;
+            background-color: var(--surface);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            ring: 2px solid var(--primary-100);
+            border-color: var(--primary);
+        }
+
+        .card-elevated {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .status-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status-success {
+            background-color: var(--success);
+        }
+
+        .status-warning {
+            background-color: var(--warning);
+        }
+
+        .status-error {
+            background-color: var(--error);
+        }
+
+        .status-accent {
+            background-color: var(--accent);
+        }
+
+        .status-secondary {
+            background-color: var(--secondary-300);
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+
+        /* Officer card hover effects */
+        .officer-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .officer-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Officer detail modal */
+        .officer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .officer-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .officer-modal-content {
+            background-color: var(--surface);
+            border-radius: 0.75rem;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .officer-modal.active .officer-modal-content {
+            transform: scale(1);
+        }
+
+        /* Navigation arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--surface);
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s ease;
+            border: 1px solid var(--secondary-200);
+        }
+
+        .nav-arrow:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .nav-arrow.prev {
+            left: -1.5rem;
+        }
+
+        .nav-arrow.next {
+            right: -1.5rem;
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: var(--secondary-100);
+        }
+
+        .nav-arrow.disabled:hover {
+            background-color: var(--secondary-100);
+            color: var(--text-secondary);
+            border-color: var(--secondary-200);
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background-color: var(--secondary-200);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        /* Officer counter */
+        .officer-counter {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 1rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .nav-arrow {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+            
+            .nav-arrow.prev {
+                left: -1rem;
+            }
+            
+            .nav-arrow.next {
+                right: -1rem;
+            }
+            
+            .officer-counter {
+                top: 0.5rem;
+                left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-card border-b border-secondary-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 16l-2-2-1.41 1.41L14 18.83l6-6L18.59 11.41 14 16z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-semibold text-text-primary">HO Safety Management</h1>
+                        <p class="text-sm text-text-secondary">Officer Detail</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="dashboard_overview.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="sector_view.html" class="text-text-secondary hover:text-primary transition-colors">Sectors</a>
+                    <a href="project_overview.html" class="text-text-secondary hover:text-primary transition-colors">Projects</a>
+                    <a href="site_safety_officer_detail.html" class="text-primary font-medium border-b-2 border-primary pb-1">Officers</a>
+                    <a href="comparison_analysis.html" class="text-text-secondary hover:text-primary transition-colors">Analysis</a>
+                    <a href="settings_access_control.html" class="text-text-secondary hover:text-primary transition-colors">Settings</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-text-secondary hover:text-primary transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 h-4 w-4 bg-error text-white text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://images.unsplash.com/photo-1599182002081-60947de0356b" 
+                             alt="Profile picture of Arjun Sharma, Head Office Manager" 
+                             class="h-8 w-8 rounded-full object-cover"
+                             onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                        <span class="text-sm font-medium text-text-primary">Arjun Sharma</span>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-text-secondary hover:text-primary">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-surface border-t border-secondary-200">
+            <div class="px-4 py-2 space-y-2">
+                <a href="dashboard_overview.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Dashboard</a>
+                <a href="sector_view.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Sectors</a>
+                <a href="project_overview.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Projects</a>
+                <a href="site_safety_officer_detail.html" class="block px-3 py-2 text-primary font-medium bg-primary-50 rounded">Officers</a>
+                <a href="comparison_analysis.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Analysis</a>
+                <a href="settings_access_control.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Breadcrumb Navigation -->
+        <div class="flex items-center space-x-2 text-sm text-text-secondary mb-6">
+            <a href="dashboard_overview.html" class="hover:text-primary transition-colors">Dashboard</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <a href="project_overview.html" class="hover:text-primary transition-colors">Projects</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <span class="text-text-primary">Officer Detail</span>
+        </div>
+
+        <!-- Project Selection -->
+        <div class="bg-surface rounded-card shadow-card p-4 mb-6">
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-project-diagram text-text-secondary"></i>
+                    <span class="text-sm font-medium text-text-primary">Current Project:</span>
+                </div>
+                <select id="project-select" class="form-input text-sm px-3 py-2 min-w-64">
+                    <option value="mumbai-metro">Mumbai Metro Bridge Project</option>
+                    <option value="delhi-mall">Delhi Mall Expansion</option>
+                    <option value="chennai-residences">Chennai IT Park Residences</option>
+                    <option value="pune-tower">Pune Business Tower</option>
+                </select>
+                <div class="text-sm text-text-secondary">
+                    <span>Officers: <span id="project-officers-count">8</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Officers Grid for Different Projects -->
+        <div id="officers-container">
+            <!-- Mumbai Metro Project Officers -->
+            <div id="mumbai-metro-officers" class="project-officers active">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Officer 1 -->
+                    <div class="card-elevated bg-surface p-6 officer-card" data-officer-id="neha-sharma">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1549909773-ab3c0eb3f73e" 
+                                     alt="Profile photo of Neha Sharma, Site Safety Officer" 
+                                     class="w-20 h-20 rounded-full object-cover border-4 border-primary-100"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-success rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-text-primary mt-4">Neha Sharma</h3>
+                            <p class="text-text-secondary">Senior Safety Officer</p>
+                            <div class="text-sm text-text-secondary mt-2">
+                                <p>ID: SSO-001 • Zone A</p>
+                                <p>+91 98765 43210</p>
+                            </div>
+                            <div class="flex items-center mt-3 space-x-2">
+                                <div class="text-success font-semibold">96.8%</div>
+                                <div class="status-indicator status-success"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Officer 2 -->
+                    <div class="card-elevated bg-surface p-6 officer-card" data-officer-id="amit-verma">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1552560390-903a9a4fc428" 
+                                     alt="Profile photo of Amit Verma, Site Safety Officer" 
+                                     class="w-20 h-20 rounded-full object-cover border-4 border-primary-100"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-success rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-text-primary mt-4">Amit Verma</h3>
+                            <p class="text-text-secondary">Safety Officer</p>
+                            <div class="text-sm text-text-secondary mt-2">
+                                <p>ID: SSO-002 • Zone B</p>
+                                <p>+91 87654 32109</p>
+                            </div>
+                            <div class="flex items-center mt-3 space-x-2">
+                                <div class="text-success font-semibold">94.1%</div>
+                                <div class="status-indicator status-success"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Officer 3 -->
+                    <div class="card-elevated bg-surface p-6 officer-card" data-officer-id="kavya-reddy">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1549909773-ab3c0eb3f73e" 
+                                     alt="Profile photo of Kavya Reddy, Site Safety Officer" 
+                                     class="w-20 h-20 rounded-full object-cover border-4 border-warning-100"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-warning rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-exclamation text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-text-primary mt-4">Kavya Reddy</h3>
+                            <p class="text-text-secondary">Safety Officer</p>
+                            <div class="text-sm text-text-secondary mt-2">
+                                <p>ID: SSO-003 • East Side</p>
+                                <p>+91 76543 21098</p>
+                            </div>
+                            <div class="flex items-center mt-3 space-x-2">
+                                <div class="text-warning font-semibold">87.3%</div>
+                                <div class="status-indicator status-warning"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delhi Mall Project Officers -->
+            <div id="delhi-mall-officers" class="project-officers hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Delhi Officer 1 -->
+                    <div class="card-elevated bg-surface p-6 officer-card" data-officer-id="rohit-singh">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1628673178245-081fbf621b1d" 
+                                     alt="Profile photo of Rohit Singh, Site Safety Officer" 
+                                     class="w-20 h-20 rounded-full object-cover border-4 border-primary-100"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-success rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-text-primary mt-4">Rohit Singh</h3>
+                            <p class="text-text-secondary">Senior Safety Officer</p>
+                            <div class="text-sm text-text-secondary mt-2">
+                                <p>ID: SSO-101 • Main Structure</p>
+                                <p>+91 98765 12345</p>
+                            </div>
+                            <div class="flex items-center mt-3 space-x-2">
+                                <div class="text-success font-semibold">93.5%</div>
+                                <div class="status-indicator status-success"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delhi Officer 2 -->
+                    <div class="card-elevated bg-surface p-6 officer-card" data-officer-id="anjali-kapoor">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1725811641354-abf990c9c0a7" 
+                                     alt="Profile photo of Anjali Kapoor, Site Safety Officer" 
+                                     class="w-20 h-20 rounded-full object-cover border-4 border-primary-100"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-success rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-text-primary mt-4">Anjali Kapoor</h3>
+                            <p class="text-text-secondary">Safety Officer</p>
+                            <div class="text-sm text-text-secondary mt-2">
+                                <p>ID: SSO-102 • Parking Area</p>
+                                <p>+91 87654 23456</p>
+                            </div>
+                            <div class="flex items-center mt-3 space-x-2">
+                                <div class="text-success font-semibold">91.2%</div>
+                                <div class="status-indicator status-success"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chennai Project Officers -->
+            <div id="chennai-residences-officers" class="project-officers hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Chennai Officer 1 -->
+                    <div class="card-elevated bg-surface p-6 officer-card" data-officer-id="karthik-raj">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1552560390-903a9a4fc428" 
+                                     alt="Profile photo of Karthik Raj, Site Safety Officer" 
+                                     class="w-20 h-20 rounded-full object-cover border-4 border-primary-100"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-success rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-text-primary mt-4">Karthik Raj</h3>
+                            <p class="text-text-secondary">Senior Safety Officer</p>
+                            <div class="text-sm text-text-secondary mt-2">
+                                <p>ID: SSO-201 • Building A</p>
+                                <p>+91 98765 67890</p>
+                            </div>
+                            <div class="flex items-center mt-3 space-x-2">
+                                <div class="text-success font-semibold">95.1%</div>
+                                <div class="status-indicator status-success"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chennai Officer 2 -->
+                    <div class="card-elevated bg-surface p-6 officer-card" data-officer-id="lakshmi-menon">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1725811641341-51459cba220e" 
+                                     alt="Profile photo of Lakshmi Menon, Site Safety Officer" 
+                                     class="w-20 h-20 rounded-full object-cover border-4 border-primary-100"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-success rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-text-primary mt-4">Lakshmi Menon</h3>
+                            <p class="text-text-secondary">Safety Officer</p>
+                            <div class="text-sm text-text-secondary mt-2">
+                                <p>ID: SSO-202 • Building B</p>
+                                <p>+91 87654 56789</p>
+                            </div>
+                            <div class="flex items-center mt-3 space-x-2">
+                                <div class="text-success font-semibold">92.8%</div>
+                                <div class="status-indicator status-success"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pune Project Officers -->
+            <div id="pune-tower-officers" class="project-officers hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Pune Officer 1 -->
+                    <div class="card-elevated bg-surface p-6 officer-card" data-officer-id="manish-desai">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1632560916961-cdf28707060a" 
+                                     alt="Profile photo of Manish Desai, Site Safety Officer" 
+                                     class="w-20 h-20 rounded-full object-cover border-4 border-primary-100"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-success rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-text-primary mt-4">Manish Desai</h3>
+                            <p class="text-text-secondary">Senior Safety Officer</p>
+                            <div class="text-sm text-text-secondary mt-2">
+                                <p>ID: SSO-301 • Tower Base</p>
+                                <p>+91 98765 11111</p>
+                            </div>
+                            <div class="flex items-center mt-3 space-x-2">
+                                <div class="text-success font-semibold">97.3%</div>
+                                <div class="status-indicator status-success"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination for Officers -->
+        <div class="flex items-center justify-between mt-8 pt-4 border-t border-secondary-200">
+            <div class="text-sm text-text-secondary">
+                Showing <span id="officers-showing-start">1</span>-<span id="officers-showing-end">3</span> of <span id="total-officers-count">8</span> officers
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="officers-prev-page" class="px-3 py-1 text-sm border border-secondary-200 rounded hover:bg-secondary-50 transition-colors disabled:opacity-50" disabled>
+                    Previous
+                </button>
+                <button id="officers-page-1" class="px-3 py-1 text-sm bg-primary text-white rounded">1</button>
+                <button id="officers-page-2" class="px-3 py-1 text-sm border border-secondary-200 rounded hover:bg-secondary-50 transition-colors">2</button>
+                <button id="officers-page-3" class="px-3 py-1 text-sm border border-secondary-200 rounded hover:bg-secondary-50 transition-colors">3</button>
+                <button id="officers-next-page" class="px-3 py-1 text-sm border border-secondary-200 rounded hover:bg-secondary-50 transition-colors">
+                    Next
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Officer Detail Modal -->
+    <div class="officer-modal" id="officer-modal">
+        <div class="officer-modal-content relative">
+            <!-- Navigation Arrows -->
+            <div class="nav-arrow prev" id="prev-officer">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="nav-arrow next" id="next-officer">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+
+            <!-- Officer Counter -->
+            <div class="officer-counter" id="officer-counter">
+                <span id="current-officer-index">1</span> / <span id="total-officers-modal">3</span>
+            </div>
+
+            <!-- Close Button -->
+            <button class="absolute top-4 right-4 text-text-secondary hover:text-primary transition-colors z-10" id="close-modal">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <!-- Modal Content -->
+            <div class="p-6" id="officer-modal-body">
+                <!-- Content will be dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Officer data for detailed view
+        const officerDetails = {
+            'neha-sharma': {
+                name: 'Neha Sharma',
+                role: 'Senior Safety Officer',
+                id: 'SSO-001',
+                phone: '+91 98765 43210',
+                email: 'neha.sharma@company.in',
+                project: 'Mumbai Metro Bridge Project',
+                zone: 'Zone A - Bridge Foundation',
+                compliance: 96.8,
+                image: 'https://images.unsplash.com/photo-1549909773-ab3c0eb3f73e',
+                joinDate: 'March 15, 2023',
+                experience: '5 years',
+                certifications: ['Advanced Safety Management', 'First Aid & CPR', 'Hazard Identification'],
+                recentReports: 12,
+                resolvedIssues: 45,
+                pendingActions: 2,
+                performance: {
+                    safetyObservations: 245,
+                    unsafeActs: 8,
+                    trainingSessions: 18,
+                    incidentReports: 3
+                },
+                status: 'active'
+            },
+            'amit-verma': {
+                name: 'Amit Verma',
+                role: 'Safety Officer',
+                id: 'SSO-002',
+                phone: '+91 87654 32109',
+                email: 'amit.verma@company.in',
+                project: 'Mumbai Metro Bridge Project',
+                zone: 'Zone B - Bridge Foundation',
+                compliance: 94.1,
+                image: 'https://images.unsplash.com/photo-1552560390-903a9a4fc428',
+                joinDate: 'June 22, 2023',
+                experience: '3 years',
+                certifications: ['Basic Safety Management', 'First Aid & CPR'],
+                recentReports: 8,
+                resolvedIssues: 32,
+                pendingActions: 1,
+                performance: {
+                    safetyObservations: 189,
+                    unsafeActs: 12,
+                    trainingSessions: 12,
+                    incidentReports: 5
+                },
+                status: 'active'
+            },
+            'kavya-reddy': {
+                name: 'Kavya Reddy',
+                role: 'Safety Officer',
+                id: 'SSO-003',
+                phone: '+91 76543 21098',
+                email: 'kavya.reddy@company.in',
+                project: 'Mumbai Metro Bridge Project',
+                zone: 'East Side - Superstructure',
+                compliance: 87.3,
+                image: 'https://images.unsplash.com/photo-1549909773-ab3c0eb3f73e',
+                joinDate: 'January 10, 2024',
+                experience: '2 years',
+                certifications: ['Basic Safety Management'],
+                recentReports: 6,
+                resolvedIssues: 28,
+                pendingActions: 4,
+                performance: {
+                    safetyObservations: 156,
+                    unsafeActs: 22,
+                    trainingSessions: 8,
+                    incidentReports: 7
+                },
+                status: 'needs-attention'
+            },
+            'rohit-singh': {
+                name: 'Rohit Singh',
+                role: 'Senior Safety Officer',
+                id: 'SSO-101',
+                phone: '+91 98765 12345',
+                email: 'rohit.singh@company.in',
+                project: 'Delhi Mall Expansion',
+                zone: 'Main Structure',
+                compliance: 93.5,
+                image: 'https://images.unsplash.com/photo-1628673178245-081fbf621b1d',
+                joinDate: 'August 5, 2022',
+                experience: '6 years',
+                certifications: ['Advanced Safety Management', 'First Aid & CPR', 'Fire Safety'],
+                recentReports: 15,
+                resolvedIssues: 67,
+                pendingActions: 1,
+                performance: {
+                    safetyObservations: 312,
+                    unsafeActs: 21,
+                    trainingSessions: 24,
+                    incidentReports: 4
+                },
+                status: 'active'
+            },
+            'anjali-kapoor': {
+                name: 'Anjali Kapoor',
+                role: 'Safety Officer',
+                id: 'SSO-102',
+                phone: '+91 87654 23456',
+                email: 'anjali.kapoor@company.in',
+                project: 'Delhi Mall Expansion',
+                zone: 'Parking Area',
+                compliance: 91.2,
+                image: 'https://images.unsplash.com/photo-1725811641354-abf990c9c0a7',
+                joinDate: 'November 18, 2023',
+                experience: '2.5 years',
+                certifications: ['Basic Safety Management', 'First Aid & CPR'],
+                recentReports: 9,
+                resolvedIssues: 41,
+                pendingActions: 2,
+                performance: {
+                    safetyObservations: 198,
+                    unsafeActs: 18,
+                    trainingSessions: 14,
+                    incidentReports: 6
+                },
+                status: 'active'
+            },
+            'karthik-raj': {
+                name: 'Karthik Raj',
+                role: 'Senior Safety Officer',
+                id: 'SSO-201',
+                phone: '+91 98765 67890',
+                email: 'karthik.raj@company.in',
+                project: 'Chennai IT Park Residences',
+                zone: 'Building A',
+                compliance: 95.1,
+                image: 'https://images.unsplash.com/photo-1552560390-903a9a4fc428',
+                joinDate: 'April 12, 2022',
+                experience: '7 years',
+                certifications: ['Advanced Safety Management', 'First Aid & CPR', 'Hazard Identification', 'Fire Safety'],
+                recentReports: 18,
+                resolvedIssues: 89,
+                pendingActions: 0,
+                performance: {
+                    safetyObservations: 421,
+                    unsafeActs: 21,
+                    trainingSessions: 31,
+                    incidentReports: 2
+                },
+                status: 'active'
+            },
+            'lakshmi-menon': {
+                name: 'Lakshmi Menon',
+                role: 'Safety Officer',
+                id: 'SSO-202',
+                phone: '+91 87654 56789',
+                email: 'lakshmi.menon@company.in',
+                project: 'Chennai IT Park Residences',
+                zone: 'Building B',
+                compliance: 92.8,
+                image: 'https://images.unsplash.com/photo-1725811641341-51459cba220e',
+                joinDate: 'September 3, 2023',
+                experience: '3 years',
+                certifications: ['Basic Safety Management', 'First Aid & CPR'],
+                recentReports: 11,
+                resolvedIssues: 53,
+                pendingActions: 1,
+                performance: {
+                    safetyObservations: 234,
+                    unsafeActs: 17,
+                    trainingSessions: 16,
+                    incidentReports: 4
+                },
+                status: 'active'
+            },
+            'manish-desai': {
+                name: 'Manish Desai',
+                role: 'Senior Safety Officer',
+                id: 'SSO-301',
+                phone: '+91 98765 11111',
+                email: 'manish.desai@company.in',
+                project: 'Pune Business Tower',
+                zone: 'Tower Base',
+                compliance: 97.3,
+                image: 'https://images.unsplash.com/photo-1632560916961-cdf28707060a',
+                joinDate: 'February 28, 2021',
+                experience: '8 years',
+                certifications: ['Advanced Safety Management', 'First Aid & CPR', 'Hazard Identification', 'Fire Safety', 'Emergency Response'],
+                recentReports: 22,
+                resolvedIssues: 124,
+                pendingActions: 0,
+                performance: {
+                    safetyObservations: 567,
+                    unsafeActs: 15,
+                    trainingSessions: 42,
+                    incidentReports: 1
+                },
+                status: 'active'
+            }
+        };
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Project selection functionality
+        const projectOfficersMap = {
+            'mumbai-metro': {
+                element: 'mumbai-metro-officers',
+                count: 8,
+                totalPages: 3,
+                officers: ['neha-sharma', 'amit-verma', 'kavya-reddy']
+            },
+            'delhi-mall': {
+                element: 'delhi-mall-officers', 
+                count: 6,
+                totalPages: 2,
+                officers: ['rohit-singh', 'anjali-kapoor']
+            },
+            'chennai-residences': {
+                element: 'chennai-residences-officers',
+                count: 5,
+                totalPages: 2,
+                officers: ['karthik-raj', 'lakshmi-menon']
+            },
+            'pune-tower': {
+                element: 'pune-tower-officers',
+                count: 4,
+                totalPages: 2,
+                officers: ['manish-desai']
+            }
+        };
+
+        let currentProject = 'mumbai-metro';
+        let currentOfficersPage = 1;
+        let currentOfficerIndex = 0;
+        let currentOfficersList = [];
+
+        function switchProject(projectId) {
+            // Hide all officer containers
+            document.querySelectorAll('.project-officers').forEach(container => {
+                container.classList.add('hidden');
+                container.classList.remove('active');
+            });
+
+            // Show selected project officers
+            const targetProject = projectOfficersMap[projectId];
+            if (targetProject) {
+                document.getElementById(targetProject.element).classList.remove('hidden');
+                document.getElementById(targetProject.element).classList.add('active');
+                
+                // Update counters
+                document.getElementById('project-officers-count').textContent = targetProject.count;
+                document.getElementById('total-officers-count').textContent = targetProject.count;
+                
+                // Update current officers list
+                currentOfficersList = targetProject.officers;
+                
+                // Reset pagination
+                currentOfficersPage = 1;
+                updateOfficersPagination(targetProject.totalPages);
+            }
+        }
+
+        document.getElementById('project-select').addEventListener('change', function() {
+            currentProject = this.value;
+            switchProject(currentProject);
+            console.log('Project switched to:', currentProject);
+        });
+
+        // Officers pagination functionality
+        function updateOfficersPagination(totalPages = 3) {
+            const project = projectOfficersMap[currentProject];
+            const perPage = 3;
+            
+            // Update previous/next buttons
+            document.getElementById('officers-prev-page').disabled = currentOfficersPage === 1;
+            document.getElementById('officers-next-page').disabled = currentOfficersPage === totalPages;
+            
+            // Update page buttons visibility and state
+            for (let i = 1; i <= 3; i++) {
+                const pageBtn = document.getElementById(`officers-page-${i}`);
+                if (i <= totalPages) {
+                    pageBtn.style.display = 'inline-block';
+                    if (i === currentOfficersPage) {
+                        pageBtn.classList.add('bg-primary', 'text-white');
+                        pageBtn.classList.remove('border', 'border-secondary-200');
+                    } else {
+                        pageBtn.classList.remove('bg-primary', 'text-white');
+                        pageBtn.classList.add('border', 'border-secondary-200');
+                    }
+                } else {
+                    pageBtn.style.display = 'none';
+                }
+            }
+            
+            // Update showing count
+            const start = (currentOfficersPage - 1) * perPage + 1;
+            const end = Math.min(currentOfficersPage * perPage, project.count);
+            document.getElementById('officers-showing-start').textContent = start;
+            document.getElementById('officers-showing-end').textContent = end;
+        }
+
+        // Next page button
+        document.getElementById('officers-next-page').addEventListener('click', function() {
+            const project = projectOfficersMap[currentProject];
+            if (currentOfficersPage < project.totalPages) {
+                currentOfficersPage++;
+                updateOfficersPagination(project.totalPages);
+                console.log('Officers next page:', currentOfficersPage);
+            }
+        });
+
+        // Previous page button
+        document.getElementById('officers-prev-page').addEventListener('click', function() {
+            if (currentOfficersPage > 1) {
+                currentOfficersPage--;
+                const project = projectOfficersMap[currentProject];
+                updateOfficersPagination(project.totalPages);
+                console.log('Officers previous page:', currentOfficersPage);
+            }
+        });
+
+        // Individual page buttons
+        document.getElementById('officers-page-1').addEventListener('click', function() {
+            currentOfficersPage = 1;
+            const project = projectOfficersMap[currentProject];
+            updateOfficersPagination(project.totalPages);
+        });
+
+        document.getElementById('officers-page-2').addEventListener('click', function() {
+            currentOfficersPage = 2;
+            const project = projectOfficersMap[currentProject];
+            updateOfficersPagination(project.totalPages);
+        });
+
+        document.getElementById('officers-page-3').addEventListener('click', function() {
+            currentOfficersPage = 3;
+            const project = projectOfficersMap[currentProject];
+            updateOfficersPagination(project.totalPages);
+        });
+
+        // Officer detail modal functionality
+        function showOfficerDetail(officerId) {
+            const officer = officerDetails[officerId];
+            if (!officer) return;
+            
+            // Find the index of the current officer
+            currentOfficerIndex = currentOfficersList.indexOf(officerId);
+            
+            // Update navigation arrows state
+            updateNavigationArrows();
+            
+            // Populate modal content
+            const modalBody = document.getElementById('officer-modal-body');
+            modalBody.innerHTML = `
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <!-- Officer Profile -->
+                    <div class="lg:w-1/3">
+                        <div class="bg-secondary-50 rounded-lg p-6 text-center">
+                            <div class="relative inline-block">
+                                <img src="${officer.image}" 
+                                     alt="Profile photo of ${officer.name}" 
+                                     class="w-32 h-32 rounded-full object-cover border-4 ${officer.status === 'active' ? 'border-success-100' : officer.status === 'needs-attention' ? 'border-warning-100' : 'border-error-100'}"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="absolute -bottom-1 -right-1 w-8 h-8 ${officer.status === 'active' ? 'bg-success' : officer.status === 'needs-attention' ? 'bg-warning' : 'bg-error'} rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas ${officer.status === 'active' ? 'fa-check' : officer.status === 'needs-attention' ? 'fa-exclamation' : 'fa-times'} text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <h2 class="text-xl font-bold text-text-primary mt-4">${officer.name}</h2>
+                            <p class="text-text-secondary">${officer.role}</p>
+                            <div class="mt-4 space-y-2 text-sm text-text-secondary">
+                                <p><strong>ID:</strong> ${officer.id}</p>
+                                <p><strong>Project:</strong> ${officer.project}</p>
+                                <p><strong>Zone:</strong> ${officer.zone}</p>
+                                <p><strong>Phone:</strong> ${officer.phone}</p>
+                                <p><strong>Email:</strong> ${officer.email}</p>
+                            </div>
+                            <div class="mt-4 flex items-center justify-center space-x-2">
+                                <div class="text-2xl font-bold ${officer.compliance >= 90 ? 'text-success' : officer.compliance >= 80 ? 'text-warning' : 'text-error'}">${officer.compliance}%</div>
+                                <div class="status-indicator ${officer.compliance >= 90 ? 'status-success' : officer.compliance >= 80 ? 'status-warning' : 'status-error'}"></div>
+                            </div>
+                            <p class="text-sm text-text-secondary mt-1">Compliance Rate</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Officer Details -->
+                    <div class="lg:w-2/3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-secondary-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-text-primary">${officer.recentReports}</div>
+                                <div class="text-sm text-text-secondary">Recent Reports</div>
+                            </div>
+                            <div class="bg-secondary-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-success">${officer.resolvedIssues}</div>
+                                <div class="text-sm text-text-secondary">Resolved Issues</div>
+                            </div>
+                            <div class="bg-secondary-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-warning">${officer.pendingActions}</div>
+                                <div class="text-sm text-text-secondary">Pending Actions</div>
+                            </div>
+                            <div class="bg-secondary-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-text-primary">${officer.experience}</div>
+                                <div class="text-sm text-text-secondary">Experience</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Performance Metrics -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-3">Performance Metrics</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Safety Observations</span>
+                                        <span class="font-semibold">${officer.performance.safetyObservations}</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill bg-success" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Unsafe Acts Identified</span>
+                                        <span class="font-semibold">${officer.performance.unsafeActs}</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill bg-warning" style="width: ${(officer.performance.unsafeActs / officer.performance.safetyObservations * 100)}%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Training Sessions Conducted</span>
+                                        <span class="font-semibold">${officer.performance.trainingSessions}</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill bg-primary" style="width: ${(officer.performance.trainingSessions / 50 * 100)}%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Incident Reports</span>
+                                        <span class="font-semibold">${officer.performance.incidentReports}</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill bg-error" style="width: ${(officer.performance.incidentReports / 20 * 100)}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Certifications -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary mb-3">Certifications</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${officer.certifications.map(cert => 
+                                    `<span class="px-3 py-1 bg-primary-100 text-primary-700 text-sm rounded-full">${cert}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Update officer counter
+            document.getElementById('current-officer-index').textContent = currentOfficerIndex + 1;
+            document.getElementById('total-officers-modal').textContent = currentOfficersList.length;
+            
+            // Show modal
+            document.getElementById('officer-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Update navigation arrows state
+        function updateNavigationArrows() {
+            const prevArrow = document.getElementById('prev-officer');
+            const nextArrow = document.getElementById('next-officer');
+            
+            // Update previous arrow
+            if (currentOfficerIndex === 0) {
+                prevArrow.classList.add('disabled');
+            } else {
+                prevArrow.classList.remove('disabled');
+            }
+            
+            // Update next arrow
+            if (currentOfficerIndex === currentOfficersList.length - 1) {
+                nextArrow.classList.add('disabled');
+            } else {
+                nextArrow.classList.remove('disabled');
+            }
+        }
+
+        // Close modal
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('officer-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Navigate to next officer
+        document.getElementById('next-officer').addEventListener('click', function() {
+            if (currentOfficerIndex < currentOfficersList.length - 1) {
+                currentOfficerIndex++;
+                showOfficerDetail(currentOfficersList[currentOfficerIndex]);
+            }
+        });
+
+        // Navigate to previous officer
+        document.getElementById('prev-officer').addEventListener('click', function() {
+            if (currentOfficerIndex > 0) {
+                currentOfficerIndex--;
+                showOfficerDetail(currentOfficersList[currentOfficerIndex]);
+            }
+        });
+
+        // Add click event to officer cards
+        document.addEventListener('click', function(e) {
+            const officerCard = e.target.closest('.officer-card');
+            if (officerCard) {
+                const officerId = officerCard.getAttribute('data-officer-id');
+                showOfficerDetail(officerId);
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('officer-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                document.getElementById('officer-modal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Initialize pagination
+        updateOfficersPagination(3);
+
+        // Auto-refresh performance data
+        setInterval(function() {
+            console.log('Refreshing performance data...');
+        }, 60000);
+    </script>
+</body>
+</html>

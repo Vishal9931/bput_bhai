@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Overview - HO Safety Management</title>
+    <link rel="stylesheet" href="../css2/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="module"
+        src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhosafety1834back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+    <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+</head>
+
+<body class="bg-background font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-card border-b border-secondary-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z" />
+                            <path d="M14 16l-2-2-1.41 1.41L14 18.83l6-6L18.59 11.41 14 16z" fill="white" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-semibold text-text-primary">HO Safety Management</h1>
+                        <p class="text-sm text-text-secondary">Dashboard Overview</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="dashboard_overview.html"
+                        class="text-primary font-medium border-b-2 border-primary pb-1">Dashboard</a>
+                    <a href="sector_view.html"
+                        class="text-text-secondary hover:text-primary transition-colors">Sectors</a>
+                    <a href="project_overview.html"
+                        class="text-text-secondary hover:text-primary transition-colors">Projects</a>
+                    <a href="site_safety_officer_detail.html"
+                        class="text-text-secondary hover:text-primary transition-colors">Officers</a>
+                    <a href="comparison_analysis.html"
+                        class="text-text-secondary hover:text-primary transition-colors">Analysis</a>
+                    <a href="settings_access_control.html"
+                        class="text-text-secondary hover:text-primary transition-colors">Settings</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-text-secondary hover:text-primary transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span
+                            class="absolute -top-1 -right-1 h-4 w-4 bg-error text-white text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://images.unsplash.com/photo-1599182002081-60947de0356b"
+                            alt="Profile picture of Arjun Sharma, Head Office Manager"
+                            class="h-8 w-8 rounded-full object-cover"
+                            onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                        <span class="text-sm font-medium text-text-primary">Arjun Sharma</span>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-text-secondary hover:text-primary">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-surface border-t border-secondary-200">
+            <div class="px-4 py-2 space-y-2">
+                <a href="dashboard_overview.html"
+                    class="block px-3 py-2 text-primary font-medium bg-primary-50 rounded">Dashboard</a>
+                <a href="sector_view.html"
+                    class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Sectors</a>
+                <a href="project_overview.html"
+                    class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Projects</a>
+                <a href="site_safety_officer_detail.html"
+                    class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Officers</a>
+                <a href="comparison_analysis.html"
+                    class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Analysis</a>
+                <a href="settings_access_control.html"
+                    class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Header Section -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+            <div>
+                <h2 class="text-2xl font-bold text-text-primary">Safety Operations Overview</h2>
+                <p class="text-text-secondary mt-1">Real-time insights across all sectors and projects</p>
+                <div class="flex items-center mt-2 text-sm text-text-secondary">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span id="last-updated">Last updated: November 1, 2025 at 2:48 PM</span>
+                    <div class="ml-4 flex items-center">
+                        <div class="w-2 h-2 bg-success rounded-full animate-pulse mr-2"></div>
+                        <span>Live</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Sector Summary Card -->
+        <div class="grid grid-cols-1 gap-6 mb-8 max-w-md mx-auto">
+            <!-- Construction Sector -->
+            <div class="card-elevated bg-surface p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-hard-hat text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-text-primary">Construction</h3>
+                            <p class="text-sm text-text-secondary">12 Active Projects</p>
+                        </div>
+                    </div>
+                    <div class="status-indicator status-success"></div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-text-secondary">Safety Officers</span>
+                        <span class="font-semibold text-text-primary">24</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-text-secondary">Reports Today</span>
+                        <span class="font-semibold text-text-primary">18</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-text-secondary">Compliance Rate</span>
+                        <span class="font-semibold text-success">94.2%</span>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-secondary-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-text-secondary">Trend</span>
+                        <div class="flex items-center text-success text-xs">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            <span>+2.1%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Alerts and Notifications -->
+        <div class="card-elevated bg-surface p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-text-primary">Recent Alerts</h3>
+                <button class="text-sm text-primary hover:text-primary-700 transition-colors">View All</button>
+            </div>
+
+            <div class="space-y-4">
+                <!-- High Priority Alert -->
+                <div class="flex items-start space-x-3 p-3 bg-error-50 border border-error-100 rounded-lg">
+                    <div
+                        class="flex-shrink-0 w-8 h-8 bg-error text-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-exclamation text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-text-primary">Critical Safety Violation</p>
+                        <p class="text-xs text-text-secondary mt-1">Mumbai Metro Bridge Project - Fall protection not in
+                            use</p>
+                        <p class="text-xs text-error mt-1">2 minutes ago</p>
+                    </div>
+                </div>
+
+                <!-- Medium Priority Alert -->
+                <div class="flex items-start space-x-3 p-3 bg-warning-50 border border-warning-100 rounded-lg">
+                    <div
+                        class="flex-shrink-0 w-8 h-8 bg-warning text-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-triangle-exclamation text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-text-primary">Equipment Maintenance Due</p>
+                        <p class="text-xs text-text-secondary mt-1">Delhi Steel Plant - Crane inspection overdue</p>
+                        <p class="text-xs text-warning mt-1">15 minutes ago</p>
+                    </div>
+                </div>
+
+                <!-- Low Priority Alert -->
+                <div class="flex items-start space-x-3 p-3 bg-accent-50 border border-accent-100 rounded-lg">
+                    <div
+                        class="flex-shrink-0 w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-info text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-text-primary">Report Submitted</p>
+                        <p class="text-xs text-text-secondary mt-1">Rajasthan Solar Farm - Daily safety checklist
+                            completed</p>
+                        <p class="text-xs text-accent mt-1">1 hour ago</p>
+                    </div>
+                </div>
+
+                <!-- Success Alert -->
+                <div class="flex items-start space-x-3 p-3 bg-success-50 border border-success-100 rounded-lg">
+                    <div
+                        class="flex-shrink-0 w-8 h-8 bg-success text-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-check text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-text-primary">Compliance Achieved</p>
+                        <p class="text-xs text-text-secondary mt-1">Chennai Highway Extension - 30 days incident-free
+                        </p>
+                        <p class="text-xs text-success mt-1">2 hours ago</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-secondary-200">
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-text-secondary">Alert Summary</span>
+                    <div class="flex items-center space-x-4">
+                        <span class="flex items-center text-error">
+                            <div class="w-2 h-2 bg-error rounded-full mr-1"></div>
+                            1 Critical
+                        </span>
+                        <span class="flex items-center text-warning">
+                            <div class="w-2 h-2 bg-warning rounded-full mr-1"></div>
+                            2 Medium
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secondary Metrics Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <!-- Daily Observations -->
+            <div class="card-elevated bg-surface p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-text-primary">Daily Observations</h3>
+                    <i class="fas fa-eye text-primary text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold text-text-primary mb-2">1,247</div>
+                <div class="flex items-center text-sm">
+                    <span class="text-success flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i>
+                        +8.2%
+                    </span>
+                    <span class="text-text-secondary ml-2">vs yesterday</span>
+                </div>
+                <div class="mt-4 space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-text-secondary">Safe Observations</span>
+                        <span class="font-medium text-success">1,089 (87.3%)</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-text-secondary">Unsafe Acts</span>
+                        <span class="font-medium text-error">158 (12.7%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incident Tracking -->
+            <div class="card-elevated bg-surface p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-text-primary">Incident Tracking</h3>
+                    <i class="fas fa-exclamation-triangle text-warning text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold text-text-primary mb-2">23</div>
+                <div class="flex items-center text-sm">
+                    <span class="text-error flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i>
+                        +2 incidents
+                    </span>
+                    <span class="text-text-secondary ml-2">this week</span>
+                </div>
+                <div class="mt-4 space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-text-secondary">Near Misses</span>
+                        <span class="font-medium text-warning">18</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-text-secondary">Minor Injuries</span>
+                        <span class="font-medium text-error">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Officer Performance -->
+            <div class="card-elevated bg-surface p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-text-primary">Officer Performance</h3>
+                    <i class="fas fa-users text-accent text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold text-text-primary mb-2">91.4%</div>
+                <div class="flex items-center text-sm">
+                    <span class="text-success flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i>
+                        +1.8%
+                    </span>
+                    <span class="text-text-secondary ml-2">avg compliance</span>
+                </div>
+                <div class="mt-4 space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-text-secondary">Top Performers</span>
+                        <span class="font-medium text-success">42 officers</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-text-secondary">Need Attention</span>
+                        <span class="font-medium text-warning">8 officers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Auto-refresh data every 30 seconds
+        function updateTimestamp() {
+            const timestamp = document.getElementById('last-updated');
+            if (timestamp) {
+                const now = new Date();
+                const timeString = now.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                });
+                timestamp.textContent = `Last updated: ${timeString}`;
+            }
+        }
+
+        // Initialize timestamp and set interval
+        updateTimestamp();
+        setInterval(updateTimestamp, 30000);
+    </script>
+    <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+
+</html>

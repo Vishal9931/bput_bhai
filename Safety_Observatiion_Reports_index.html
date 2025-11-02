@@ -1,88 +1,878 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Observations</title>
+    <title>Safety Observations System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="Safety_Observatiion_Reports_index.css">
 </head>
+
 <body>
     <div class="container">
-        <header>
-            <a href="#" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <div class="user-info">
-                <div class="avatar">JD</div>
-                <div>
-                    <div class="page-title">Safety Observations</div>
-                    <div class="page-subtitle">Select observation type</div>
+        <!-- Page 1: Safety Observations Selection -->
+        <div id="page-observations-selection" class="page active">
+            <header>
+                <div class="back-btn" id="back-to-dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="user-info">
+                    <div class="avatar">JD</div>
+                    <div>
+                        <div class="page-title">Safety Observations</div>
+                        <div class="page-subtitle">Select observation type</div>
+                    </div>
+                </div>
+                <div class="back-btn" style="visibility: hidden;">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+            </header>
+
+            <div class="options-container">
+                <div class="option-card" id="active-observations-btn">
+                    <div class="option-icon active-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="option-title">Active Safety Observations</div>
+                    <div class="option-description">
+                        View and manage all currently open safety observations that require attention or action.
+                    </div>
+                    <div class="option-count">12</div>
+                    <div class="option-label">Active Observations</div>
+                </div>
+
+                <div class="option-card" id="closed-observations-btn">
+                    <div class="option-icon closed-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="option-title">Closed Safety Observations</div>
+                    <div class="option-description">
+                        Review completed safety observations that have been resolved and documented.
+                    </div>
+                    <div class="option-count">24</div>
+                    <div class="option-label">Closed Observations</div>
                 </div>
             </div>
-            <div class="back-btn" style="visibility: hidden;">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-        </header>
-        
-        <div class="options-container">
-            <div class="option-card">
-                <div class="option-icon active-icon">
-                    <i class="fas fa-eye"></i>
-                </div>
-                <div class="option-title">Active Safety Observations</div>
-                <div class="option-description">
-                    View and manage all currently open safety observations that require attention or action.
-                </div>
-                <div class="option-count">12</div>
-                <div class="option-label">Active Observations</div>
-            </div>
-            
-            <div class="option-card">
-                <div class="option-icon closed-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="option-title">Closed Safety Observations</div>
-                <div class="option-description">
-                    Review completed safety observations that have been resolved and documented.
-                </div>
-                <div class="option-count">24</div>
-                <div class="option-label">Closed Observations</div>
+
+            <div class="footer">
+                <p>Safety First • Last updated: Today at 10:45 AM</p>
             </div>
         </div>
-        
-        <div class="footer">
-            <p>Safety First • Last updated: Today at 10:45 AM</p>
+
+        <!-- Page 2: Active Safety Observations -->
+        <div id="page-active-observations" class="page">
+            <header>
+                <div class="back-btn" id="back-to-selection">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div>
+                    <div class="page-title">Active Safety Observations</div>
+                    <div class="page-subtitle">12 observations requiring action</div>
+                </div>
+                <div class="back-btn" style="visibility: hidden;">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+            </header>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">High Priority</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Medium Priority</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Overdue</div>
+                </div>
+            </div>
+
+            <div class="filters-container">
+                <div class="filter-header">
+                    <div class="filter-title">Filter Observations</div>
+                    <div class="filter-toggle" id="clear-filters">Clear All</div>
+                </div>
+
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label class="filter-label">Date Range</label>
+                        <select class="filter-select" id="date-filter">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 3 months</option>
+                            <option>Custom range</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Location</label>
+                        <select class="filter-select" id="location-filter">
+                            <option>All Locations</option>
+                            <option>Main Building</option>
+                            <option>Warehouse</option>
+                            <option>Production Area</option>
+                            <option>Office Area</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Priority</label>
+                        <select class="filter-select" id="priority-filter">
+                            <option>All Priorities</option>
+                            <option>High Priority</option>
+                            <option>Medium Priority</option>
+                            <option>Low Priority</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Status</label>
+                        <select class="filter-select" id="status-filter">
+                            <option>All Status</option>
+                            <option>New</option>
+                            <option>In Progress</option>
+                            <option>Awaiting Review</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="btn btn-outline" id="reset-filters">Reset</button>
+                    <button class="btn btn-primary" id="apply-filters">Apply Filters</button>
+                </div>
+            </div>
+
+            <div class="observations-list" id="active-observations-list">
+                <!-- Active observations will be populated by JavaScript -->
+            </div>
+
+            <div class="footer">
+                <p>Safety First • Last updated: Today at 11:20 AM</p>
+            </div>
+        </div>
+
+        <!-- Page 3: Observation Detail -->
+        <div id="page-observation-detail" class="page">
+            <header>
+                <div class="back-btn" id="back-to-active">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div>
+                    <div class="page-title">Observation Details</div>
+                    <div class="page-subtitle" id="observation-id-display">#OBS-2023-0876</div>
+                </div>
+                <div class="back-btn" style="visibility: hidden;">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+            </header>
+
+            <div class="observation-detail">
+                <div class="detail-section">
+                    <div class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        Basic Information
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Title</div>
+                        <div class="detail-value" id="detail-title">Unsafe ladder usage</div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Status</div>
+                        <div class="detail-value">
+                            <span class="priority-badge priority-high" id="detail-status">Overdue</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Priority</div>
+                        <div class="detail-value">
+                            <span class="priority-badge priority-high" id="detail-priority">High Priority</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Location</div>
+                        <div class="detail-value" id="detail-location">Warehouse Area B</div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Reported Date</div>
+                        <div class="detail-value" id="detail-reported-date">Oct 12, 2023</div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Due Date</div>
+                        <div class="detail-value" id="detail-due-date">Oct 19, 2023</div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Reported By</div>
+                        <div class="detail-value" id="detail-reported-by">John Smith</div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Assigned To</div>
+                        <div class="detail-value" id="detail-assigned-to">Safety Team A</div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="section-title">
+                        <i class="fas fa-align-left"></i>
+                        Description
+                    </div>
+                    <div class="description-box" id="detail-description">
+                        Worker observed using a ladder improperly by standing on the top rung while attempting to reach
+                        items on a high shelf. The ladder was not secured and was positioned on an uneven surface.
+                        Immediate corrective action required to prevent fall hazard.
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="section-title">
+                        <i class="fas fa-history"></i>
+                        Action History
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Initial Report</div>
+                        <div class="detail-value">Oct 12, 2023 by John Smith</div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Assigned to Safety Team</div>
+                        <div class="detail-value">Oct 13, 2023 by Safety Manager</div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label-large">Site Inspection Completed</div>
+                        <div class="detail-value">Oct 15, 2023 by Safety Officer</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-outline" id="view-attachments">View Attachments</button>
+                <button class="btn btn-primary" id="take-action-btn">Take Action</button>
+            </div>
+
+            <div class="footer">
+                <p>Safety First • Last updated: Today at 11:30 AM</p>
+            </div>
+        </div>
+
+        <!-- Page 4: Take Action Form -->
+        <div id="page-take-action" class="page">
+            <header>
+                <div class="back-btn" id="back-to-detail">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div>
+                    <div class="page-title">Take Action</div>
+                    <div class="page-subtitle" id="action-observation-id">#OBS-2023-0876</div>
+                </div>
+                <div class="back-btn" style="visibility: hidden;">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+            </header>
+
+            <div class="action-form">
+                <div class="form-group">
+                    <label class="form-label">Action Type</label>
+                    <select class="form-select" id="action-type">
+                        <option value="">Select action type</option>
+                        <option value="update">Update Status</option>
+                        <option value="assign">Assign to Team/Member</option>
+                        <option value="close">Close Observation</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="status-update-group" style="display: none;">
+                    <label class="form-label">Update Status</label>
+                    <select class="form-select" id="status-update">
+                        <option value="">Select status</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="awaiting-review">Awaiting Review</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="assign-to-group" style="display: none;">
+                    <label class="form-label">Assign To</label>
+                    <select class="form-select" id="assign-to">
+                        <option value="">Select team/member</option>
+                        <option value="safety-team-a">Safety Team A</option>
+                        <option value="safety-team-b">Safety Team B</option>
+                        <option value="maintenance">Maintenance Team</option>
+                        <option value="supervisor">Area Supervisor</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="close-reason-group" style="display: none;">
+                    <label class="form-label">Close Reason</label>
+                    <select class="form-select" id="close-reason">
+                        <option value="">Select close reason</option>
+                        <option value="resolved">Issue Resolved</option>
+                        <option value="not-applicable">Not Applicable</option>
+                        <option value="duplicate">Duplicate Observation</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Comments</label>
+                    <textarea class="form-textarea" id="action-comments"
+                        placeholder="Add comments about the action taken..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Attachments (Optional)</label>
+                    <input type="file" class="form-input" id="action-attachments" multiple>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-outline" id="cancel-action">Cancel</button>
+                <button class="btn btn-primary" id="submit-action">Submit Action</button>
+            </div>
+
+            <div class="footer">
+                <p>Safety First • Complete all required fields</p>
+            </div>
+        </div>
+
+        <!-- Page 5: Closed Safety Observations -->
+        <div id="page-closed-observations" class="page">
+            <header>
+                <div class="back-btn" id="back-to-selection-closed">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div>
+                    <div class="page-title">Closed Safety Observations</div>
+                    <div class="page-subtitle">24 resolved observations</div>
+                </div>
+                <div class="back-btn" style="visibility: hidden;">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+            </header>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">18</div>
+                    <div class="stat-label">Resolved This Month</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">92%</div>
+                    <div class="stat-label">Completion Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5.2</div>
+                    <div class="stat-label">Avg. Resolution Days</div>
+                </div>
+            </div>
+
+            <div class="filters-container">
+                <div class="filter-header">
+                    <div class="filter-title">Filter Observations</div>
+                    <div class="filter-toggle" id="clear-filters-closed">Clear All</div>
+                </div>
+
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label class="filter-label">Date Closed</label>
+                        <select class="filter-select" id="date-closed-filter">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 3 months</option>
+                            <option>Custom range</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Location</label>
+                        <select class="filter-select" id="location-closed-filter">
+                            <option>All Locations</option>
+                            <option>Main Building</option>
+                            <option>Warehouse</option>
+                            <option>Production Area</option>
+                            <option>Office Area</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Closed By</label>
+                        <select class="filter-select" id="closed-by-filter">
+                            <option>All Users</option>
+                            <option>John Smith</option>
+                            <option>Maria Rodriguez</option>
+                            <option>Robert Chen</option>
+                            <option>Safety Team A</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Close Reason</label>
+                        <select class="filter-select" id="close-reason-filter">
+                            <option>All Reasons</option>
+                            <option>Issue Resolved</option>
+                            <option>Not Applicable</option>
+                            <option>Duplicate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="btn btn-outline" id="reset-filters-closed">Reset</button>
+                    <button class="btn btn-primary" id="apply-filters-closed">Apply Filters</button>
+                </div>
+            </div>
+
+            <div class="observations-list" id="closed-observations-list">
+                <!-- Closed observations will be populated by JavaScript -->
+            </div>
+
+            <div class="footer">
+                <p>Safety First • Last updated: Today at 11:45 AM</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Add some interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.option-card');
-            
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    // Add visual feedback when card is clicked
-                    this.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
+        // Sample data for active observations
+        const activeObservations = [
+            {
+                id: "OBS-2023-0876",
+                title: "Unsafe ladder usage",
+                location: "Warehouse Area B",
+                reportedDate: "Oct 12, 2023",
+                reportedBy: "John Smith",
+                status: "Overdue",
+                priority: "high",
+                description: "Worker observed using a ladder improperly by standing on the top rung while attempting to reach items on a high shelf."
+            },
+            {
+                id: "OBS-2023-0921",
+                title: "Electrical hazard - exposed wiring",
+                location: "Production Line 3",
+                reportedDate: "Oct 15, 2023",
+                reportedBy: "Maria Rodriguez",
+                status: "In Progress",
+                priority: "high",
+                description: "Exposed electrical wiring found near water source in production area creating potential electrocution hazard."
+            },
+            {
+                id: "OBS-2023-0945",
+                title: "Improper storage of chemicals",
+                location: "Storage Room 2",
+                reportedDate: "Oct 18, 2023",
+                reportedBy: "Robert Chen",
+                status: "New",
+                priority: "medium",
+                description: "Chemical containers stored without proper labeling and incompatible chemicals stored together."
+            },
+            {
+                id: "OBS-2023-0952",
+                title: "Missing safety signage in hallway",
+                location: "Main Building, 2nd Floor",
+                reportedDate: "Oct 20, 2023",
+                reportedBy: "Sarah Johnson",
+                status: "Awaiting Review",
+                priority: "low",
+                description: "Safety exit signs missing in the east hallway of the second floor, potential evacuation issue."
+            }
+        ];
+
+        // Sample data for closed observations
+        const closedObservations = [
+            {
+                id: "OBS-2023-0821",
+                title: "Slippery floor in cafeteria",
+                location: "Main Cafeteria",
+                reportedDate: "Sep 28, 2023",
+                closedDate: "Oct 5, 2023",
+                reportedBy: "David Wilson",
+                closedBy: "Maintenance Team",
+                closeReason: "Issue Resolved",
+                description: "Wet floor near beverage station creating slip hazard."
+            },
+            {
+                id: "OBS-2023-0845",
+                title: "Blocked emergency exit",
+                location: "Warehouse West",
+                reportedDate: "Oct 2, 2023",
+                closedDate: "Oct 3, 2023",
+                reportedBy: "Lisa Brown",
+                closedBy: "Safety Team A",
+                closeReason: "Issue Resolved",
+                description: "Emergency exit partially blocked by storage pallets."
+            },
+            {
+                id: "OBS-2023-0867",
+                title: "Faulty fire extinguisher",
+                location: "Production Area A",
+                reportedDate: "Oct 8, 2023",
+                closedDate: "Oct 10, 2023",
+                reportedBy: "Michael Taylor",
+                closedBy: "Safety Officer",
+                closeReason: "Issue Resolved",
+                description: "Fire extinguisher found with broken seal and pressure gauge in red zone."
+            }
+        ];
+
+        // DOM Elements
+        const pages = document.querySelectorAll('.page');
+        const backToDashboardBtn = document.getElementById('back-to-dashboard');
+        const activeObservationsBtn = document.getElementById('active-observations-btn');
+        const closedObservationsBtn = document.getElementById('closed-observations-btn');
+        const backToSelectionBtn = document.getElementById('back-to-selection');
+        const backToActiveBtn = document.getElementById('back-to-active');
+        const backToDetailBtn = document.getElementById('back-to-detail');
+        const backToSelectionClosedBtn = document.getElementById('back-to-selection-closed');
+        const takeActionBtn = document.getElementById('take-action-btn');
+        const cancelActionBtn = document.getElementById('cancel-action');
+        const submitActionBtn = document.getElementById('submit-action');
+        const actionTypeSelect = document.getElementById('action-type');
+        const activeObservationsList = document.getElementById('active-observations-list');
+        const closedObservationsList = document.getElementById('closed-observations-list');
+        const clearFiltersBtn = document.getElementById('clear-filters');
+        const resetFiltersBtn = document.getElementById('reset-filters');
+        const applyFiltersBtn = document.getElementById('apply-filters');
+        const clearFiltersClosedBtn = document.getElementById('clear-filters-closed');
+        const resetFiltersClosedBtn = document.getElementById('reset-filters-closed');
+        const applyFiltersClosedBtn = document.getElementById('apply-filters-closed');
+
+        // Current observation being viewed
+        let currentObservation = null;
+
+        // Navigation functions
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function navigateToObservationDetail(observation) {
+            currentObservation = observation;
+
+            // Update observation detail page with observation data
+            document.getElementById('observation-id-display').textContent = `#${observation.id}`;
+            document.getElementById('detail-title').textContent = observation.title;
+            document.getElementById('detail-status').textContent = observation.status;
+            document.getElementById('detail-priority').textContent = observation.priority === 'high' ? 'High Priority' :
+                observation.priority === 'medium' ? 'Medium Priority' : 'Low Priority';
+            document.getElementById('detail-location').textContent = observation.location;
+            document.getElementById('detail-reported-date').textContent = observation.reportedDate;
+            document.getElementById('detail-reported-by').textContent = observation.reportedBy;
+            document.getElementById('detail-description').textContent = observation.description;
+
+            // Set due date (for demo purposes, 7 days after reported date)
+            const reportedDate = new Date(observation.reportedDate);
+            reportedDate.setDate(reportedDate.getDate() + 7);
+            document.getElementById('detail-due-date').textContent = reportedDate.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            // Update action page observation ID
+            document.getElementById('action-observation-id').textContent = `#${observation.id}`;
+
+            showPage('page-observation-detail');
+        }
+
+        // Initialize the page with active observations
+        function initializeActiveObservations() {
+            activeObservationsList.innerHTML = '';
+
+            activeObservations.forEach(obs => {
+                const priorityClass = obs.priority === 'high' ? 'high-priority' :
+                    obs.priority === 'medium' ? 'medium-priority' : '';
+
+                const priorityBadgeClass = obs.priority === 'high' ? 'priority-high' :
+                    obs.priority === 'medium' ? 'priority-medium' : 'priority-low';
+
+                const priorityText = obs.priority === 'high' ? 'High Priority' :
+                    obs.priority === 'medium' ? 'Medium Priority' : 'Low Priority';
+
+                const observationCard = document.createElement('div');
+                observationCard.className = `observation-card ${priorityClass}`;
+                observationCard.innerHTML = `
+                    <div class="observation-header">
+                        <div>
+                            <div class="observation-title">${obs.title}</div>
+                            <div class="observation-id">#${obs.id}</div>
+                        </div>
+                        <div class="priority-badge ${priorityBadgeClass}">${priorityText}</div>
+                    </div>
                     
-                    // In a real app, this would navigate to the selected page
-                    const title = this.querySelector('.option-title').textContent;
-                    alert(`Navigating to: ${title}`);
+                    <div class="observation-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <div class="detail-text">${obs.location}</div>
+                                <div class="detail-label">Location</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div>
+                                <div class="detail-text">${obs.reportedDate}</div>
+                                <div class="detail-label">Reported</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <div class="detail-text">${obs.reportedBy}</div>
+                                <div class="detail-label">Reported By</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <div>
+                                <div class="detail-text">${obs.status}</div>
+                                <div class="detail-label">Status</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="observation-actions">
+                        <button class="action-btn action-btn-outline view-details-btn">View Details</button>
+                        <button class="action-btn action-btn-primary take-action-btn">Take Action</button>
+                    </div>
+                `;
+
+                activeObservationsList.appendChild(observationCard);
+
+                // Add event listeners to the buttons in this card
+                const viewDetailsBtn = observationCard.querySelector('.view-details-btn');
+                const takeActionBtn = observationCard.querySelector('.take-action-btn');
+
+                viewDetailsBtn.addEventListener('click', () => {
+                    navigateToObservationDetail(obs);
+                });
+
+                takeActionBtn.addEventListener('click', () => {
+                    navigateToObservationDetail(obs);
+                    setTimeout(() => {
+                        document.getElementById('take-action-btn').click();
+                    }, 100);
                 });
             });
-            
-            // Back button functionality
-            const backBtn = document.querySelector('.back-btn');
-            backBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Returning to dashboard...');
-                // In a real app, this would navigate back
+        }
+
+        // Initialize the page with closed observations
+        function initializeClosedObservations() {
+            closedObservationsList.innerHTML = '';
+
+            closedObservations.forEach(obs => {
+                const observationCard = document.createElement('div');
+                observationCard.className = 'observation-card';
+                observationCard.innerHTML = `
+                    <div class="observation-header">
+                        <div>
+                            <div class="observation-title">${obs.title}</div>
+                            <div class="observation-id">#${obs.id}</div>
+                        </div>
+                        <div class="priority-badge priority-low">Closed</div>
+                    </div>
+                    
+                    <div class="observation-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <div class="detail-text">${obs.location}</div>
+                                <div class="detail-label">Location</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div>
+                                <div class="detail-text">${obs.reportedDate}</div>
+                                <div class="detail-label">Reported</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div>
+                                <div class="detail-text">${obs.closedBy}</div>
+                                <div class="detail-label">Closed By</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div>
+                                <div class="detail-text">${obs.closedDate}</div>
+                                <div class="detail-label">Closed Date</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="observation-actions">
+                        <button class="action-btn action-btn-outline view-details-closed-btn">View Details</button>
+                    </div>
+                `;
+
+                closedObservationsList.appendChild(observationCard);
+
+                // Add event listener to view details button
+                const viewDetailsBtn = observationCard.querySelector('.view-details-closed-btn');
+                viewDetailsBtn.addEventListener('click', () => {
+                    // For closed observations, we can show a read-only version of the detail page
+                    navigateToObservationDetail(obs);
+                });
+            });
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize the pages
+            initializeActiveObservations();
+            initializeClosedObservations();
+
+            // Navigation event listeners
+            submitBtn.addEventListener("click", () => {
+                window.location.href = "dashboard.html";
+            });
+
+            activeObservationsBtn.addEventListener('click', () => {
+                showPage('page-active-observations');
+            });
+
+            closedObservationsBtn.addEventListener('click', () => {
+                showPage('page-closed-observations');
+            });
+
+            backToSelectionBtn.addEventListener('click', () => {
+                showPage('page-observations-selection');
+            });
+
+            backToActiveBtn.addEventListener('click', () => {
+                showPage('page-active-observations');
+            });
+
+            backToDetailBtn.addEventListener('click', () => {
+                showPage('page-observation-detail');
+            });
+
+            backToSelectionClosedBtn.addEventListener('click', () => {
+                showPage('page-observations-selection');
+            });
+
+            takeActionBtn.addEventListener('click', () => {
+                showPage('page-take-action');
+            });
+
+            cancelActionBtn.addEventListener('click', () => {
+                showPage('page-observation-detail');
+            });
+
+            submitActionBtn.addEventListener('click', () => {
+                const actionType = document.getElementById('action-type').value;
+                const comments = document.getElementById('action-comments').value;
+
+                if (!actionType) {
+                    alert('Please select an action type');
+                    return;
+                }
+
+                // In a real app, this would submit the action to a server
+                alert(`Action submitted for ${currentObservation.id}\nAction Type: ${actionType}\nComments: ${comments}`);
+
+                // Navigate back to active observations
+                showPage('page-active-observations');
+            });
+
+            // Filter event listeners for active observations
+            clearFiltersBtn.addEventListener('click', () => {
+                document.getElementById('date-filter').selectedIndex = 0;
+                document.getElementById('location-filter').selectedIndex = 0;
+                document.getElementById('priority-filter').selectedIndex = 0;
+                document.getElementById('status-filter').selectedIndex = 0;
+            });
+
+            resetFiltersBtn.addEventListener('click', () => {
+                document.getElementById('date-filter').selectedIndex = 0;
+                document.getElementById('location-filter').selectedIndex = 0;
+                document.getElementById('priority-filter').selectedIndex = 0;
+                document.getElementById('status-filter').selectedIndex = 0;
+            });
+
+            applyFiltersBtn.addEventListener('click', () => {
+                alert('Filters applied successfully');
+            });
+
+            // Filter event listeners for closed observations
+            clearFiltersClosedBtn.addEventListener('click', () => {
+                document.getElementById('date-closed-filter').selectedIndex = 0;
+                document.getElementById('location-closed-filter').selectedIndex = 0;
+                document.getElementById('closed-by-filter').selectedIndex = 0;
+                document.getElementById('close-reason-filter').selectedIndex = 0;
+            });
+
+            resetFiltersClosedBtn.addEventListener('click', () => {
+                document.getElementById('date-closed-filter').selectedIndex = 0;
+                document.getElementById('location-closed-filter').selectedIndex = 0;
+                document.getElementById('closed-by-filter').selectedIndex = 0;
+                document.getElementById('close-reason-filter').selectedIndex = 0;
+            });
+
+            applyFiltersClosedBtn.addEventListener('click', () => {
+                alert('Filters applied successfully');
+            });
+
+            // Action type change handler
+            actionTypeSelect.addEventListener('change', function () {
+                const actionType = this.value;
+
+                // Hide all action-specific fields
+                document.getElementById('status-update-group').style.display = 'none';
+                document.getElementById('assign-to-group').style.display = 'none';
+                document.getElementById('close-reason-group').style.display = 'none';
+
+                // Show relevant fields based on action type
+                if (actionType === 'update') {
+                    document.getElementById('status-update-group').style.display = 'block';
+                } else if (actionType === 'assign') {
+                    document.getElementById('assign-to-group').style.display = 'block';
+                } else if (actionType === 'close') {
+                    document.getElementById('close-reason-group').style.display = 'block';
+                }
+            });
+
+            // View attachments button
+            document.getElementById('view-attachments').addEventListener('click', () => {
+                alert('Showing attachments for this observation');
             });
         });
     </script>
 </body>
+
 </html>

@@ -33,7 +33,7 @@
             </div>
 
             <div class="row">
-                
+
                 <div class="input-box">
                     <label>Security level *</label>
                     <!-- <input type="text"> -->
@@ -57,7 +57,7 @@
                 <label>Recommended Action</label>
                 <textarea placeholder="What was done immediately ?"></textarea>
             </div>
-            
+
             <h1 id="title">Select a photo or take a new one</h1>
             <p>Choose a file from your device or open the camera and capture a photo. Works on modern desktop and mobile
                 browsers.</p>
@@ -304,6 +304,12 @@
 
         let submitBtn = document.querySelector(".submit");
         let cancelBtn = document.querySelector(".cancel");
+        let backBtn = document.querySelector(".back-arrow");
+
+        backBtn.addEventListener("click", () => {
+            window.location.href = "dashboard.html";
+        });
+
 
         submitBtn.addEventListener("click", () => {
             window.location.href = "dashboard.html";

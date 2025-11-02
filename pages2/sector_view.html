@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sector View - HO Safety Management</title>
+    <link rel="stylesheet" href="../css2/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional CSS for enhanced styling */
+        :root {
+            --primary: #3b82f6;
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --success: #10b981;
+            --success-100: #d1fae5;
+            --success-600: #059669;
+            --warning: #f59e0b;
+            --warning-100: #fef3c7;
+            --warning-600: #d97706;
+            --error: #ef4444;
+            --error-100: #fee2e2;
+            --accent: #8b5cf6;
+            --accent-100: #ede9fe;
+            --accent-600: #7c3aed;
+            --surface: #ffffff;
+            --background: #f8fafc;
+            --secondary-50: #f8fafc;
+            --secondary-100: #f1f5f9;
+            --secondary-200: #e2e8f0;
+            --secondary-300: #cbd5e1;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+        }
+
+        .shadow-card {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .rounded-card {
+            border-radius: 0.5rem;
+        }
+
+        .rounded-button {
+            border-radius: 0.375rem;
+        }
+
+        .form-input {
+            border: 1px solid var(--secondary-300);
+            border-radius: 0.375rem;
+            background-color: var(--surface);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            ring: 2px solid var(--primary-100);
+            border-color: var(--primary);
+        }
+
+        .card-elevated {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .status-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status-success {
+            background-color: var(--success);
+        }
+
+        .status-warning {
+            background-color: var(--warning);
+        }
+
+        .status-error {
+            background-color: var(--error);
+        }
+
+        .status-accent {
+            background-color: var(--accent);
+        }
+
+        .status-secondary {
+            background-color: var(--secondary-300);
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+
+        /* Enhanced table styling */
+        .data-table th {
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .data-table tbody tr {
+            transition: background-color 0.2s;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: var(--secondary-50);
+        }
+
+        /* Improved mobile card layout */
+        .mobile-project-card {
+            border: 1px solid var(--secondary-200);
+            border-radius: 0.5rem;
+            background-color: var(--secondary-50);
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+
+        .mobile-project-card:hover {
+            background-color: var(--secondary-100);
+            border-color: var(--secondary-300);
+        }
+
+        /* Enhanced pagination */
+        .pagination-btn {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            border: 1px solid var(--secondary-300);
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background-color: var(--secondary-50);
+        }
+
+        .pagination-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Enhanced filter section */
+        .filter-section {
+            background-color: var(--surface);
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            padding: 1rem;
+        }
+
+        /* Analytics panel improvements */
+        .analytics-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .analytics-metric:not(:last-child) {
+            border-bottom: 1px solid var(--secondary-200);
+        }
+
+        /* Loading animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid var(--secondary-300);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 1024px) {
+            .xl\:col-span-3 {
+                grid-column: span 3 / span 3;
+            }
+            
+            .xl\:col-span-1 {
+                grid-column: span 1 / span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .xl\:col-span-3, .xl\:col-span-1 {
+                grid-column: 1;
+            }
+            
+            .flex-col {
+                flex-direction: column;
+            }
+            
+            .lg\:flex-row {
+                flex-direction: column;
+            }
+            
+            .lg\:items-center {
+                align-items: flex-start;
+            }
+        }
+
+        /* Animation for project selection */
+        .project-checkbox:checked + .project-info {
+            background-color: var(--primary-50);
+        }
+
+        /* Enhanced search input */
+        .search-container {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .search-input {
+            padding-left: 2.5rem;
+        }
+
+        /* Custom scrollbar for table */
+        .table-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: var(--secondary-100);
+            border-radius: 3px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: var(--secondary-300);
+            border-radius: 3px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-400);
+        }
+    </style>
+</head>
+<body class="bg-background font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-surface shadow-card border-b border-secondary-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 16l-2-2-1.41 1.41L14 18.83l6-6L18.59 11.41 14 16z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-semibold text-text-primary">HO Safety Management</h1>
+                        <p class="text-sm text-text-secondary">Sector View</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="dashboard_overview.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="sector_view.html" class="text-primary font-medium border-b-2 border-primary pb-1">Sectors</a>
+                    <a href="project_overview.html" class="text-text-secondary hover:text-primary transition-colors">Projects</a>
+                    <a href="site_safety_officer_detail.html" class="text-text-secondary hover:text-primary transition-colors">Officers</a>
+                    <a href="comparison_analysis.html" class="text-text-secondary hover:text-primary transition-colors">Analysis</a>
+                    <a href="settings_access_control.html" class="text-text-secondary hover:text-primary transition-colors">Settings</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-text-secondary hover:text-primary transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 h-4 w-4 bg-error text-white text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://images.unsplash.com/photo-1599182002081-60947de0356b" 
+                             alt="Profile picture of Arjun Sharma, Head Office Manager" 
+                             class="h-8 w-8 rounded-full object-cover"
+                             onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                        <span class="text-sm font-medium text-text-primary">Arjun Sharma</span>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-text-secondary hover:text-primary">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-surface border-t border-secondary-200">
+            <div class="px-4 py-2 space-y-2">
+                <a href="dashboard_overview.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Dashboard</a>
+                <a href="sector_view.html" class="block px-3 py-2 text-primary font-medium bg-primary-50 rounded">Sectors</a>
+                <a href="project_overview.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Projects</a>
+                <a href="site_safety_officer_detail.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Officers</a>
+                <a href="comparison_analysis.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Analysis</a>
+                <a href="settings_access_control.html" class="block px-3 py-2 text-text-secondary hover:bg-secondary-50 rounded">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Header Section -->
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
+            <div>
+                <h2 class="text-2xl font-bold text-text-primary">Construction Sector Overview</h2>
+                <p class="text-text-secondary mt-1">Manage and analyze projects within the construction sector</p>
+                <div class="flex items-center mt-2 text-sm text-text-secondary">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span id="last-updated">Last updated: November 1, 2025 at 2:51 PM</span>
+                    <div class="ml-4 flex items-center">
+                        <div class="w-2 h-2 bg-success rounded-full animate-pulse mr-2"></div>
+                        <span>Live</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button id="compare-projects-btn" class="flex items-center px-4 py-2 bg-accent text-white rounded-button hover:bg-accent-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    <i class="fas fa-balance-scale mr-2"></i>
+                    Compare Selected (<span id="selected-count">0</span>)
+                </button>
+                <button id="export-data-btn" class="flex items-center px-4 py-2 bg-primary text-white rounded-button hover:bg-primary-700 transition-colors">
+                    <i class="fas fa-download mr-2"></i>
+                    Export
+                </button>
+            </div>
+        </div>
+
+        <!-- Sector Selection and Filters -->
+        <div class="filter-section p-4 mb-6">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center gap-4">
+                <!-- Sector Selection -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-layer-group text-text-secondary"></i>
+                        <span class="text-sm font-medium text-text-primary">Sector:</span>
+                    </div>
+                    <select id="sector-select" class="form-input text-sm px-3 py-2 min-w-40">
+                        <option value="construction" selected>Construction</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="energy">Energy</option>
+                        <option value="infrastructure">Infrastructure</option>
+                    </select>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap items-center gap-4 flex-1">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-filter text-text-secondary"></i>
+                        <span class="text-sm font-medium text-text-primary">Filters:</span>
+                    </div>
+                    
+                    <select id="location-filter" class="form-input text-sm px-3 py-2 min-w-32">
+                        <option value="">All Locations</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="chennai">Chennai</option>
+                        <option value="pune">Pune</option>
+                        <option value="hyderabad">Hyderabad</option>
+                    </select>
+
+                    <select id="status-filter" class="form-input text-sm px-3 py-2 min-w-32">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="on-hold">On Hold</option>
+                        <option value="completed">Completed</option>
+                        <option value="planning">Planning</option>
+                    </select>
+
+                    <div class="flex items-center space-x-2 ml-auto search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="search-input" placeholder="Search projects..." class="form-input text-sm px-3 py-2 w-48 search-input">
+                        <button id="reset-filters" class="p-2 text-text-secondary hover:text-primary transition-colors" title="Reset all filters">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results Count -->
+            <div class="mt-3 pt-3 border-t border-secondary-200">
+                <span class="text-sm text-text-secondary">Showing <span id="results-count" class="font-medium text-text-primary">12</span> projects in Construction sector</span>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
+            <!-- Project List Table (Main Section) -->
+            <div class="xl:col-span-3">
+                <div class="card-elevated bg-surface rounded-card">
+                    <!-- Table Header -->
+                    <div class="px-6 py-4 border-b border-secondary-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-text-primary">Project Portfolio</h3>
+                            <div class="flex items-center space-x-2">
+                                <button id="select-all" class="text-sm text-primary hover:text-primary-700 transition-colors">
+                                    Select All
+                                </button>
+                                <span class="text-secondary-300">|</span>
+                                <button id="clear-selection" class="text-sm text-text-secondary hover:text-primary transition-colors">
+                                    Clear Selection
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desktop Table -->
+                    <div class="hidden lg:block overflow-x-auto table-container">
+                        <table class="w-full data-table">
+                            <thead class="bg-secondary-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left">
+                                        <input type="checkbox" id="header-checkbox" class="rounded border-secondary-300 text-primary focus:ring-primary">
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:text-text-primary" data-sort="name">
+                                        Project Name
+                                        <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:text-text-primary" data-sort="location">
+                                        Location
+                                        <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:text-text-primary" data-sort="head">
+                                        Project Head
+                                        <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:text-text-primary" data-sort="status">
+                                        Status
+                                        <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:text-text-primary" data-sort="safety">
+                                        Safety Score
+                                        <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:text-text-primary" data-sort="officers">
+                                        Officers
+                                        <i class="fas fa-sort ml-1"></i>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="projects-table-body" class="bg-surface divide-y divide-secondary-200">
+                                <!-- Project rows will be dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Mobile Card Layout -->
+                    <div class="lg:hidden space-y-4 p-4" id="mobile-projects">
+                        <!-- Mobile project cards will be dynamically populated -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="px-6 py-4 border-t border-secondary-200">
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-text-secondary">
+                                Showing <span id="showing-start">1</span> to <span id="showing-end">3</span> of <span id="total-projects">12</span> projects
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button id="prev-page" class="pagination-btn disabled:opacity-50" disabled>
+                                    Previous
+                                </button>
+                                <button id="page-1" class="pagination-btn active">
+                                    1
+                                </button>
+                                <button id="page-2" class="pagination-btn">
+                                    2
+                                </button>
+                                <button id="page-3" class="pagination-btn">
+                                    3
+                                </button>
+                                <button id="page-4" class="pagination-btn">
+                                    4
+                                </button>
+                                <button id="next-page" class="pagination-btn">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Panel (Secondary Section) -->
+            <div class="xl:col-span-1">
+                <div class="space-y-6">
+                    <!-- Sector Performance Metrics -->
+                    <div class="card-elevated bg-surface p-6">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Sector Performance</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="analytics-metric">
+                                <span class="text-sm text-text-secondary">Total Near Miss Incidents</span>
+                                <div class="flex items-center">
+                                    <span class="text-lg font-semibold text-warning mr-2">47</span>
+                                    <i class="fas fa-info-circle text-text-secondary cursor-help" title="Near miss incidents reported in the last 30 days"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="analytics-metric">
+                                <span class="text-sm text-text-secondary">Training Conducted</span>
+                                <div class="flex items-center">
+                                    <span class="text-lg font-semibold text-success mr-2">156</span>
+                                    <i class="fas fa-info-circle text-text-secondary cursor-help" title="Safety training sessions conducted this quarter"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="analytics-metric">
+                                <span class="text-sm text-text-secondary">Active Projects</span>
+                                <span class="text-lg font-semibold text-text-primary">12</span>
+                            </div>
+                            
+                            <div class="analytics-metric">
+                                <span class="text-sm text-text-secondary">Total Officers</span>
+                                <span class="text-lg font-semibold text-text-primary">67</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card-elevated bg-surface p-6">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Actions</h3>
+                        
+                        <div class="space-y-3">
+                            <button class="w-full flex items-center justify-between p-3 text-left bg-secondary-50 hover:bg-secondary-100 rounded-lg transition-colors">
+                                <div>
+                                    <div class="font-medium text-text-primary">Add New Project</div>
+                                    <div class="text-sm text-text-secondary">Create a new project in this sector</div>
+                                </div>
+                                <i class="fas fa-plus text-primary"></i>
+                            </button>
+                            
+                            <button class="w-full flex items-center justify-between p-3 text-left bg-secondary-50 hover:bg-secondary-100 rounded-lg transition-colors">
+                                <div>
+                                    <div class="font-medium text-text-primary">Generate Report</div>
+                                    <div class="text-sm text-text-secondary">Create sector performance report</div>
+                                </div>
+                                <i class="fas fa-chart-bar text-primary"></i>
+                            </button>
+                            
+                            <button class="w-full flex items-center justify-between p-3 text-left bg-secondary-50 hover:bg-secondary-100 rounded-lg transition-colors">
+                                <div>
+                                    <div class="font-medium text-text-primary">Assign Officers</div>
+                                    <div class="text-sm text-text-secondary">Manage officer assignments</div>
+                                </div>
+                                <i class="fas fa-user-plus text-primary"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Sample project data for different pages
+        const projectData = {
+            1: [
+                {
+                    id: 1,
+                    name: "Mumbai Metro Tower Complex",
+                    type: "High-rise construction",
+                    location: "Mumbai, Maharashtra",
+                    area: "Bandra-Kurla Complex",
+                    head: "Rajesh Kumar",
+                    headRole: "Senior PM",
+                    status: "active",
+                    safetyScore: 94.2,
+                    officers: 8,
+                    reportsToday: 2,
+                    image: "https://images.unsplash.com/photo-1718259282218-c0dc4fa74244",
+                    headImage: "https://images.unsplash.com/photo-1703385387781-dd9ac32b0467",
+                    description: "A state-of-the-art metro tower complex with advanced safety features",
+                    daysActive: 247,
+                    openIssues: 2,
+                    totalObservations: 1000,
+                    safeObservations: 892,
+                    unsafeActs: 108,
+                    complianceRate: 94.2,
+                    trendData: [94, 93, 95, 92, 94, 93, 94.2]
+                },
+                {
+                    id: 2,
+                    name: "Delhi Mall Expansion",
+                    type: "Commercial construction",
+                    location: "New Delhi, Delhi",
+                    area: "Connaught Place",
+                    head: "Priya Patel",
+                    headRole: "Project Manager",
+                    status: "on-hold",
+                    safetyScore: 87.5,
+                    officers: 6,
+                    reportsToday: 1,
+                    image: "https://images.unsplash.com/photo-1552666791-75a034f6542a",
+                    headImage: "https://images.unsplash.com/photo-1725811641341-51459cba220e",
+                    description: "Expansion of the premier shopping destination in Delhi",
+                    daysActive: 156,
+                    openIssues: 5,
+                    totalObservations: 850,
+                    safeObservations: 740,
+                    unsafeActs: 110,
+                    complianceRate: 87.5,
+                    trendData: [88, 87, 86, 88, 87, 86, 87.5]
+                },
+                {
+                    id: 3,
+                    name: "Chennai IT Park Residences",
+                    type: "Residential complex",
+                    location: "Chennai, Tamil Nadu",
+                    area: "OMR IT Corridor",
+                    head: "Vikram Singh",
+                    headRole: "Lead PM",
+                    status: "active",
+                    safetyScore: 91.8,
+                    officers: 5,
+                    reportsToday: 3,
+                    image: "https://images.unsplash.com/photo-1599145866500-24d38d11fe86",
+                    headImage: "https://images.unsplash.com/photo-1542713405-362ce99d7f33",
+                    description: "Modern residential complex for IT professionals",
+                    daysActive: 189,
+                    openIssues: 1,
+                    totalObservations: 920,
+                    safeObservations: 845,
+                    unsafeActs: 75,
+                    complianceRate: 91.8,
+                    trendData: [90, 91, 92, 91, 92, 91, 91.8]
+                }
+            ],
+            2: [
+                {
+                    id: 4,
+                    name: "Bangalore Tech Hub",
+                    type: "IT Park Development",
+                    location: "Bangalore, Karnataka",
+                    area: "Whitefield",
+                    head: "Ananya Reddy",
+                    headRole: "Senior PM",
+                    status: "active",
+                    safetyScore: 95.1,
+                    officers: 7,
+                    reportsToday: 4,
+                    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
+                    headImage: "https://images.unsplash.com/photo-1584824486539-713bbd556029",
+                    description: "Cutting-edge technology hub with sustainable design",
+                    daysActive: 312,
+                    openIssues: 0,
+                    totalObservations: 1100,
+                    safeObservations: 1045,
+                    unsafeActs: 55,
+                    complianceRate: 95.1,
+                    trendData: [94, 95, 95, 96, 95, 95, 95.1]
+                },
+                {
+                    id: 5,
+                    name: "Hyderabad Pharma Campus",
+                    type: "Pharmaceutical Facility",
+                    location: "Hyderabad, Telangana",
+                    area: "Gachibowli",
+                    head: "Rahul Mehta",
+                    headRole: "Project Manager",
+                    status: "planning",
+                    safetyScore: 88.3,
+                    officers: 4,
+                    reportsToday: 0,
+                    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+                    headImage: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b",
+                    description: "Advanced pharmaceutical manufacturing facility",
+                    daysActive: 45,
+                    openIssues: 3,
+                    totalObservations: 300,
+                    safeObservations: 265,
+                    unsafeActs: 35,
+                    complianceRate: 88.3,
+                    trendData: [87, 88, 89, 88, 88, 89, 88.3]
+                },
+                {
+                    id: 6,
+                    name: "Pune Industrial Park",
+                    type: "Industrial Construction",
+                    location: "Pune, Maharashtra",
+                    area: "Hinjewadi",
+                    head: "Sanjay Verma",
+                    headRole: "Lead PM",
+                    status: "active",
+                    safetyScore: 92.7,
+                    officers: 9,
+                    reportsToday: 5,
+                    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+                    headImage: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b",
+                    description: "Modern industrial park with advanced safety protocols",
+                    daysActive: 278,
+                    openIssues: 2,
+                    totalObservations: 1250,
+                    safeObservations: 1159,
+                    unsafeActs: 91,
+                    complianceRate: 92.7,
+                    trendData: [91, 92, 93, 92, 93, 92, 92.7]
+                }
+            ],
+            3: [
+                {
+                    id: 7,
+                    name: "Kolkata Bridge Project",
+                    type: "Infrastructure Development",
+                    location: "Kolkata, West Bengal",
+                    area: "Howrah Bridge Area",
+                    head: "Sneha Chatterjee",
+                    headRole: "Senior PM",
+                    status: "active",
+                    safetyScore: 89.4,
+                    officers: 6,
+                    reportsToday: 2,
+                    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
+                    headImage: "https://images.unsplash.com/photo-1584824486539-713bbd556029",
+                    description: "Major bridge infrastructure project over the river",
+                    daysActive: 421,
+                    openIssues: 4,
+                    totalObservations: 980,
+                    safeObservations: 876,
+                    unsafeActs: 104,
+                    complianceRate: 89.4,
+                    trendData: [88, 89, 90, 89, 89, 90, 89.4]
+                },
+                {
+                    id: 8,
+                    name: "Ahmedabad Mall Complex",
+                    type: "Commercial Development",
+                    location: "Ahmedabad, Gujarat",
+                    area: "SG Highway",
+                    head: "Karan Patel",
+                    headRole: "Project Manager",
+                    status: "completed",
+                    safetyScore: 96.2,
+                    officers: 5,
+                    reportsToday: 1,
+                    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+                    headImage: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b",
+                    description: "Luxury shopping complex with integrated safety systems",
+                    daysActive: 512,
+                    openIssues: 0,
+                    totalObservations: 1350,
+                    safeObservations: 1298,
+                    unsafeActs: 52,
+                    complianceRate: 96.2,
+                    trendData: [95, 96, 96, 97, 96, 96, 96.2]
+                },
+                {
+                    id: 9,
+                    name: "Jaipur Heritage Resort",
+                    type: "Hospitality Construction",
+                    location: "Jaipur, Rajasthan",
+                    area: "Amer Road",
+                    head: "Priya Sharma",
+                    headRole: "Lead PM",
+                    status: "active",
+                    safetyScore: 93.8,
+                    officers: 4,
+                    reportsToday: 3,
+                    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
+                    headImage: "https://images.unsplash.com/photo-1584824486539-713bbd556029",
+                    description: "Luxury heritage resort with traditional architecture",
+                    daysActive: 198,
+                    openIssues: 1,
+                    totalObservations: 870,
+                    safeObservations: 815,
+                    unsafeActs: 55,
+                    complianceRate: 93.8,
+                    trendData: [92, 93, 94, 93, 94, 93, 93.8]
+                }
+            ],
+            4: [
+                {
+                    id: 10,
+                    name: "Lucknow Metro Extension",
+                    type: "Rail Infrastructure",
+                    location: "Lucknow, Uttar Pradesh",
+                    area: "Gomti Nagar",
+                    head: "Amit Singh",
+                    headRole: "Senior PM",
+                    status: "on-hold",
+                    safetyScore: 85.9,
+                    officers: 8,
+                    reportsToday: 1,
+                    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+                    headImage: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b",
+                    description: "Metro rail extension project with modern safety features",
+                    daysActive: 167,
+                    openIssues: 7,
+                    totalObservations: 760,
+                    safeObservations: 653,
+                    unsafeActs: 107,
+                    complianceRate: 85.9,
+                    trendData: [84, 85, 86, 85, 86, 85, 85.9]
+                },
+                {
+                    id: 11,
+                    name: "Chandigarh IT Tower",
+                    type: "Commercial High-rise",
+                    location: "Chandigarh",
+                    area: "Sector 17",
+                    head: "Neha Kapoor",
+                    headRole: "Project Manager",
+                    status: "active",
+                    safetyScore: 94.7,
+                    officers: 7,
+                    reportsToday: 4,
+                    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
+                    headImage: "https://images.unsplash.com/photo-1584824486539-713bbd556029",
+                    description: "Modern IT tower with advanced safety systems",
+                    daysActive: 234,
+                    openIssues: 1,
+                    totalObservations: 1050,
+                    safeObservations: 992,
+                    unsafeActs: 58,
+                    complianceRate: 94.7,
+                    trendData: [93, 94, 95, 94, 95, 94, 94.7]
+                },
+                {
+                    id: 12,
+                    name: "Kochi Waterfront Project",
+                    type: "Mixed-use Development",
+                    location: "Kochi, Kerala",
+                    area: "Marine Drive",
+                    head: "Rajeev Nair",
+                    headRole: "Lead PM",
+                    status: "planning",
+                    safetyScore: 87.2,
+                    officers: 3,
+                    reportsToday: 0,
+                    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+                    headImage: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b",
+                    description: "Waterfront mixed-use development with sustainability focus",
+                    daysActive: 32,
+                    openIssues: 2,
+                    totalObservations: 210,
+                    safeObservations: 183,
+                    unsafeActs: 27,
+                    complianceRate: 87.2,
+                    trendData: [86, 87, 88, 87, 87, 88, 87.2]
+                }
+            ]
+        };
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Project selection functionality
+        let selectedProjects = new Set();
+
+        function updateSelectedCount() {
+            const count = selectedProjects.size;
+            document.getElementById('selected-count').textContent = count;
+            document.getElementById('compare-projects-btn').disabled = count < 2;
+        }
+
+        // Individual checkbox handling
+        function attachCheckboxEventListeners() {
+            document.querySelectorAll('.project-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const projectId = this.dataset.projectId;
+                    if (this.checked) {
+                        selectedProjects.add(projectId);
+                    } else {
+                        selectedProjects.delete(projectId);
+                    }
+                    updateSelectedCount();
+                });
+            });
+        }
+
+        // Header checkbox (select all)
+        document.getElementById('header-checkbox').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.project-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+                const projectId = checkbox.dataset.projectId;
+                if (this.checked) {
+                    selectedProjects.add(projectId);
+                } else {
+                    selectedProjects.delete(projectId);
+                }
+            });
+            updateSelectedCount();
+        });
+
+        // Select all button
+        document.getElementById('select-all').addEventListener('click', function() {
+            document.getElementById('header-checkbox').checked = true;
+            document.getElementById('header-checkbox').dispatchEvent(new Event('change'));
+        });
+
+        // Clear selection button
+        document.getElementById('clear-selection').addEventListener('click', function() {
+            document.getElementById('header-checkbox').checked = false;
+            document.getElementById('header-checkbox').dispatchEvent(new Event('change'));
+        });
+
+        // Compare projects button
+        document.getElementById('compare-projects-btn').addEventListener('click', function() {
+            if (selectedProjects.size >= 2) {
+                const projectIds = Array.from(selectedProjects).join(',');
+                window.location.href = `comparison_analysis.html?projects=${projectIds}`;
+            }
+        });
+
+        // Export data button
+        document.getElementById('export-data-btn').addEventListener('click', function() {
+            console.log('Exporting project data...');
+            alert('Export functionality would be implemented here');
+        });
+
+        // Table sorting functionality
+        document.querySelectorAll('[data-sort]').forEach(header => {
+            header.addEventListener('click', function() {
+                const sortBy = this.dataset.sort;
+                console.log('Sorting by:', sortBy);
+                
+                document.querySelectorAll('[data-sort] i').forEach(icon => {
+                    icon.className = 'fas fa-sort ml-1';
+                });
+                this.querySelector('i').className = 'fas fa-sort-up ml-1';
+            });
+        });
+
+        // Filter functionality
+        document.getElementById('sector-select').addEventListener('change', function() {
+            const sector = this.value;
+            console.log('Sector changed to:', sector);
+            // Update page title and content based on selected sector
+            const sectorNames = {
+                'construction': 'Construction',
+                'manufacturing': 'Manufacturing', 
+                'energy': 'Energy',
+                'infrastructure': 'Infrastructure'
+            };
+            document.querySelector('h2').textContent = `${sectorNames[sector]} Sector Overview`;
+        });
+
+        document.getElementById('location-filter').addEventListener('change', function() {
+            console.log('Location filter:', this.value);
+        });
+
+        document.getElementById('status-filter').addEventListener('change', function() {
+            console.log('Status filter:', this.value);
+        });
+
+        // Search functionality
+        document.getElementById('search-input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            console.log('Searching for:', searchTerm);
+        });
+
+        // Reset filters
+        document.getElementById('reset-filters').addEventListener('click', function() {
+            document.getElementById('location-filter').value = '';
+            document.getElementById('status-filter').value = '';
+            document.getElementById('search-input').value = '';
+            console.log('Filters reset');
+        });
+
+        // Function to navigate to project overview with project data
+        function navigateToProjectOverview(projectId) {
+            // Find the project data
+            let project = null;
+            for (const page in projectData) {
+                const foundProject = projectData[page].find(p => p.id == projectId);
+                if (foundProject) {
+                    project = foundProject;
+                    break;
+                }
+            }
+            
+            if (project) {
+                // Store project data in sessionStorage to pass to project overview
+                sessionStorage.setItem('selectedProject', JSON.stringify(project));
+                // Navigate to project overview page
+                window.location.href = `project_overview.html?id=${projectId}`;
+            }
+        }
+
+        // Project row click navigation
+        function attachRowEventListeners() {
+            document.querySelectorAll('.project-row').forEach(row => {
+                row.addEventListener('click', function(e) {
+                    if (e.target.type === 'checkbox' || e.target.closest('button')) {
+                        return;
+                    }
+                    
+                    const projectId = this.dataset.projectId;
+                    navigateToProjectOverview(projectId);
+                });
+            });
+        }
+
+        // Pagination functionality - Fixed with dynamic data loading
+        let currentPage = 1;
+        const totalPages = 4;
+
+        function updateProjectTable(page) {
+            const projects = projectData[page];
+            const tableBody = document.getElementById('projects-table-body');
+            const mobileProjects = document.getElementById('mobile-projects');
+            
+            // Clear existing rows
+            tableBody.innerHTML = '';
+            mobileProjects.innerHTML = '';
+            
+            // Add new rows for desktop
+            projects.forEach(project => {
+                const statusClass = project.status === 'active' ? 'bg-success-100 text-success-600' : 
+                                 project.status === 'on-hold' ? 'bg-warning-100 text-warning-600' : 
+                                 project.status === 'completed' ? 'bg-accent-100 text-accent-600' : 
+                                 'bg-secondary-100 text-secondary-600';
+                
+                const statusText = project.status === 'active' ? 'Active' : 
+                                 project.status === 'on-hold' ? 'On Hold' : 
+                                 project.status === 'completed' ? 'Completed' : 
+                                 'Planning';
+                
+                const statusIndicator = project.status === 'active' ? 'status-success' : 
+                                      project.status === 'on-hold' ? 'status-warning' : 
+                                      project.status === 'completed' ? 'status-accent' : 
+                                      'status-secondary';
+
+                // Desktop table row
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-secondary-50 transition-colors cursor-pointer project-row';
+                row.dataset.projectId = project.id;
+                row.innerHTML = `
+                    <td class="px-6 py-4">
+                        <input type="checkbox" class="project-checkbox rounded border-secondary-300 text-primary focus:ring-primary" data-project-id="${project.id}">
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-10 w-10">
+                                <img src="${project.image}" 
+                                     alt="${project.name} construction site" 
+                                     class="h-10 w-10 rounded-lg object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-text-primary">${project.name}</div>
+                                <div class="text-sm text-text-secondary">${project.type}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-text-primary">${project.location}</div>
+                        <div class="text-sm text-text-secondary">${project.area}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <img src="${project.headImage}" 
+                                 alt="Profile photo of ${project.head}" 
+                                 class="h-8 w-8 rounded-full object-cover mr-2"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <div>
+                                <div class="text-sm font-medium text-text-primary">${project.head}</div>
+                                <div class="text-sm text-text-secondary">${project.headRole}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
+                            <div class="status-indicator ${statusIndicator} mr-1"></div>
+                            ${statusText}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <div class="text-sm font-medium ${project.safetyScore >= 90 ? 'text-success' : project.safetyScore >= 80 ? 'text-warning' : 'text-error'}">${project.safetyScore}%</div>
+                            <div class="ml-2 flex-1 bg-secondary-200 rounded-full h-2 w-16">
+                                <div class="${project.safetyScore >= 90 ? 'bg-success' : project.safetyScore >= 80 ? 'bg-warning' : 'bg-error'} h-2 rounded-full" style="width: ${project.safetyScore}%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-text-primary">${project.officers} officers</div>
+                        <div class="text-sm text-text-secondary">${project.reportsToday} reports today</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <button class="text-primary hover:text-primary-700 transition-colors" onclick="navigateToProjectOverview(${project.id})">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+                
+                // Mobile card
+                const mobileCard = document.createElement('div');
+                mobileCard.className = 'mobile-project-card';
+                mobileCard.innerHTML = `
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" class="project-checkbox rounded border-secondary-300 text-primary focus:ring-primary" data-project-id="${project.id}">
+                            <img src="${project.image}" 
+                                 alt="${project.name} construction site" 
+                                 class="h-12 w-12 rounded-lg object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
+                            <div class="status-indicator ${statusIndicator} mr-1"></div>
+                            ${statusText}
+                        </span>
+                    </div>
+                    <h4 class="font-medium text-text-primary mb-1">${project.name}</h4>
+                    <p class="text-sm text-text-secondary mb-3">${project.location} • ${project.head}</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-sm">
+                                <span class="text-text-secondary">Safety:</span>
+                                <span class="font-medium ${project.safetyScore >= 90 ? 'text-success' : project.safetyScore >= 80 ? 'text-warning' : 'text-error'} ml-1">${project.safetyScore}%</span>
+                            </div>
+                            <div class="text-sm">
+                                <span class="text-text-secondary">Officers:</span>
+                                <span class="font-medium text-text-primary ml-1">${project.officers}</span>
+                            </div>
+                        </div>
+                        <button class="text-primary hover:text-primary-700 transition-colors" onclick="navigateToProjectOverview(${project.id})">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                `;
+                
+                mobileProjects.appendChild(mobileCard);
+            });
+
+            // Re-attach event listeners to new rows
+            attachRowEventListeners();
+            attachCheckboxEventListeners();
+        }
+
+        function updatePagination() {
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = currentPage === totalPages;
+            
+            // Update all page buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.getElementById(`page-${i}`);
+                if (pageBtn) {
+                    if (i === currentPage) {
+                        pageBtn.classList.add('active');
+                    } else {
+                        pageBtn.classList.remove('active');
+                    }
+                }
+            }
+            
+            // Update showing range
+            const start = (currentPage - 1) * 3 + 1;
+            const end = Math.min(currentPage * 3, 12);
+            document.getElementById('showing-start').textContent = start;
+            document.getElementById('showing-end').textContent = end;
+        }
+
+        // Next page button - Fixed with data loading
+        document.getElementById('next-page').addEventListener('click', function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateProjectTable(currentPage);
+                updatePagination();
+                console.log('Next page:', currentPage);
+            }
+        });
+
+        // Previous page button - Fixed with data loading
+        document.getElementById('prev-page').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                updateProjectTable(currentPage);
+                updatePagination();
+                console.log('Previous page:', currentPage);
+            }
+        });
+
+        // Page number buttons
+        for (let i = 1; i <= totalPages; i++) {
+            document.getElementById(`page-${i}`).addEventListener('click', function() {
+                currentPage = i;
+                updateProjectTable(currentPage);
+                updatePagination();
+            });
+        }
+
+        // Initialize pagination and load first page data
+        updateProjectTable(1);
+        updatePagination();
+
+        // Auto-refresh data every 30 seconds
+        function updateTimestamp() {
+            const timestamp = document.getElementById('last-updated');
+            if (timestamp) {
+                const now = new Date();
+                const timeString = now.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                });
+                timestamp.textContent = `Last updated: ${timeString}`;
+            }
+        }
+
+        // Initialize timestamp and set interval
+        updateTimestamp();
+        setInterval(updateTimestamp, 30000);
+    </script>
+</body>
+</html>

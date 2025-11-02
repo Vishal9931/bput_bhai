@@ -44,35 +44,35 @@
                 <div class="report-count">4</div>
             </div>
             </div>
-            <div class="report-card">
+            <div class="report-card induction">
                 <div class="report-icon training">
                     <i class="fas fa-user-graduate"></i>
                 </div>
                 <div class="report-name">Induction Training</div>
                 <div class="report-count">3</div>
             </div>
-            <div class="report-card">
+            <div class="report-card daily-training">
                 <div class="report-icon training">
                     <i class="fas fa-chalkboard-teacher"></i>
                 </div>
                 <div class="report-name">Daily Training Talk</div>
                 <div class="report-count">2</div>
             </div>
-            <div class="report-card">
+            <div class="report-card pep_talk">
                 <div class="report-icon training">
                     <i class="fas fa-comments"></i>
                 </div>
                 <div class="report-name">PEP Talk</div>
                 <div class="report-count">1</div>
             </div>
-            <div class="report-card">
+            <div class="report-card special_technical">
                 <div class="report-icon training">
                     <i class="fas fa-cogs"></i>
                 </div>
                 <div class="report-name">Special Technical Training</div>
                 <div class="report-count">2</div>
             </div>
-            <div class="report-card">
+            <div class="report-card saw">
                 <div class="report-icon training">
                     <i class="fas fa-tools"></i>
                 </div>
@@ -144,9 +144,34 @@
         });
 
         let SafetyobservationBtn = document.querySelector(".Safety-observation");
+        let inductionBtn = document.querySelector(".induction");
+        let dailytrainingnBtn = document.querySelector(".daily-training");
+        let peptalkBtn = document.querySelector(".pep_talk");
+        let specialtechnicalBtn = document.querySelector(".special_technical");
+        let sawBtn = document.querySelector(".saw");
 
     SafetyobservationBtn.addEventListener("click", () => {
         window.location.href = "Safety_Observatiion_Reports_index.html";
+    });
+
+    inductionBtn.addEventListener("click", () => {
+        window.location.href = "induction_reports.html";
+    });
+
+    dailytrainingnBtn.addEventListener("click", () => {
+        window.location.href = "daily_training_reports.html";
+    });
+
+    peptalkBtn.addEventListener("click", () => {
+        window.location.href = "pep_reports.html";
+    });
+
+    specialtechnicalBtn.addEventListener("click", () => {
+        window.location.href = "special_technical_reports.html";
+    });
+
+    sawBtn.addEventListener("click", () => {
+        window.location.href = "saw_reports.html";
     });
     </script>
 </body>

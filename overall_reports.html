@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Reports Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 15px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: #2c3e50;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        /* Stats Overview */
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        /* Charts */
+        .chart-container {
+            margin-top: 15px;
+        }
+
+        .chart {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 0 10px;
+            margin-bottom: 10px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            margin: 0 5px;
+            background-color: #3498db;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            min-height: 10px;
+        }
+
+        .chart-label {
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 5px;
+            color: #6c757d;
+        }
+
+        /* Top Performers */
+        .top-performers {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .performer-card {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .performer-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .rank-1 {
+            background-color: #f1c40f;
+        }
+
+        .rank-2 {
+            background-color: #95a5a6;
+        }
+
+        .rank-3 {
+            background-color: #d35400;
+        }
+
+        .performer-info {
+            flex: 1;
+        }
+
+        .performer-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .performer-stats {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .performer-score {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Near Miss List */
+        .incident-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .incident-item {
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .incident-info {
+            flex: 1;
+        }
+
+        .incident-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .incident-details {
+            font-size: 0.8rem;
+            color: #6c757d;
+            display: flex;
+            gap: 10px;
+        }
+
+        .incident-type {
+            padding: 2px 8px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+
+        .incident-severity {
+            padding: 2px 8px;
+            background-color: #f39c12;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+
+        .incident-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #3498db;
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Filter Controls */
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .filter-select {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: white;
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            flex: 1;
+            padding: 12px;
+            background-color: white;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: 500;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-button.active {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="logo">MEIL Safety App</div>
+                <div class="user-info">
+                    <span>John Doe</span>
+                    <div class="avatar">JD</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <button class="nav-button" id="officersButton">Officers</button>
+            <button class="nav-button active" id="reportsButton">Reports</button>
+        </div>
+
+        <!-- Reports Dashboard -->
+        <div id="reportsDashboard">
+            <h2 class="page-title">Safety Reports Dashboard</h2>
+
+            <div class="section">
+                <div class="section-title">Overall Reporting Summary</div>
+                <div class="filter-controls">
+                    <select class="filter-select" id="timeRange">
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month" selected>This Month</option>
+                        <option value="quarter">This Quarter</option>
+                    </select>
+                    <select class="filter-select" id="projectFilter">
+                        <option value="all">All Projects</option>
+                        <option value="alpha">Project Alpha</option>
+                        <option value="beta">Project Beta</option>
+                        <option value="gamma">Project Gamma</option>
+                    </select>
+                </div>
+                <div class="stats-overview">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalReports">142</div>
+                        <div class="stat-label">Total Reports</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="safetyObservations">67</div>
+                        <div class="stat-label">Safety Observations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="trainings">42</div>
+                        <div class="stat-label">Trainings Conducted</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="incidents">8</div>
+                        <div class="stat-label">Incidents Reported</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="reportTypes">Report Types</div>
+                <div class="tab" data-tab="topPerformers">Top Performers</div>
+                <div class="tab" data-tab="nearMiss">Near Miss Incidents</div>
+            </div>
+
+            <!-- Report Types Tab -->
+            <div class="tab-content active" id="reportTypesTab">
+                <div class="section">
+                    <div class="section-title">Reports by Type</div>
+                    <div class="chart-container">
+                        <div class="chart" id="reportTypesChart">
+                            <!-- Chart bars will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Trend Analysis</div>
+                    <div class="chart-container">
+                        <div class="chart" id="trendChart">
+                            <!-- Trend chart will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Performers Tab -->
+            <div class="tab-content" id="topPerformersTab">
+                <div class="section">
+                    <div class="section-title">Today's Top Performers</div>
+                    <div class="top-performers" id="topPerformersList">
+                        <!-- Performer cards will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Weekly Performance Leaders</div>
+                    <div class="chart-container">
+                        <div class="chart" id="weeklyPerformanceChart">
+                            <!-- Weekly performance chart will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Near Miss Tab -->
+            <div class="tab-content" id="nearMissTab">
+                <div class="section">
+                    <div class="section-title">Recent Near Miss Incidents</div>
+                    <div class="incident-list" id="nearMissList">
+                        <!-- Incident items will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Near Miss Types Distribution</div>
+                    <div class="chart-container">
+                        <div class="chart" id="incidentTypesChart">
+                            <!-- Incident types chart will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for the reports dashboard
+        const reportsData = {
+            totalReports: 142,
+            safetyObservations: 67,
+            trainings: 42,
+            incidents: 8,
+            reportTypes: [
+                { type: 'Safety Observation', count: 67, color: '#3498db' },
+                { type: 'Training', count: 42, color: '#2ecc71' },
+                { type: 'PEP Talk', count: 18, color: '#9b59b6' },
+                { type: 'Near Miss', count: 8, color: '#e74c3c' },
+                { type: 'First-Aid', count: 5, color: '#f39c12' },
+                { type: 'Good Practice', count: 2, color: '#1abc9c' }
+            ],
+            trendData: [45, 52, 48, 65, 72, 68, 75, 80, 78, 82, 85, 90, 88, 92, 95, 98, 102, 110, 115, 120, 118, 125, 130, 135, 142],
+            topPerformers: [
+                { name: 'Sarah Smith', reports: 12, project: 'Project Beta', avatar: 'SS' },
+                { name: 'Michael Brown', reports: 10, project: 'Project Gamma', avatar: 'MB' },
+                { name: 'Emily Johnson', reports: 8, project: 'Project Alpha', avatar: 'EJ' },
+                { name: 'David Wilson', reports: 7, project: 'Project Delta', avatar: 'DW' },
+                { name: 'John Doe', reports: 6, project: 'Project Alpha', avatar: 'JD' }
+            ],
+            weeklyPerformance: [
+                { name: 'Sarah Smith', value: 42 },
+                { name: 'Michael Brown', value: 38 },
+                { name: 'John Doe', value: 35 },
+                { name: 'Emily Johnson', value: 32 },
+                { name: 'David Wilson', value: 28 }
+            ],
+            nearMissIncidents: [
+                { 
+                    title: 'Falling Object Near Workers', 
+                    type: 'Falling Object', 
+                    severity: 'High',
+                    location: 'Site A - North Section',
+                    date: '2023-05-15',
+                    reportedBy: 'Michael Brown'
+                },
+                { 
+                    title: 'Unsafe Scaffolding Setup', 
+                    type: 'Structural', 
+                    severity: 'Medium',
+                    location: 'Site B - East Wing',
+                    date: '2023-05-14',
+                    reportedBy: 'Sarah Smith'
+                },
+                { 
+                    title: 'Electrical Hazard - Exposed Wires', 
+                    type: 'Electrical', 
+                    severity: 'High',
+                    location: 'Site C - Generator Area',
+                    date: '2023-05-13',
+                    reportedBy: 'David Wilson'
+                },
+                { 
+                    title: 'Near Collision - Site Vehicle', 
+                    type: 'Vehicle', 
+                    severity: 'Medium',
+                    location: 'Site A - Access Road',
+                    date: '2023-05-12',
+                    reportedBy: 'Emily Johnson'
+                },
+                { 
+                    title: 'Chemical Spill Contained', 
+                    type: 'Hazardous Material', 
+                    severity: 'Low',
+                    location: 'Site B - Storage Area',
+                    date: '2023-05-11',
+                    reportedBy: 'John Doe'
+                }
+            ],
+            incidentTypes: [
+                { type: 'Falling Object', count: 3, color: '#e74c3c' },
+                { type: 'Structural', count: 2, color: '#3498db' },
+                { type: 'Electrical', count: 1, color: '#f1c40f' },
+                { type: 'Vehicle', count: 1, color: '#2ecc71' },
+                { type: 'Hazardous Material', count: 1, color: '#9b59b6' }
+            ]
+        };
+
+        // DOM elements
+        const reportsDashboard = document.getElementById('reportsDashboard');
+        const officersButton = document.getElementById('officersButton');
+        const reportsButton = document.getElementById('reportsButton');
+        const totalReports = document.getElementById('totalReports');
+        const safetyObservations = document.getElementById('safetyObservations');
+        const trainings = document.getElementById('trainings');
+        const incidents = document.getElementById('incidents');
+        const reportTypesChart = document.getElementById('reportTypesChart');
+        const trendChart = document.getElementById('trendChart');
+        const topPerformersList = document.getElementById('topPerformersList');
+        const weeklyPerformanceChart = document.getElementById('weeklyPerformanceChart');
+        const nearMissList = document.getElementById('nearMissList');
+        const incidentTypesChart = document.getElementById('incidentTypesChart');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const timeRangeFilter = document.getElementById('timeRange');
+        const projectFilter = document.getElementById('projectFilter');
+
+        // Initialize the dashboard
+        function initDashboard() {
+            updateStats();
+            renderReportTypesChart();
+            renderTrendChart();
+            renderTopPerformers();
+            renderWeeklyPerformanceChart();
+            renderNearMissIncidents();
+            renderIncidentTypesChart();
+            setupEventListeners();
+        }
+
+        // Update statistics
+        function updateStats() {
+            totalReports.textContent = reportsData.totalReports;
+            safetyObservations.textContent = reportsData.safetyObservations;
+            trainings.textContent = reportsData.trainings;
+            incidents.textContent = reportsData.incidents;
+        }
+
+        // Render report types chart
+        function renderReportTypesChart() {
+            reportTypesChart.innerHTML = '';
+            
+            const maxValue = Math.max(...reportsData.reportTypes.map(item => item.count));
+            
+            reportsData.reportTypes.forEach(item => {
+                const barHeight = (item.count / maxValue) * 100;
+                
+                const barContainer = document.createElement('div');
+                barContainer.style.display = 'flex';
+                barContainer.style.flexDirection = 'column';
+                barContainer.style.alignItems = 'center';
+                barContainer.style.flex = '1';
+                
+                barContainer.innerHTML = `
+                    <div class="chart-bar" style="height: ${barHeight}%; background-color: ${item.color};"></div>
+                    <div class="chart-label">${item.type}</div>
+                    <div class="chart-label">${item.count}</div>
+                `;
+                
+                reportTypesChart.appendChild(barContainer);
+            });
+        }
+
+        // Render trend chart
+        function renderTrendChart() {
+            trendChart.innerHTML = '';
+            
+            const maxValue = Math.max(...reportsData.trendData);
+            const barWidth = 100 / reportsData.trendData.length;
+            
+            reportsData.trendData.forEach((value, index) => {
+                const barHeight = (value / maxValue) * 100;
+                
+                const barContainer = document.createElement('div');
+                barContainer.style.display = 'flex';
+                barContainer.style.flexDirection = 'column';
+                barContainer.style.alignItems = 'center';
+                barContainer.style.flex = `0 0 ${barWidth}%`;
+                
+                // Only show every 5th label to avoid clutter
+                const showLabel = index % 5 === 0;
+                
+                barContainer.innerHTML = `
+                    <div class="chart-bar" style="height: ${barHeight}%; background-color: #3498db;"></div>
+                    ${showLabel ? `<div class="chart-label">${index + 1}</div>` : ''}
+                `;
+                
+                trendChart.appendChild(barContainer);
+            });
+        }
+
+        // Render top performers list
+        function renderTopPerformers() {
+            topPerformersList.innerHTML = '';
+            
+            reportsData.topPerformers.forEach((performer, index) => {
+                const performerCard = document.createElement('div');
+                performerCard.className = 'performer-card';
+                
+                const rankClass = index < 3 ? `rank-${index + 1}` : '';
+                
+                performerCard.innerHTML = `
+                    <div class="performer-rank ${rankClass}">${index + 1}</div>
+                    <div class="performer-info">
+                        <div class="performer-name">${performer.name}</div>
+                        <div class="performer-stats">${performer.project} • <span class="performer-score">${performer.reports} reports</span></div>
+                    </div>
+                    <div class="avatar">${performer.avatar}</div>
+                `;
+                
+                topPerformersList.appendChild(performerCard);
+            });
+        }
+
+        // Render weekly performance chart
+        function renderWeeklyPerformanceChart() {
+            weeklyPerformanceChart.innerHTML = '';
+            
+            const maxValue = Math.max(...reportsData.weeklyPerformance.map(item => item.value));
+            
+            reportsData.weeklyPerformance.forEach(item => {
+                const barHeight = (item.value / maxValue) * 100;
+                
+                const barContainer = document.createElement('div');
+                barContainer.style.display = 'flex';
+                barContainer.style.flexDirection = 'column';
+                barContainer.style.alignItems = 'center';
+                barContainer.style.flex = '1';
+                
+                barContainer.innerHTML = `
+                    <div class="chart-bar" style="height: ${barHeight}%; background-color: #2ecc71;"></div>
+                    <div class="chart-label">${item.name.split(' ')[0]}</div>
+                    <div class="chart-label">${item.value}</div>
+                `;
+                
+                weeklyPerformanceChart.appendChild(barContainer);
+            });
+        }
+
+        // Render near miss incidents
+        function renderNearMissIncidents() {
+            nearMissList.innerHTML = '';
+            
+            reportsData.nearMissIncidents.forEach(incident => {
+                const incidentItem = document.createElement('div');
+                incidentItem.className = 'incident-item';
+                
+                incidentItem.innerHTML = `
+                    <div class="incident-info">
+                        <div class="incident-title">${incident.title}</div>
+                        <div class="incident-details">
+                            <span class="incident-type">${incident.type}</span>
+                            <span class="incident-severity">${incident.severity}</span>
+                            <span>${incident.location}</span>
+                        </div>
+                    </div>
+                    <div class="incident-date">${incident.date}</div>
+                `;
+                
+                nearMissList.appendChild(incidentItem);
+            });
+        }
+
+        // Render incident types chart
+        function renderIncidentTypesChart() {
+            incidentTypesChart.innerHTML = '';
+            
+            const maxValue = Math.max(...reportsData.incidentTypes.map(item => item.count));
+            
+            reportsData.incidentTypes.forEach(item => {
+                const barHeight = (item.count / maxValue) * 100;
+                
+                const barContainer = document.createElement('div');
+                barContainer.style.display = 'flex';
+                barContainer.style.flexDirection = 'column';
+                barContainer.style.alignItems = 'center';
+                barContainer.style.flex = '1';
+                
+                barContainer.innerHTML = `
+                    <div class="chart-bar" style="height: ${barHeight}%; background-color: ${item.color};"></div>
+                    <div class="chart-label">${item.type}</div>
+                    <div class="chart-label">${item.count}</div>
+                `;
+                
+                incidentTypesChart.appendChild(barContainer);
+            });
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Tab switching
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.dataset.tab;
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}Tab`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Navigation buttons
+            officersButton.addEventListener('click', () => {
+                // In a real app, this would navigate to the officers page
+                alert('Navigating to Officers page');
+                officersButton.classList.add('active');
+                reportsButton.classList.remove('active');
+            });
+            
+            reportsButton.addEventListener('click', () => {
+                officersButton.classList.remove('active');
+                reportsButton.classList.add('active');
+            });
+            
+            // Filter changes
+            timeRangeFilter.addEventListener('change', applyFilters);
+            projectFilter.addEventListener('change', applyFilters);
+        }
+
+        // Apply filters (placeholder function)
+        function applyFilters() {
+            // In a real app, this would filter the data based on selected options
+            console.log('Filters applied:', {
+                timeRange: timeRangeFilter.value,
+                project: projectFilter.value
+            });
+            
+            // For demo purposes, we'll just update the stats with random values
+            const randomFactor = 0.8 + Math.random() * 0.4; // Between 0.8 and 1.2
+            
+            totalReports.textContent = Math.round(reportsData.totalReports * randomFactor);
+            safetyObservations.textContent = Math.round(reportsData.safetyObservations * randomFactor);
+            trainings.textContent = Math.round(reportsData.trainings * randomFactor);
+            incidents.textContent = Math.round(reportsData.incidents * randomFactor);
+        }
+
+        // Initialize the dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>

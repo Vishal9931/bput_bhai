@@ -129,6 +129,8 @@
             </div>
 
             <button class="button-53" role="button">Check Reports</button>
+            <button class="button-54" role="button">Check Other Officer Reports</button>
+            <button class="button-55" role="button">Check Overall Reports</button>
 
         </div>
 
@@ -151,6 +153,8 @@
     let stopWorkOrderBtn = document.querySelector(".Stop-Work-Order");
     let goodPracticeBtn = document.querySelector(".Good-Practice");
     let checkReportsBtn = document.querySelector(".button-53");
+    let checkotherReportsBtn = document.querySelector(".button-54");
+    let overallReportsBtn = document.querySelector(".button-55");
 
     SafetyObservationBtn.addEventListener("click", () => {
         window.location.href = "Safety_Observation.html";
@@ -190,6 +194,12 @@
     });
     checkReportsBtn.addEventListener("click", () => {
         window.location.href = "Reports_Dashboard.html";
+    });
+    checkotherReportsBtn.addEventListener("click", () => {
+        window.location.href = "other_officers.html";
+    });
+   overallReportsBtn.addEventListener("click", () => {
+        window.location.href = "overall_reports.html";
     });
 </script>
 </body>

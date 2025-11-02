@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - TopManagement Dashboard</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ftopmanagem2294back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Sidebar -->
+    <div class="flex">
+        <nav class="w-64 bg-surface shadow-lg min-h-screen fixed left-0 top-0 z-50">
+            <div class="p-6">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-text-primary">TopManagement</h1>
+                        <p class="text-sm text-text-secondary">Dashboard</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <ul class="space-y-2">
+                    <li>
+                        <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                            <i class="fas fa-tachometer-alt w-5"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="projects.html" class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                            <i class="fas fa-project-diagram w-5"></i>
+                            Projects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="employees.html" class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                            <i class="fas fa-users w-5"></i>
+                            Employees
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reports.html" class="flex items-center gap-3 px-4 py-3 bg-primary-50 text-primary rounded-lg font-medium">
+                            <i class="fas fa-file-alt w-5"></i>
+                            Reports
+                        </a>
+                    </li>
+                    <li>
+                        <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-secondary-50 hover:text-text-primary rounded-lg transition-colors">
+                            <i class="fas fa-cog w-5"></i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-secondary-200">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1672415259095-0560205489f4" 
+                         alt="Executive profile photo" 
+                         class="w-10 h-10 rounded-full object-cover"
+                         onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-text-primary">John Executive</p>
+                        <p class="text-xs text-text-secondary">CEO</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64 p-8">
+            <!-- Header -->
+            <header class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-text-primary mb-2">Reports & Analytics</h1>
+                        <p class="text-text-secondary">Generate comprehensive reports for executive analysis and decision-making</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-right">
+                            <p class="text-sm text-text-secondary">Last Generated</p>
+                            <p class="text-sm font-medium text-text-primary">Nov 02, 2025 - 03:41 AM</p>
+                        </div>
+                        <button class="p-2 text-text-secondary hover:text-text-primary hover:bg-secondary-50 rounded-lg transition-colors">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Report Type Selection -->
+            <section class="mb-8">
+                <h2 class="text-xl font-semibold text-text-primary mb-6">Select Report Type</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Sector Reports Card -->
+                    <div class="card hover-lift cursor-pointer report-type-card" data-type="sector">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-industry text-primary text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-text-primary">Sector Reports</h3>
+                                <p class="text-sm text-text-secondary">Infrastructure, Energy, Oil & Gas</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-text-secondary mb-4">Comprehensive analysis of project performance, safety metrics, and resource allocation across industrial sectors.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-text-secondary">3 Sectors Available</span>
+                            <div class="w-4 h-4 border-2 border-secondary-300 rounded-full report-radio"></div>
+                        </div>
+                    </div>
+
+                    <!-- Project Reports Card -->
+                    <div class="card hover-lift cursor-pointer report-type-card" data-type="project">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-project-diagram text-success-600 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-text-primary">Project Reports</h3>
+                                <p class="text-sm text-text-secondary">Individual project analysis</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-text-secondary mb-4">Detailed project-specific reports including timeline, budget utilization, team performance, and safety records.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-text-secondary">47 Projects Active</span>
+                            <div class="w-4 h-4 border-2 border-secondary-300 rounded-full report-radio"></div>
+                        </div>
+                    </div>
+
+                    <!-- Personnel Reports Card -->
+                    <div class="card hover-lift cursor-pointer report-type-card" data-type="personnel">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-users text-accent-600 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-text-primary">Personnel Reports</h3>
+                                <p class="text-sm text-text-secondary">Employee performance & assignments</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-text-secondary mb-4">Individual and team performance reports including project assignments, safety records, and productivity metrics.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-text-secondary">1,247 Employees</span>
+                            <div class="w-4 h-4 border-2 border-secondary-300 rounded-full report-radio"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Panel -->
+            <section class="mb-8">
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Report Filters</h3>
+                        <button id="resetFilters" class="text-text-secondary hover:text-text-primary text-sm font-medium">
+                            <i class="fas fa-undo mr-2"></i>Reset Filters
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <!-- Specific Filter (Dynamic based on report type) -->
+                        <div id="specificFilter" class="hidden">
+                            <label class="block text-sm font-medium text-text-primary mb-2">Select Target</label>
+                            <select id="specificSelect" class="form-input w-full">
+                                <option value="">Choose...</option>
+                            </select>
+                        </div>
+
+                        <!-- Date Range -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Date Range</label>
+                            <select class="form-input w-full">
+                                <option value="7d">Last 7 Days</option>
+                                <option value="30d" selected>Last 30 Days</option>
+                                <option value="90d">Last 90 Days</option>
+                                <option value="1y">Last Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+
+                        <!-- Status Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Status</label>
+                            <select class="form-input w-full">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="completed">Completed</option>
+                                <option value="on-hold">On Hold</option>
+                                <option value="delayed">Delayed</option>
+                            </select>
+                        </div>
+
+                        <!-- Report Format -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Format</label>
+                            <select class="form-input w-full">
+                                <option value="html">HTML Table</option>
+                                <option value="detailed">Detailed HTML</option>
+                                <option value="summary">Executive Summary</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Filters Toggle -->
+                    <div class="mt-6 pt-6 border-t border-secondary-200">
+                        <button id="advancedToggle" class="flex items-center gap-2 text-primary hover:text-primary-700 text-sm font-medium">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                            Advanced Filters
+                        </button>
+                        
+                        <div id="advancedFilters" class="hidden mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-2">Priority Level</label>
+                                <select class="form-input w-full">
+                                    <option value="all">All Priorities</option>
+                                    <option value="critical">Critical</option>
+                                    <option value="high">High</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-2">Safety Rating</label>
+                                <select class="form-input w-full">
+                                    <option value="all">All Ratings</option>
+                                    <option value="excellent">Excellent (90%+)</option>
+                                    <option value="good">Good (80-89%)</option>
+                                    <option value="fair">Fair (70-79%)</option>
+                                    <option value="poor">Poor (<70%)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-2">Budget Range</label>
+                                <select class="form-input w-full">
+                                    <option value="all">All Budgets</option>
+                                    <option value="under-1m">Under $1M</option>
+                                    <option value="1m-10m">$1M - $10M</option>
+                                    <option value="10m-50m">$10M - $50M</option>
+                                    <option value="over-50m">Over $50M</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Report Preview -->
+            <section class="mb-8">
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Report Preview</h3>
+                        <div class="flex items-center gap-2 text-sm text-text-secondary">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Sample data structure</span>
+                        </div>
+                    </div>
+
+                    <!-- Preview Content (Dynamic based on report type) -->
+                    <div id="previewContent" class="overflow-x-auto">
+                        <!-- Default Preview -->
+                        <div id="defaultPreview" class="text-center py-12">
+                            <i class="fas fa-file-alt text-4xl text-secondary-300 mb-4"></i>
+                            <p class="text-text-secondary">Select a report type to preview the data structure</p>
+                        </div>
+
+                        <!-- Sector Report Preview -->
+                        <div id="sectorPreview" class="hidden">
+                            <table class="data-table w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Sector</th>
+                                        <th>Active Projects</th>
+                                        <th>Total Employees</th>
+                                        <th>Safety Score</th>
+                                        <th>Budget Utilization</th>
+                                        <th>Completion Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-medium">Infrastructure</td>
+                                        <td>18</td>
+                                        <td>487</td>
+                                        <td><span class="status-success">94%</span></td>
+                                        <td>78%</td>
+                                        <td>89%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">Energy</td>
+                                        <td>15</td>
+                                        <td>392</td>
+                                        <td><span class="status-success">96%</span></td>
+                                        <td>82%</td>
+                                        <td>91%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">Oil & Gas</td>
+                                        <td>14</td>
+                                        <td>368</td>
+                                        <td><span class="status-warning">87%</span></td>
+                                        <td>74%</td>
+                                        <td>85%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Project Report Preview -->
+                        <div id="projectPreview" class="hidden">
+                            <table class="data-table w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Project Name</th>
+                                        <th>Sector</th>
+                                        <th>Manager</th>
+                                        <th>Progress</th>
+                                        <th>Safety Officer</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-medium">Metro Rail Phase 3</td>
+                                        <td>Infrastructure</td>
+                                        <td>Michael Chen</td>
+                                        <td>78%</td>
+                                        <td>Sarah Johnson</td>
+                                        <td><span class="status-success">On Track</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">Wind Farm Delta</td>
+                                        <td>Energy</td>
+                                        <td>Emily Rodriguez</td>
+                                        <td>85%</td>
+                                        <td>David Kim</td>
+                                        <td><span class="status-success">On Track</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">Offshore Platform Alpha</td>
+                                        <td>Oil & Gas</td>
+                                        <td>James Wilson</td>
+                                        <td>92%</td>
+                                        <td>Lisa Thompson</td>
+                                        <td><span class="status-warning">Delayed</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Personnel Report Preview -->
+                        <div id="personnelPreview" class="hidden">
+                            <table class="data-table w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <th>ID</th>
+                                        <th>Designation</th>
+                                        <th>Current Project</th>
+                                        <th>Safety Record</th>
+                                        <th>Performance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-medium">Sarah Johnson</td>
+                                        <td>EMP001</td>
+                                        <td>Site Safety Officer</td>
+                                        <td>Metro Rail Phase 3</td>
+                                        <td><span class="status-success">Excellent</span></td>
+                                        <td>95%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">Michael Chen</td>
+                                        <td>EMP002</td>
+                                        <td>HO Manager</td>
+                                        <td>Metro Rail Phase 3</td>
+                                        <td><span class="status-success">Excellent</span></td>
+                                        <td>92%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">David Kim</td>
+                                        <td>EMP003</td>
+                                        <td>Site Safety Officer</td>
+                                        <td>Wind Farm Delta</td>
+                                        <td><span class="status-success">Good</span></td>
+                                        <td>88%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Report Statistics -->
+                    <div class="mt-6 pt-6 border-t border-secondary-200">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-text-primary" id="recordCount">0</p>
+                                <p class="text-sm text-text-secondary">Total Records</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-text-primary" id="estimatedSize">0 KB</p>
+                                <p class="text-sm text-text-secondary">Estimated Size</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-text-primary" id="columns">0</p>
+                                <p class="text-sm text-text-secondary">Data Columns</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-text-primary" id="lastUpdated">--</p>
+                                <p class="text-sm text-text-secondary">Last Updated</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Download Section -->
+            <section>
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary">Generate Report</h3>
+                            <p class="text-sm text-text-secondary mt-1">Download comprehensive reports for executive analysis</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button id="previewBtn" class="btn-secondary" disabled>
+                                <i class="fas fa-eye mr-2"></i>Preview
+                            </button>
+                            <button id="downloadBtn" class="btn-primary" disabled>
+                                <i class="fas fa-download mr-2"></i>Generate Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Progress Indicator -->
+                    <div id="progressSection" class="hidden mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-text-primary">Generating Report...</span>
+                            <span class="text-sm text-text-secondary" id="progressPercent">0%</span>
+                        </div>
+                        <div class="w-full bg-secondary-200 rounded-full h-2">
+                            <div id="progressBar" class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-2" id="progressStatus">Initializing...</p>
+                    </div>
+
+                    <!-- Report Summary -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center p-4 bg-secondary-50 rounded-lg">
+                            <i class="fas fa-clock text-2xl text-secondary-500 mb-2"></i>
+                            <p class="text-sm font-medium text-text-primary">Generation Time</p>
+                            <p class="text-xs text-text-secondary">~2-5 seconds</p>
+                        </div>
+                        <div class="text-center p-4 bg-secondary-50 rounded-lg">
+                            <i class="fas fa-file-code text-2xl text-secondary-500 mb-2"></i>
+                            <p class="text-sm font-medium text-text-primary">Format</p>
+                            <p class="text-xs text-text-secondary">Professional HTML</p>
+                        </div>
+                        <div class="text-center p-4 bg-secondary-50 rounded-lg">
+                            <i class="fas fa-shield-alt text-2xl text-secondary-500 mb-2"></i>
+                            <p class="text-sm font-medium text-text-primary">Security</p>
+                            <p class="text-xs text-text-secondary">Executive Level</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Report type selection functionality
+        const reportTypeCards = document.querySelectorAll('.report-type-card');
+        const specificFilter = document.getElementById('specificFilter');
+        const specificSelect = document.getElementById('specificSelect');
+        const previewContent = document.getElementById('previewContent');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const previewBtn = document.getElementById('previewBtn');
+        const progressSection = document.getElementById('progressSection');
+        const progressBar = document.getElementById('progressBar');
+        const progressPercent = document.getElementById('progressPercent');
+        const progressStatus = document.getElementById('progressStatus');
+
+        let selectedReportType = null;
+
+        // Mock data for different report types
+        const mockData = {
+            sector: {
+                options: [
+                    { value: 'infrastructure', text: 'Infrastructure' },
+                    { value: 'energy', text: 'Energy' },
+                    { value: 'oil-gas', text: 'Oil & Gas' }
+                ],
+                records: 3,
+                size: '45 KB',
+                columns: 6,
+                data: [
+                    ['Infrastructure', '18', '487', '94%', '78%', '89%'],
+                    ['Energy', '15', '392', '96%', '82%', '91%'],
+                    ['Oil & Gas', '14', '368', '87%', '74%', '85%']
+                ]
+            },
+            project: {
+                options: [
+                    { value: 'metro-rail', text: 'Metro Rail Phase 3' },
+                    { value: 'wind-farm', text: 'Wind Farm Delta' },
+                    { value: 'offshore-platform', text: 'Offshore Platform Alpha' },
+                    { value: 'solar-park', text: 'Solar Park Beta' },
+                    { value: 'highway-expansion', text: 'Highway Expansion' }
+                ],
+                records: 47,
+                size: '156 KB',
+                columns: 6,
+                data: [
+                    ['Metro Rail Phase 3', 'Infrastructure', 'Michael Chen', '78%', 'Sarah Johnson', 'On Track'],
+                    ['Wind Farm Delta', 'Energy', 'Emily Rodriguez', '85%', 'David Kim', 'On Track'],
+                    ['Offshore Platform Alpha', 'Oil & Gas', 'James Wilson', '92%', 'Lisa Thompson', 'Delayed']
+                ]
+            },
+            personnel: {
+                options: [
+                    { value: 'sarah-johnson', text: 'Sarah Johnson (EMP001)' },
+                    { value: 'michael-chen', text: 'Michael Chen (EMP002)' },
+                    { value: 'david-kim', text: 'David Kim (EMP003)' },
+                    { value: 'emily-rodriguez', text: 'Emily Rodriguez (EMP004)' },
+                    { value: 'james-wilson', text: 'James Wilson (EMP005)' }
+                ],
+                records: 1247,
+                size: '892 KB',
+                columns: 6,
+                data: [
+                    ['Sarah Johnson', 'EMP001', 'Site Safety Officer', 'Metro Rail Phase 3', 'Excellent', '95%'],
+                    ['Michael Chen', 'EMP002', 'HO Manager', 'Metro Rail Phase 3', 'Excellent', '92%'],
+                    ['David Kim', 'EMP003', 'Site Safety Officer', 'Wind Farm Delta', 'Good', '88%']
+                ]
+            }
+        };
+
+        // Handle report type selection
+        reportTypeCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove previous selection
+                reportTypeCards.forEach(c => {
+                    c.classList.remove('ring-2', 'ring-primary');
+                    c.querySelector('.report-radio').classList.remove('bg-primary', 'border-primary');
+                    c.querySelector('.report-radio').classList.add('border-secondary-300');
+                });
+
+                // Add selection to clicked card
+                this.classList.add('ring-2', 'ring-primary');
+                const radio = this.querySelector('.report-radio');
+                radio.classList.remove('border-secondary-300');
+                radio.classList.add('bg-primary', 'border-primary');
+
+                selectedReportType = this.dataset.type;
+                updateSpecificFilter();
+                updatePreview();
+                updateButtons();
+            });
+        });
+
+        // Update specific filter based on report type
+        function updateSpecificFilter() {
+            if (!selectedReportType) {
+                specificFilter.classList.add('hidden');
+                return;
+            }
+
+            specificFilter.classList.remove('hidden');
+            const data = mockData[selectedReportType];
+            
+            // Update label
+            const label = specificFilter.querySelector('label');
+            const labels = {
+                sector: 'Select Sector',
+                project: 'Select Project',
+                personnel: 'Select Employee'
+            };
+            label.textContent = labels[selectedReportType];
+
+            // Update options
+            specificSelect.innerHTML = '<option value="">All ' + selectedReportType.charAt(0).toUpperCase() + selectedReportType.slice(1) + 's</option>';
+            data.options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option.value;
+                optionElement.textContent = option.text;
+                specificSelect.appendChild(optionElement);
+            });
+        }
+
+        // Update preview based on selected report type
+        function updatePreview() {
+            // Hide all previews
+            document.getElementById('defaultPreview').classList.add('hidden');
+            document.getElementById('sectorPreview').classList.add('hidden');
+            document.getElementById('projectPreview').classList.add('hidden');
+            document.getElementById('personnelPreview').classList.add('hidden');
+
+            if (!selectedReportType) {
+                document.getElementById('defaultPreview').classList.remove('hidden');
+                updateStats(0, '0 KB', 0, '--');
+                return;
+            }
+
+            // Show selected preview
+            document.getElementById(selectedReportType + 'Preview').classList.remove('hidden');
+            
+            // Update statistics
+            const data = mockData[selectedReportType];
+            updateStats(data.records, data.size, data.columns, 'Nov 02, 2025');
+        }
+
+        // Update statistics
+        function updateStats(records, size, columns, lastUpdated) {
+            document.getElementById('recordCount').textContent = records.toLocaleString();
+            document.getElementById('estimatedSize').textContent = size;
+            document.getElementById('columns').textContent = columns;
+            document.getElementById('lastUpdated').textContent = lastUpdated;
+        }
+
+        // Update button states
+        function updateButtons() {
+            const hasSelection = selectedReportType !== null;
+            downloadBtn.disabled = !hasSelection;
+            previewBtn.disabled = !hasSelection;
+            
+            if (hasSelection) {
+                downloadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                previewBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                downloadBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                previewBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // Advanced filters toggle
+        document.getElementById('advancedToggle').addEventListener('click', function() {
+            const advancedFilters = document.getElementById('advancedFilters');
+            const icon = this.querySelector('i');
+            
+            if (advancedFilters.classList.contains('hidden')) {
+                advancedFilters.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                advancedFilters.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Reset filters
+        document.getElementById('resetFilters').addEventListener('click', function() {
+            // Reset all form inputs
+            document.querySelectorAll('select').forEach(select => {
+                select.selectedIndex = 0;
+            });
+            
+            // Reset report type selection
+            reportTypeCards.forEach(card => {
+                card.classList.remove('ring-2', 'ring-primary');
+                card.querySelector('.report-radio').classList.remove('bg-primary', 'border-primary');
+                card.querySelector('.report-radio').classList.add('border-secondary-300');
+            });
+            
+            selectedReportType = null;
+            specificFilter.classList.add('hidden');
+            updatePreview();
+            updateButtons();
+        });
+
+        // Generate report functionality
+        downloadBtn.addEventListener('click', function() {
+            if (!selectedReportType) return;
+
+            // Show progress
+            progressSection.classList.remove('hidden');
+            downloadBtn.disabled = true;
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Generating...';
+
+            // Simulate progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress > 100) progress = 100;
+
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = Math.round(progress) + '%';
+
+                // Update status messages
+                if (progress < 30) {
+                    progressStatus.textContent = 'Collecting data...';
+                } else if (progress < 60) {
+                    progressStatus.textContent = 'Processing filters...';
+                } else if (progress < 90) {
+                    progressStatus.textContent = 'Formatting report...';
+                } else {
+                    progressStatus.textContent = 'Finalizing download...';
+                }
+
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    setTimeout(() => {
+                        generateAndDownloadReport();
+                        resetDownloadState();
+                    }, 500);
+                }
+            }, 100);
+        });
+
+        // Generate and download HTML report
+        function generateAndDownloadReport() {
+            const data = mockData[selectedReportType];
+            const reportTitle = selectedReportType.charAt(0).toUpperCase() + selectedReportType.slice(1) + ' Report';
+            
+            // Create HTML content
+            let htmlContent = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${reportTitle} - TopManagement Dashboard</title>
+                    <style>
+                        body { font-family: 'Inter', sans-serif; margin: 40px; background: #f8fafc; }
+                        .header { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+                        .header h1 { color: #1e40af; margin: 0 0 10px 0; font-size: 28px; }
+                        .header p { color: #64748b; margin: 0; }
+                        .meta { display: flex; gap: 30px; margin: 20px 0; }
+                        .meta div { text-align: center; }
+                        .meta strong { display: block; font-size: 18px; color: #0f172a; }
+                        .meta span { color: #64748b; font-size: 14px; }
+                        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+                        th { background: #f1f5f9; padding: 15px; text-align: left; font-weight: 600; color: #475569; border-bottom: 1px solid #e2e8f0; }
+                        td { padding: 15px; border-bottom: 1px solid #e2e8f0; }
+                        tr:hover { background: #f8fafc; }
+                        .status-success { background: #ecfdf5; color: #059669; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; }
+                        .status-warning { background: #fffbeb; color: #d97706; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; }
+                        .footer { margin-top: 30px; text-align: center; color: #64748b; font-size: 14px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>${reportTitle}</h1>
+                        <p>Generated on ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                        <div class="meta">
+                            <div><strong>${data.records.toLocaleString()}</strong><span>Total Records</span></div>
+                            <div><strong>${data.columns}</strong><span>Data Columns</span></div>
+                            <div><strong>${data.size}</strong><span>Report Size</span></div>
+                        </div>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>`;
+
+            // Add headers based on report type
+            const headers = {
+                sector: ['Sector', 'Active Projects', 'Total Employees', 'Safety Score', 'Budget Utilization', 'Completion Rate'],
+                project: ['Project Name', 'Sector', 'Manager', 'Progress', 'Safety Officer', 'Status'],
+                personnel: ['Employee Name', 'ID', 'Designation', 'Current Project', 'Safety Record', 'Performance']
+            };
+
+            headers[selectedReportType].forEach(header => {
+                htmlContent += `<th>${header}</th>`;
+            });
+
+            htmlContent += `</tr></thead><tbody>`;
+
+            // Add data rows
+            data.data.forEach(row => {
+                htmlContent += '<tr>';
+                row.forEach((cell, index) => {
+                    if (cell.includes('%') && (cell.includes('94%') || cell.includes('96%') || cell.includes('Excellent') || cell.includes('On Track'))) {
+                        htmlContent += `<td><span class="status-success">${cell}</span></td>`;
+                    } else if (cell.includes('%') && (cell.includes('87%') || cell.includes('Good') || cell.includes('Delayed'))) {
+                        htmlContent += `<td><span class="status-warning">${cell}</span></td>`;
+                    } else {
+                        htmlContent += `<td>${cell}</td>`;
+                    }
+                });
+                htmlContent += '</tr>';
+            });
+
+            htmlContent += `
+                        </tbody>
+                    </table>
+                    
+                    <div class="footer">
+                        <p>© 2025 TopManagement Dashboard. All Rights Reserved.</p>
+                        <p>This report contains confidential business information.</p>
+                    </div>
+                <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+                </html>
+            `;
+
+            // Create and download file
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${selectedReportType}_report_${new Date().toISOString().split('T')[0]}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Reset download state
+        function resetDownloadState() {
+            progressSection.classList.add('hidden');
+            downloadBtn.disabled = false;
+            downloadBtn.innerHTML = '<i class="fas fa-download mr-2"></i>Generate Report';
+            progressBar.style.width = '0%';
+            progressPercent.textContent = '0%';
+            progressStatus.textContent = 'Initializing...';
+        }
+
+        // Preview functionality
+        previewBtn.addEventListener('click', function() {
+            if (!selectedReportType) return;
+            
+            // Simple preview - just scroll to preview section
+            document.getElementById('previewContent').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+        });
+
+        // Initialize
+        updateButtons();
+        updatePreview();
+    </script>
+</body>
+</html>

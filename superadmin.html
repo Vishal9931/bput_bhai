@@ -1,191 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Safety Dashboard</title>
-  <link rel="stylesheet" href="superadmin.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopManagement Dashboard</title>
+    <link rel="stylesheet" href="css1/main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading-container {
+            text-align: center;
+            color: white;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .app-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+    </style>
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ftopmanagem2294back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <header class="header">
-      <div class="header-left">
-        <div class="logo">
-          <img src="logo2.png" alt="Logo" height="90px">
-        </div>
-      </div>
-      <div class="header-right">
-        <div class="icon"><i class="bi bi-bell"></i></div>
-        <div class="icon menu-icon">☰</div>
-      </div>
-    </header>
+    <div class="loading-container">
+        <h1 class="app-title">TopManagement Dashboard</h1>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading Dashboard...</div>
+    </div>
 
-    <!-- User Info -->
-    <section class="user-info">
-      <div class="login-box">
-        <div class="icon"><i class="bi bi-person-circle"></i></div>
-        <p>Logged in as</p>
-        <h3>Top Management</h3>
-      </div>
-    </section>
-
-    <!-- Filters -->
-    <section class="filters">
-      <div class="filter">
-        <label>Project Filter</label>
-        <select id="projectFilter">
-          <option>All Projects</option>
-          <option>Project A</option>
-          <option>Project B</option>
-        </select>
-      </div>
-
-      <div class="filter">
-        <label>Date Range</label>
-        <select id="dateFilter">
-          <option>Last 30 Days</option>
-          <option>Last 7 Days</option>
-          <option>Custom</option>
-        </select>
-      </div>
-    </section>
-
-    
-
-    <!-- Cards Section -->
-    <main class="cards">
-      <!-- <div class="card pink">
-        <div class="icon"><i class="bi bi-eye"></i></div>
-        <h3>Safety Observation</h3>
-      </div> -->
-
-      <div class="card beige">
-        <div class="icon"><i class="bi bi-people"></i></div>
-        <h3>User Management</h3>
-      </div>
-    
-      <div class="card darkpurple">
-        <div class="icon"><i class="bi bi-radioactive"></i></div>
-        <h3>Active Project</h3>
-      </div>
-
-      <!-- Uncommented additional cards
-      <div class="card teal">
-        <div class="icon"><i class="bi bi-person-circle"></i></div>
-        <h3>Safety Officer</h3>
-      </div>
-
-      <div class="card green">
-        <div class="icon"><i class="bi bi-journals"></i></div>
-        <h3>Comprehensive Report</h3>
-      </div>
-
-      <div class="card blue">
-        <div class="icon"><i class="bi bi-people"></i></div>
-        <h3>HO Manager</h3>
-      </div>
-
-      <div class="card peach">
-        <div class="icon"><i class="bi bi-award"></i></div>
-        <h3>Project Performance</h3>
-      </div> -->
-    </main>
-  </div>
-
-  <!-- JavaScript -->
-  <script>
-    // Get all card elements
-    let activeProjectBtn = document.querySelector(".darkpurple");
-    let safetyOfficerBtn = document.querySelector(".teal");
-    let userManagementBtn = document.querySelector(".beige");
-    let comprehensiveReportBtn = document.querySelector(".green");
-    let HOManagerBtn = document.querySelector(".blue");
-    let projectPerformanceBtn = document.querySelector(".peach");
-    let safetyObservationBtn = document.querySelector(".pink");
-
-    // Add event listeners for all cards
-    if (activeProjectBtn) {
-      activeProjectBtn.addEventListener("click", () => {
-        alert("Opening Active Project page");
-        window.location.href = "activeProject.html";
-      });
-    }
-
-    if (safetyOfficerBtn) {
-      safetyOfficerBtn.addEventListener("click", () => {
-        alert("Opening safety officer page");
-        window.location.href = "safetyOfficer.html";
-      });
-    }
-
-    if (userManagementBtn) {
-      userManagementBtn.addEventListener("click", () => {
-        alert("Opening User Management page");
-        window.location.href = "userManagement.html";
-      });
-    }
-
-    if (comprehensiveReportBtn) {
-      comprehensiveReportBtn.addEventListener("click", () => {
-        alert("Opening comprehensive Report page");
-        window.location.href = "comprehensiveReport.html";
-      });
-    }
-
-    if (HOManagerBtn) {
-      HOManagerBtn.addEventListener("click", () => {
-        alert("Opening HO Manager page");
-        window.location.href = "HOManager.html";
-      });
-    }
-
-    if (projectPerformanceBtn) {
-      projectPerformanceBtn.addEventListener("click", () => {
-        alert("Opening Project Performance page");
-        window.location.href = "projectPerformance.html";
-      });
-    }
-
-    if (safetyObservationBtn) {
-      safetyObservationBtn.addEventListener("click", () => {
-        alert("Opening Safety Observation page");
-        window.location.href = "addObservation.html"; // Fixed space in filename
-      });
-    }
-
-    // Notification bell click
-    const notificationBtn = document.querySelector(".bi-bell");
-    if (notificationBtn) {
-      notificationBtn.addEventListener("click", () => {
-        alert("🔔 You have 3 new safety notifications!");
-      });
-    }
-
-    // Menu button click (future sidebar)
-    const menuBtn = document.querySelector(".menu-icon");
-    if (menuBtn) {
-      menuBtn.addEventListener("click", () => {
-        alert("☰ Menu opened (Sidebar or Settings will appear here)");
-      });
-    }
-
-    // Update info box based on filters
-    const projectFilter = document.getElementById("projectFilter");
-    const dateFilter = document.getElementById("dateFilter");
-    const box = document.querySelector(".box");
-
-    function updateBox() {
-      if (box && projectFilter && dateFilter) {
-        box.textContent = `📁 Showing data for "${projectFilter.value}" | Date Range: ${dateFilter.value}`;
-      }
-    }
-
-    if (projectFilter && dateFilter && box) {
-      projectFilter.addEventListener("change", updateBox);
-      dateFilter.addEventListener("change", updateBox);
-    }
-  </script>
+    <script>
+        // Redirect to dashboard page after a brief loading animation
+        setTimeout(function() {
+            window.location.href = 'pages1/dashboard.html';
+        }, 2000);
+    </script>
+<script id="dhws-dataInjector" src="/public/dhws-data-injector.js"></script>
 </body>
 </html>
