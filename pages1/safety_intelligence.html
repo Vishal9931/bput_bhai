@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Intelligence - Executive Management Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fexecutive1323back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border shadow-executive-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-semibold text-text-primary">Executive Management Portal</h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="executive_overview.html" class="text-text-secondary hover:text-primary transition-micro">Overview</a>
+                    <a href="project_portfolio.html" class="text-text-secondary hover:text-primary transition-micro">Projects</a>
+                    <a href="employee_analytics.html" class="text-text-secondary hover:text-primary transition-micro">Employees</a>
+                    <a href="safety_intelligence.html" class="text-primary font-medium border-b-2 border-primary pb-1">Safety</a>
+                    <a href="reports_center.html" class="text-text-secondary hover:text-primary transition-micro">Reports</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-micro">
+                            <img src="https://images.unsplash.com/photo-1683378180040-69d411ea7bb9" 
+                                 alt="Executive profile photo" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <span class="text-sm font-medium">John Mitchell</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-text-primary mb-2">Safety Intelligence Dashboard</h2>
+                <p class="text-text-secondary">Real-time incident monitoring and predictive safety analytics</p>
+            </div>
+            
+            <!-- Global Controls -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4 lg:mt-0">
+                <!-- Incident Type Filter -->
+                <select id="incidentTypeFilter" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="all">All Incidents</option>
+                    <option value="near-miss">Near Miss</option>
+                    <option value="observation">Observation</option>
+                    <option value="accident">Accident</option>
+                </select>
+
+                <!-- Severity Level -->
+                <select id="severityFilter" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="all">All Severity</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="critical">Critical</option>
+                </select>
+
+                <!-- Sector Filter -->
+                <select id="sectorFilter" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="all">All Sectors</option>
+                    <option value="oil-gas">Oil & Gas</option>
+                    <option value="infrastructure">Infrastructure</option>
+                    <option value="energy">Energy</option>
+                </select>
+
+                <!-- Date Range -->
+                <select id="dateRange" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="7">Last 7 Days</option>
+                    <option value="30">Last 30 Days</option>
+                    <option value="90">Last 90 Days</option>
+                </select>
+
+                <!-- Live Status -->
+                <div class="flex items-center space-x-2 text-text-secondary">
+                    <div class="w-2 h-2 bg-success rounded-full animate-pulse-subtle"></div>
+                    <span class="text-sm">Live Monitoring</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Critical Metrics Strip -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Incidents Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Total Incidents</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">127</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-error mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-error text-sm font-medium">+8.2%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-error-50 rounded-lg">
+                        <svg class="w-8 h-8 text-error" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Near Miss Frequency Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Near Miss Events</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">89</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-warning mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-warning text-sm font-medium">+12.5%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-warning-50 rounded-lg">
+                        <svg class="w-8 h-8 text-warning" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safety Score Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Safety Score</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">87.3%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+2.1%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-success-50 rounded-lg">
+                        <svg class="w-8 h-8 text-success" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance Percentage Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Compliance Rate</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">94.7%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+1.8%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-accent-50 rounded-lg">
+                        <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <!-- Main Visualization Area -->
+            <div class="lg:col-span-8">
+                <div class="card p-6 mb-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Incident Trends & Severity Analysis</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">Trends</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Patterns</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Predictions</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Combined Chart -->
+                    <div class="relative h-80 mb-6">
+                        <canvas id="incidentTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Heat Map Section -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Incident Pattern Heat Map</h3>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-success rounded-sm"></div>
+                                <span class="text-xs text-text-secondary">Low Risk</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-warning rounded-sm"></div>
+                                <span class="text-xs text-text-secondary">Medium Risk</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-error rounded-sm"></div>
+                                <span class="text-xs text-text-secondary">High Risk</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Heat Map Grid -->
+                    <div class="grid grid-cols-7 gap-2">
+                        <!-- Time Labels -->
+                        <div class="text-xs text-text-secondary font-medium">Time</div>
+                        <div class="text-xs text-text-secondary text-center">Mon</div>
+                        <div class="text-xs text-text-secondary text-center">Tue</div>
+                        <div class="text-xs text-text-secondary text-center">Wed</div>
+                        <div class="text-xs text-text-secondary text-center">Thu</div>
+                        <div class="text-xs text-text-secondary text-center">Fri</div>
+                        <div class="text-xs text-text-secondary text-center">Sat</div>
+                        
+                        <!-- Morning Shift -->
+                        <div class="text-xs text-text-secondary font-medium py-2">06:00</div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-warning-100 rounded border border-warning-200 hover:bg-warning-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-error-100 rounded border border-error-200 hover:bg-error-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-warning-100 rounded border border-warning-200 hover:bg-warning-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                        
+                        <!-- Day Shift -->
+                        <div class="text-xs text-text-secondary font-medium py-2">14:00</div>
+                        <div class="h-8 bg-warning-100 rounded border border-warning-200 hover:bg-warning-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-error-100 rounded border border-error-200 hover:bg-error-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-warning-100 rounded border border-warning-200 hover:bg-warning-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-error-100 rounded border border-error-200 hover:bg-error-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                        
+                        <!-- Night Shift -->
+                        <div class="text-xs text-text-secondary font-medium py-2">22:00</div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-warning-100 rounded border border-warning-200 hover:bg-warning-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-warning-100 rounded border border-warning-200 hover:bg-warning-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                        <div class="h-8 bg-success-100 rounded border border-success-200 hover:bg-success-200 transition-micro cursor-pointer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Incident Feed -->
+            <div class="lg:col-span-4">
+                <div class="card p-6 mb-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Live Incident Feed</h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2 py-1 text-xs bg-error text-white rounded-full">2 Critical</span>
+                            <button class="p-1 text-text-secondary hover:text-primary transition-micro">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 max-h-96 overflow-y-auto">
+                        <!-- Critical Incident -->
+                        <div class="border-l-4 border-error bg-error-50 p-4 rounded-r-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <span class="status-indicator status-error"></span>
+                                        <span class="text-xs font-medium text-error uppercase">Critical</span>
+                                        <span class="text-xs text-text-secondary">2 min ago</span>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-text-primary">Equipment Malfunction - Rig Alpha</h4>
+                                    <p class="text-sm text-text-secondary mt-1">Hydraulic system failure detected. Emergency shutdown initiated.</p>
+                                    <div class="flex items-center space-x-2 mt-3">
+                                        <button class="px-3 py-1 text-xs bg-error text-white rounded-md hover:bg-error-600 transition-micro">
+                                            Escalate
+                                        </button>
+                                        <button class="px-3 py-1 text-xs border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                                            Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- High Severity Incident -->
+                        <div class="border-l-4 border-warning bg-warning-50 p-4 rounded-r-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <span class="status-indicator status-warning"></span>
+                                        <span class="text-xs font-medium text-warning uppercase">High</span>
+                                        <span class="text-xs text-text-secondary">15 min ago</span>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-text-primary">Near Miss - Construction Site B</h4>
+                                    <p class="text-sm text-text-secondary mt-1">Worker narrowly avoided falling debris. Safety protocols reviewed.</p>
+                                    <div class="flex items-center space-x-2 mt-3">
+                                        <button class="px-3 py-1 text-xs bg-warning text-white rounded-md hover:bg-warning-600 transition-micro">
+                                            Investigate
+                                        </button>
+                                        <button class="px-3 py-1 text-xs border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                                            Report
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Medium Severity Incident -->
+                        <div class="border-l-4 border-accent bg-accent-50 p-4 rounded-r-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <span class="status-indicator bg-accent"></span>
+                                        <span class="text-xs font-medium text-accent uppercase">Medium</span>
+                                        <span class="text-xs text-text-secondary">1 hour ago</span>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-text-primary">Safety Observation - Energy Plant</h4>
+                                    <p class="text-sm text-text-secondary mt-1">Improper PPE usage observed during routine inspection.</p>
+                                    <div class="flex items-center space-x-2 mt-3">
+                                        <button class="px-3 py-1 text-xs bg-accent text-white rounded-md hover:bg-accent-600 transition-micro">
+                                            Follow Up
+                                        </button>
+                                        <button class="px-3 py-1 text-xs border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                                            Training
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Low Severity Incident -->
+                        <div class="border-l-4 border-success bg-success-50 p-4 rounded-r-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <span class="status-indicator status-success"></span>
+                                        <span class="text-xs font-medium text-success uppercase">Low</span>
+                                        <span class="text-xs text-text-secondary">3 hours ago</span>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-text-primary">Safety Improvement - Infrastructure</h4>
+                                    <p class="text-sm text-text-secondary mt-1">New safety barrier installed ahead of schedule.</p>
+                                    <div class="flex items-center space-x-2 mt-3">
+                                        <button class="px-3 py-1 text-xs bg-success text-white rounded-md hover:bg-success-600 transition-micro">
+                                            Acknowledge
+                                        </button>
+                                        <button class="px-3 py-1 text-xs border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                                            Archive
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full mt-4 px-4 py-2 text-sm text-primary border border-primary rounded-md hover:bg-primary-50 transition-micro">
+                        View All Incidents
+                    </button>
+                </div>
+
+                <!-- Safety Compliance Scoring -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Compliance Scoring</h3>
+                        <button class="text-text-secondary hover:text-primary transition-micro">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Training Completion -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Training Completion</p>
+                                    <p class="text-xs text-text-secondary">3,642 / 3,847 employees</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-success">94.7%</p>
+                                <div class="w-16 h-2 bg-secondary-200 rounded-full mt-1">
+                                    <div class="w-15 h-2 bg-success rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Audit Results -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-warning-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-warning" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01.293.707V12a1 1 0 01-.293.707L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4a1 1 0 01.293-.707L5.586 9 3.293 6.707A1 1 0 013 6V4zm8-1a1 1 0 011-1h4a1 1 0 110 2h-1.586l2.293 2.293A1 1 0 0117 7v2a1 1 0 01-.293.707L14.414 12H16a1 1 0 010 2h-4a1 1 0 01-1-1v-2a1 1 0 01.293-.707L13.586 8 11.293 5.707A1 1 0 0111 5V3z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Audit Results</p>
+                                    <p class="text-xs text-text-secondary">247 audits completed</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-warning">87.3%</p>
+                                <div class="w-16 h-2 bg-secondary-200 rounded-full mt-1">
+                                    <div class="w-14 h-2 bg-warning rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certification Status -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Certification Status</p>
+                                    <p class="text-xs text-text-secondary">Valid certifications</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-accent">91.8%</p>
+                                <div class="w-16 h-2 bg-secondary-200 rounded-full mt-1">
+                                    <div class="w-15 h-2 bg-accent rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full mt-4 px-4 py-2 text-sm text-primary border border-primary rounded-md hover:bg-primary-50 transition-micro">
+                        Detailed Compliance Report
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Predictive Analytics Section -->
+        <div class="card p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-text-primary">Predictive Safety Analytics</h3>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">Risk Prediction</button>
+                    <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Pattern Analysis</button>
+                    <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Recommendations</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- High Risk Prediction -->
+                <div class="bg-error-50 border border-error-200 rounded-lg p-4">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="w-8 h-8 bg-error-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-error" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <h4 class="text-sm font-semibold text-error">High Risk Alert</h4>
+                    </div>
+                    <p class="text-sm text-text-secondary mb-3">Oil & Gas Sector - Rig Alpha shows 78% probability of safety incident in next 48 hours based on equipment stress patterns.</p>
+                    <button class="px-3 py-1 text-xs bg-error text-white rounded-md hover:bg-error-600 transition-micro">
+                        Immediate Action Required
+                    </button>
+                </div>
+
+                <!-- Medium Risk Prediction -->
+                <div class="bg-warning-50 border border-warning-200 rounded-lg p-4">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="w-8 h-8 bg-warning-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-warning" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <h4 class="text-sm font-semibold text-warning">Medium Risk</h4>
+                    </div>
+                    <p class="text-sm text-text-secondary mb-3">Infrastructure projects showing increased near-miss frequency. Recommend enhanced safety briefings for next week.</p>
+                    <button class="px-3 py-1 text-xs bg-warning text-white rounded-md hover:bg-warning-600 transition-micro">
+                        Schedule Review
+                    </button>
+                </div>
+
+                <!-- Positive Trend -->
+                <div class="bg-success-50 border border-success-200 rounded-lg p-4">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <h4 class="text-sm font-semibold text-success">Positive Trend</h4>
+                    </div>
+                    <p class="text-sm text-text-secondary mb-3">Energy sector showing 23% improvement in safety metrics. New training protocols proving effective.</p>
+                    <button class="px-3 py-1 text-xs bg-success text-white rounded-md hover:bg-success-600 transition-micro">
+                        Continue Monitoring
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Actions -->
+        <div class="flex flex-col sm:flex-row items-center justify-between mt-8 p-4 bg-secondary-50 rounded-lg">
+            <div class="flex items-center space-x-2 mb-4 sm:mb-0">
+                <svg class="w-5 h-5 text-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-text-secondary">Safety Intelligence Export</span>
+            </div>
+            <div class="flex space-x-3">
+                <button class="px-4 py-2 text-sm bg-primary text-white rounded-md hover:bg-primary-700 transition-micro">
+                    Safety Report PDF
+                </button>
+                <button class="px-4 py-2 text-sm border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                    Incident Data CSV
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-border">
+        <div class="grid grid-cols-5 gap-1">
+            <a href="executive_overview.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                </svg>
+                <span class="text-xs mt-1">Overview</span>
+            </a>
+            <a href="project_portfolio.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <span class="text-xs mt-1">Projects</span>
+            </a>
+            <a href="employee_analytics.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H17c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v5h2z"/>
+                </svg>
+                <span class="text-xs mt-1">Employees</span>
+            </a>
+            <a href="safety_intelligence.html" class="flex flex-col items-center py-2 px-1 text-primary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                </svg>
+                <span class="text-xs mt-1">Safety</span>
+            </a>
+            <a href="reports_center.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+                <span class="text-xs mt-1">Reports</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js Configuration and Data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Incident Trend Chart with Combined Data
+            const incidentTrendCtx = document.getElementById('incidentTrendChart').getContext('2d');
+            new Chart(incidentTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                    datasets: [{
+                        label: 'Total Incidents',
+                        data: [15, 12, 18, 14, 16, 11, 13, 9],
+                        borderColor: '#EF4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Near Miss Events',
+                        data: [8, 6, 11, 7, 9, 5, 7, 4],
+                        borderColor: '#F59E0B',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Critical Incidents',
+                        type: 'bar',
+                        data: [2, 1, 3, 2, 1, 0, 1, 0],
+                        backgroundColor: '#DC2626',
+                        borderRadius: 4,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Time Period'
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Number of Incidents'
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Critical Incidents'
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        }
+                    }
+                }
+            });
+
+            // Filter change handlers
+            document.getElementById('incidentTypeFilter').addEventListener('change', function() {
+                console.log('Incident type filter changed to:', this.value);
+                // Implement filter logic here
+            });
+
+            document.getElementById('severityFilter').addEventListener('change', function() {
+                console.log('Severity filter changed to:', this.value);
+                // Implement filter logic here
+            });
+
+            document.getElementById('sectorFilter').addEventListener('change', function() {
+                console.log('Sector filter changed to:', this.value);
+                // Implement filter logic here
+            });
+
+            document.getElementById('dateRange').addEventListener('change', function() {
+                console.log('Date range changed to:', this.value);
+                // Implement date range logic here
+            });
+
+            // Simulate real-time incident feed updates
+            setInterval(function() {
+                console.log('Incident feed updated at:', new Date().toLocaleTimeString());
+                // Add new incident to feed logic here
+            }, 30000); // 30 seconds
+
+            // Heat map cell click handlers
+            document.querySelectorAll('.grid .h-8').forEach(cell => {
+                cell.addEventListener('click', function() {
+                    console.log('Heat map cell clicked');
+                    // Show detailed incident information for this time/day combination
+                });
+            });
+
+            // WebSocket simulation for real-time notifications
+            function simulateWebSocketNotification() {
+                if (Math.random() > 0.7) { // 30% chance of notification
+                    const notifications = [
+                        'New critical incident reported at Oil Rig Alpha',
+                        'Near miss event logged at Construction Site B',
+                        'Safety observation recorded at Energy Plant C'
+                    ];
+                    const randomNotification = notifications[Math.floor(Math.random() * notifications.length)];
+                    
+                    // Browser notification (requires permission)
+                    if (Notification.permission === 'granted') {
+                        new Notification('Safety Alert', {
+                            body: randomNotification,
+                            icon: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                        });
+                    }
+                }
+            }
+
+            // Request notification permission
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+
+            // Simulate notifications every 2 minutes
+            setInterval(simulateWebSocketNotification, 120000);
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

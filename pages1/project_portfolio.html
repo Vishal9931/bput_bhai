@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Portfolio - Executive Management Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fexecutive1323back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border shadow-executive-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-semibold text-text-primary">Executive Management Portal</h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="executive_overview.html" class="text-text-secondary hover:text-primary transition-micro">Overview</a>
+                    <a href="project_portfolio.html" class="text-primary font-medium border-b-2 border-primary pb-1">Projects</a>
+                    <a href="employee_analytics.html" class="text-text-secondary hover:text-primary transition-micro">Employees</a>
+                    <a href="safety_intelligence.html" class="text-text-secondary hover:text-primary transition-micro">Safety</a>
+                    <a href="reports_center.html" class="text-text-secondary hover:text-primary transition-micro">Reports</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-micro">
+                            <img src="https://images.unsplash.com/photo-1676245437710-235b3ad836a4" 
+                                 alt="Executive profile photo" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <span class="text-sm font-medium">John Mitchell</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-text-primary mb-2">Project Portfolio</h2>
+                <p class="text-text-secondary">Comprehensive project oversight across all operational sectors</p>
+            </div>
+            
+            <!-- Advanced Controls -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4 lg:mt-0">
+                <!-- Multi-select Sector Filter -->
+                <div class="relative">
+                    <select id="sectorFilter" multiple class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary min-w-40">
+                        <option value="oil-gas">Oil & Gas</option>
+                        <option value="infrastructure">Infrastructure</option>
+                        <option value="energy">Energy</option>
+                        <option value="manufacturing">Manufacturing</option>
+                    </select>
+                </div>
+
+                <!-- Project Status Toggle -->
+                <div class="flex bg-secondary-100 rounded-md p-1">
+                    <button id="activeBtn" class="px-3 py-1 text-sm bg-primary text-white rounded-md transition-micro">Active</button>
+                    <button id="completedBtn" class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-200 rounded-md transition-micro">Completed</button>
+                    <button id="atRiskBtn" class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-200 rounded-md transition-micro">At Risk</button>
+                </div>
+
+                <!-- Timeline Range Picker -->
+                <select id="timelineRange" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="30">Next 30 Days</option>
+                    <option value="90">Next 90 Days</option>
+                    <option value="180">Next 6 Months</option>
+                    <option value="365">Next Year</option>
+                </select>
+
+                <!-- Personnel Search -->
+                <div class="relative">
+                    <input type="text" id="personnelSearch" placeholder="Search personnel..." 
+                           class="px-4 py-2 pl-10 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <svg class="w-4 h-4 text-text-secondary absolute left-3 top-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+
+                <!-- Live Update Indicator -->
+                <div class="flex items-center space-x-2 text-text-secondary">
+                    <div class="w-2 h-2 bg-success rounded-full animate-pulse-subtle"></div>
+                    <span class="text-sm">Live Updates</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Primary Metrics Strip -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Active Projects Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Active Projects</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">156</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+8.2%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-primary-50 rounded-lg">
+                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Sparkline -->
+                <div class="mt-4">
+                    <canvas id="projectsSparkline" class="w-full h-8"></canvas>
+                </div>
+            </div>
+
+            <!-- Budget Utilization Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Budget Utilization</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">87.3%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-warning mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-warning text-sm font-medium">+2.1%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-warning-50 rounded-lg">
+                        <svg class="w-8 h-8 text-warning" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Sparkline -->
+                <div class="mt-4">
+                    <canvas id="budgetSparkline" class="w-full h-8"></canvas>
+                </div>
+            </div>
+
+            <!-- Resource Allocation Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Resource Efficiency</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">92.8%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+5.4%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-accent-50 rounded-lg">
+                        <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H17c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v5h2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Sparkline -->
+                <div class="mt-4">
+                    <canvas id="resourceSparkline" class="w-full h-8"></canvas>
+                </div>
+            </div>
+
+            <!-- Milestone Completion Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Milestone Completion</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">74.6%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+12.3%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-success-50 rounded-lg">
+                        <svg class="w-8 h-8 text-success" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Sparkline -->
+                <div class="mt-4">
+                    <canvas id="milestoneSparkline" class="w-full h-8"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <!-- Gantt Timeline Visualization (12 cols on desktop) -->
+            <div class="lg:col-span-8">
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Project Timeline & Dependencies</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">Timeline</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Gantt</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Critical Path</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Gantt Chart Container -->
+                    <div class="relative overflow-x-auto">
+                        <div class="min-w-full">
+                            <!-- Timeline Header -->
+                            <div class="flex border-b border-border pb-4 mb-4">
+                                <div class="w-64 text-sm font-medium text-text-secondary">Project</div>
+                                <div class="flex-1 grid grid-cols-12 gap-2 text-xs text-text-secondary text-center">
+                                    <div>Nov</div><div>Dec</div><div>Jan</div><div>Feb</div><div>Mar</div><div>Apr</div>
+                                    <div>May</div><div>Jun</div><div>Jul</div><div>Aug</div><div>Sep</div><div>Oct</div>
+                                </div>
+                            </div>
+
+                            <!-- Project Rows -->
+                            <div class="space-y-4">
+                                <!-- Project Alpha -->
+                                <div class="flex items-center group hover:bg-secondary-50 p-2 rounded-md transition-micro cursor-pointer" onclick="openProjectModal('alpha')">
+                                    <div class="w-64">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-3 h-3 bg-success rounded-full"></div>
+                                            <div>
+                                                <h4 class="text-sm font-medium text-text-primary">Oil Rig Alpha Expansion</h4>
+                                                <p class="text-xs text-text-secondary">Oil & Gas • 45 members</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 grid grid-cols-12 gap-2 relative">
+                                        <div class="col-span-6 bg-primary h-6 rounded-md flex items-center justify-center text-white text-xs font-medium">
+                                            78% Complete
+                                        </div>
+                                        <div class="col-span-2 bg-primary-200 h-6 rounded-md opacity-50"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Project Beta -->
+                                <div class="flex items-center group hover:bg-secondary-50 p-2 rounded-md transition-micro cursor-pointer" onclick="openProjectModal('beta')">
+                                    <div class="w-64">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-3 h-3 bg-warning rounded-full"></div>
+                                            <div>
+                                                <h4 class="text-sm font-medium text-text-primary">Infrastructure Beta</h4>
+                                                <p class="text-xs text-text-secondary">Infrastructure • 32 members</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 grid grid-cols-12 gap-2 relative">
+                                        <div class="col-span-4 bg-warning h-6 rounded-md flex items-center justify-center text-white text-xs font-medium">
+                                            45% Complete
+                                        </div>
+                                        <div class="col-span-4 bg-warning-200 h-6 rounded-md opacity-50"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Project Gamma -->
+                                <div class="flex items-center group hover:bg-secondary-50 p-2 rounded-md transition-micro cursor-pointer" onclick="openProjectModal('gamma')">
+                                    <div class="w-64">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                            <div>
+                                                <h4 class="text-sm font-medium text-text-primary">Energy Grid Modernization</h4>
+                                                <p class="text-xs text-text-secondary">Energy • 28 members</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 grid grid-cols-12 gap-2 relative">
+                                        <div class="col-span-3 bg-accent h-6 rounded-md flex items-center justify-center text-white text-xs font-medium">
+                                            25% Complete
+                                        </div>
+                                        <div class="col-span-5 bg-accent-200 h-6 rounded-md opacity-50"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Project Delta -->
+                                <div class="flex items-center group hover:bg-secondary-50 p-2 rounded-md transition-micro cursor-pointer" onclick="openProjectModal('delta')">
+                                    <div class="w-64">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-3 h-3 bg-error rounded-full"></div>
+                                            <div>
+                                                <h4 class="text-sm font-medium text-text-primary">Manufacturing Plant Delta</h4>
+                                                <p class="text-xs text-text-secondary">Manufacturing • 52 members</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 grid grid-cols-12 gap-2 relative">
+                                        <div class="col-span-2 bg-error h-6 rounded-md flex items-center justify-center text-white text-xs font-medium">
+                                            15% Complete
+                                        </div>
+                                        <div class="col-span-6 bg-error-200 h-6 rounded-md opacity-50"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Critical Path Indicators -->
+                    <div class="mt-6 p-4 bg-secondary-50 rounded-lg">
+                        <h4 class="text-sm font-semibold text-text-primary mb-3">Critical Path Analysis</h4>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-error rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Critical Path</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-warning rounded-full"></div>
+                                <span class="text-sm text-text-secondary">Dependencies</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-success rounded-full"></div>
+                                <span class="text-sm text-text-secondary">On Schedule</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Health Panel (4 cols on desktop) -->
+            <div class="lg:col-span-4">
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Project Health</h3>
+                        <span class="px-2 py-1 text-xs bg-warning text-white rounded-full">4 At Risk</span>
+                    </div>
+                    
+                    <div class="space-y-4 max-h-96 overflow-y-auto">
+                        <!-- High Priority Project -->
+                        <div class="border-l-4 border-error bg-error-50 p-4 rounded-r-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-medium text-error">Manufacturing Plant Delta</h4>
+                                    <p class="text-xs text-text-secondary mt-1">Budget overrun: 15% • Timeline delay: 3 weeks</p>
+                                    <p class="text-xs text-text-secondary mt-1">Next milestone: Dec 15, 2025</p>
+                                </div>
+                                <button class="px-2 py-1 text-xs bg-error text-white rounded-md hover:bg-error-600 transition-micro">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Medium Priority Project -->
+                        <div class="border-l-4 border-warning bg-warning-50 p-4 rounded-r-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-medium text-warning">Infrastructure Beta</h4>
+                                    <p class="text-xs text-text-secondary mt-1">Resource constraint • Weather delays</p>
+                                    <p class="text-xs text-text-secondary mt-1">Next milestone: Nov 28, 2025</p>
+                                </div>
+                                <button class="px-2 py-1 text-xs bg-warning text-white rounded-md hover:bg-warning-600 transition-micro">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Good Status Project -->
+                        <div class="border-l-4 border-success bg-success-50 p-4 rounded-r-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-medium text-success">Oil Rig Alpha Expansion</h4>
+                                    <p class="text-xs text-text-secondary mt-1">On schedule • Under budget</p>
+                                    <p class="text-xs text-text-secondary mt-1">Next milestone: Nov 20, 2025</p>
+                                </div>
+                                <button class="px-2 py-1 text-xs bg-success text-white rounded-md hover:bg-success-600 transition-micro">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Info Status Project -->
+                        <div class="border-l-4 border-accent bg-accent-50 p-4 rounded-r-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-medium text-accent">Energy Grid Modernization</h4>
+                                    <p class="text-xs text-text-secondary mt-1">Planning phase • Team assembly</p>
+                                    <p class="text-xs text-text-secondary mt-1">Next milestone: Dec 5, 2025</p>
+                                </div>
+                                <button class="px-2 py-1 text-xs bg-accent text-white rounded-md hover:bg-accent-600 transition-micro">
+                                    Plan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full mt-4 px-4 py-2 text-sm text-primary border border-primary rounded-md hover:bg-primary-50 transition-micro">
+                        View All Projects
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resource Utilization Heatmap -->
+        <div class="card p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-text-primary">Resource Utilization Heatmap</h3>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">Current Week</button>
+                    <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Next Week</button>
+                    <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Monthly</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Heatmap Visualization -->
+                <div>
+                    <h4 class="text-sm font-medium text-text-secondary mb-4">Employee Assignment Distribution</h4>
+                    <div class="relative h-64">
+                        <canvas id="resourceHeatmap"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Capacity Indicators -->
+                <div>
+                    <h4 class="text-sm font-medium text-text-secondary mb-4">Capacity Analysis</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-primary">Oil & Gas Sector</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-24 bg-secondary-200 rounded-full h-2">
+                                    <div class="bg-success h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-success">85%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-primary">Infrastructure</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-24 bg-secondary-200 rounded-full h-2">
+                                    <div class="bg-warning h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-warning">95%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-primary">Energy</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-24 bg-secondary-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-accent">72%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-primary">Manufacturing</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-24 bg-secondary-200 rounded-full h-2">
+                                    <div class="bg-error h-2 rounded-full" style="width: 105%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-error">105%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Optimization Suggestions -->
+                    <div class="mt-6 p-4 bg-accent-50 rounded-lg">
+                        <h5 class="text-sm font-semibold text-accent mb-2">Optimization Suggestions</h5>
+                        <ul class="text-xs text-text-secondary space-y-1">
+                            <li>• Redistribute 3 engineers from Manufacturing to Energy sector</li>
+                            <li>• Consider hiring 2 additional project managers for Infrastructure</li>
+                            <li>• Oil & Gas sector has capacity for 5 more team members</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export and Actions -->
+        <div class="flex flex-col sm:flex-row items-center justify-between p-4 bg-secondary-50 rounded-lg">
+            <div class="flex items-center space-x-2 mb-4 sm:mb-0">
+                <svg class="w-5 h-5 text-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-text-secondary">Last updated: Nov 2, 2025 at 7:31 AM</span>
+            </div>
+            <div class="flex space-x-3">
+                <button class="px-4 py-2 text-sm bg-primary text-white rounded-md hover:bg-primary-700 transition-micro">
+                    Export Portfolio Report
+                </button>
+                <button class="px-4 py-2 text-sm border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                    Print Timeline
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-surface rounded-lg shadow-elevated max-w-4xl w-full max-h-screen overflow-y-auto">
+                <div class="p-6 border-b border-border">
+                    <div class="flex items-center justify-between">
+                        <h3 id="modalTitle" class="text-xl font-semibold text-text-primary">Project Details</h3>
+                        <button onclick="closeProjectModal()" class="text-text-secondary hover:text-text-primary transition-micro">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Project Overview -->
+                        <div class="lg:col-span-2">
+                            <div id="modalContent" class="space-y-6">
+                                <!-- Content will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Project Stats -->
+                        <div>
+                            <div class="card p-4">
+                                <h4 class="text-sm font-semibold text-text-primary mb-4">Project Statistics</h4>
+                                <div id="modalStats" class="space-y-3">
+                                    <!-- Stats will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-border">
+        <div class="grid grid-cols-5 gap-1">
+            <a href="executive_overview.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                </svg>
+                <span class="text-xs mt-1">Overview</span>
+            </a>
+            <a href="project_portfolio.html" class="flex flex-col items-center py-2 px-1 text-primary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <span class="text-xs mt-1">Projects</span>
+            </a>
+            <a href="employee_analytics.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H17c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v5h2z"/>
+                </svg>
+                <span class="text-xs mt-1">Employees</span>
+            </a>
+            <a href="safety_intelligence.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                </svg>
+                <span class="text-xs mt-1">Safety</span>
+            </a>
+            <a href="reports_center.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+                <span class="text-xs mt-1">Reports</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js Configuration and Data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sparkline Charts
+            const sparklineOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { display: false }
+                },
+                elements: {
+                    point: { radius: 0 },
+                    line: { borderWidth: 2 }
+                }
+            };
+
+            // Projects Sparkline
+            new Chart(document.getElementById('projectsSparkline'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        data: [120, 135, 142, 148, 152, 156],
+                        borderColor: '#1E3A8A',
+                        backgroundColor: 'rgba(30, 58, 138, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: sparklineOptions
+            });
+
+            // Budget Sparkline
+            new Chart(document.getElementById('budgetSparkline'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        data: [82.1, 84.3, 85.7, 86.2, 86.8, 87.3],
+                        borderColor: '#D97706',
+                        backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: sparklineOptions
+            });
+
+            // Resource Sparkline
+            new Chart(document.getElementById('resourceSparkline'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        data: [88.2, 89.1, 90.5, 91.2, 92.1, 92.8],
+                        borderColor: '#0EA5E9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: sparklineOptions
+            });
+
+            // Milestone Sparkline
+            new Chart(document.getElementById('milestoneSparkline'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        data: [65.2, 68.1, 70.3, 71.8, 73.2, 74.6],
+                        borderColor: '#059669',
+                        backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: sparklineOptions
+            });
+
+            // Resource Heatmap
+            new Chart(document.getElementById('resourceHeatmap'), {
+                type: 'bar',
+                data: {
+                    labels: ['Oil & Gas', 'Infrastructure', 'Energy', 'Manufacturing'],
+                    datasets: [{
+                        label: 'Assigned',
+                        data: [85, 95, 72, 105],
+                        backgroundColor: ['#10B981', '#F59E0B', '#0EA5E9', '#EF4444'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 120,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Filter handlers
+            document.getElementById('activeBtn').addEventListener('click', function() {
+                setActiveFilter(this, ['completedBtn', 'atRiskBtn']);
+            });
+
+            document.getElementById('completedBtn').addEventListener('click', function() {
+                setActiveFilter(this, ['activeBtn', 'atRiskBtn']);
+            });
+
+            document.getElementById('atRiskBtn').addEventListener('click', function() {
+                setActiveFilter(this, ['activeBtn', 'completedBtn']);
+            });
+
+            function setActiveFilter(activeBtn, otherBtns) {
+                activeBtn.classList.add('bg-primary', 'text-white');
+                activeBtn.classList.remove('text-text-secondary', 'hover:bg-secondary-200');
+                
+                otherBtns.forEach(btnId => {
+                    const btn = document.getElementById(btnId);
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('text-text-secondary', 'hover:bg-secondary-200');
+                });
+            }
+
+            // Auto-refresh functionality
+            setInterval(function() {
+                console.log('Project data refreshed at:', new Date().toLocaleTimeString());
+            }, 900000); // 15 minutes
+        });
+
+        // Project Modal Functions
+        const projectData = {
+            alpha: {
+                title: 'Oil Rig Alpha Expansion',
+                sector: 'Oil & Gas',
+                status: 'On Track',
+                completion: '78%',
+                budget: '$12.5M',
+                team: 45,
+                description: 'Major expansion project for offshore oil rig Alpha including new drilling equipment and safety systems.',
+                milestones: [
+                    { name: 'Equipment Installation', date: 'Nov 20, 2025', status: 'completed' },
+                    { name: 'Safety Testing', date: 'Dec 5, 2025', status: 'in-progress' },
+                    { name: 'Final Inspection', date: 'Dec 20, 2025', status: 'pending' }
+                ]
+            },
+            beta: {
+                title: 'Infrastructure Beta',
+                sector: 'Infrastructure',
+                status: 'At Risk',
+                completion: '45%',
+                budget: '$8.2M',
+                team: 32,
+                description: 'Critical infrastructure development project with focus on transportation and utilities.',
+                milestones: [
+                    { name: 'Site Preparation', date: 'Oct 15, 2025', status: 'completed' },
+                    { name: 'Foundation Work', date: 'Nov 28, 2025', status: 'in-progress' },
+                    { name: 'Structural Assembly', date: 'Jan 15, 2026', status: 'pending' }
+                ]
+            },
+            gamma: {
+                title: 'Energy Grid Modernization',
+                sector: 'Energy',
+                status: 'Planning',
+                completion: '25%',
+                budget: '$15.8M',
+                team: 28,
+                description: 'Comprehensive modernization of regional energy grid infrastructure with smart technology integration.',
+                milestones: [
+                    { name: 'Planning Phase', date: 'Nov 10, 2025', status: 'completed' },
+                    { name: 'Equipment Procurement', date: 'Dec 5, 2025', status: 'in-progress' },
+                    { name: 'Installation Begin', date: 'Jan 20, 2026', status: 'pending' }
+                ]
+            },
+            delta: {
+                title: 'Manufacturing Plant Delta',
+                sector: 'Manufacturing',
+                status: 'Critical',
+                completion: '15%',
+                budget: '$22.1M',
+                team: 52,
+                description: 'New manufacturing facility construction with advanced automation and environmental controls.',
+                milestones: [
+                    { name: 'Site Survey', date: 'Oct 1, 2025', status: 'completed' },
+                    { name: 'Permits & Approvals', date: 'Dec 15, 2025', status: 'in-progress' },
+                    { name: 'Construction Start', date: 'Feb 1, 2026', status: 'pending' }
+                ]
+            }
+        };
+
+        function openProjectModal(projectId) {
+            const project = projectData[projectId];
+            if (!project) return;
+
+            document.getElementById('modalTitle').textContent = project.title;
+            
+            const statusColors = {
+                'On Track': 'success',
+                'At Risk': 'warning',
+                'Planning': 'accent',
+                'Critical': 'error'
+            };
+
+            const statusColor = statusColors[project.status] || 'secondary';
+
+            document.getElementById('modalContent').innerHTML = `
+                <div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <span class="px-3 py-1 text-sm bg-${statusColor}-100 text-${statusColor}-600 rounded-full">${project.sector}</span>
+                        <span class="px-3 py-1 text-sm bg-${statusColor} text-white rounded-full">${project.status}</span>
+                    </div>
+                    <p class="text-text-secondary mb-6">${project.description}</p>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-sm font-semibold text-text-primary mb-3">Project Milestones</h4>
+                        <div class="space-y-3">
+                            ${project.milestones.map(milestone => `
+                                <div class="flex items-center justify-between p-3 border border-border rounded-md">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-3 h-3 rounded-full ${
+                                            milestone.status === 'completed' ? 'bg-success' :
+                                            milestone.status === 'in-progress' ? 'bg-warning' : 'bg-secondary-300'
+                                        }"></div>
+                                        <span class="text-sm text-text-primary">${milestone.name}</span>
+                                    </div>
+                                    <span class="text-sm text-text-secondary">${milestone.date}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('modalStats').innerHTML = `
+                <div class="flex justify-between">
+                    <span class="text-sm text-text-secondary">Completion</span>
+                    <span class="text-sm font-medium text-text-primary">${project.completion}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-text-secondary">Budget</span>
+                    <span class="text-sm font-medium text-text-primary">${project.budget}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-text-secondary">Team Size</span>
+                    <span class="text-sm font-medium text-text-primary">${project.team} members</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-text-secondary">Sector</span>
+                    <span class="text-sm font-medium text-text-primary">${project.sector}</span>
+                </div>
+            `;
+
+            document.getElementById('projectModal').classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.add('hidden');
+        }
+
+        // Close modal on outside click
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProjectModal();
+            }
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

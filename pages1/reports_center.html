@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports Center - Executive Management Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fexecutive1323back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border shadow-executive-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-semibold text-text-primary">Executive Management Portal</h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="executive_overview.html" class="text-text-secondary hover:text-primary transition-micro">Overview</a>
+                    <a href="project_portfolio.html" class="text-text-secondary hover:text-primary transition-micro">Projects</a>
+                    <a href="employee_analytics.html" class="text-text-secondary hover:text-primary transition-micro">Employees</a>
+                    <a href="safety_intelligence.html" class="text-text-secondary hover:text-primary transition-micro">Safety</a>
+                    <a href="reports_center.html" class="text-primary font-medium border-b-2 border-primary pb-1">Reports</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-micro">
+                            <img src="https://images.unsplash.com/photo-1580128636806-b29892ddbb48" 
+                                 alt="Executive profile photo" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <span class="text-sm font-medium">John Mitchell</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-text-primary mb-2">Reports Center</h2>
+                <p class="text-text-secondary">Comprehensive analytics and customizable reporting for business intelligence</p>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4 lg:mt-0">
+                <button id="newReportBtn" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-700 transition-micro flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>New Report</span>
+                </button>
+                <div class="flex items-center space-x-2 text-text-secondary">
+                    <div class="w-2 h-2 bg-success rounded-full animate-pulse-subtle"></div>
+                    <span class="text-sm">Last updated: Nov 2, 2025 7:31 AM</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Filtering Panel -->
+        <div class="card p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-text-primary">Advanced Filters</h3>
+                <div class="flex space-x-2">
+                    <button id="saveFilterBtn" class="px-3 py-1 text-sm border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                        Save Filter
+                    </button>
+                    <button id="resetFilterBtn" class="px-3 py-1 text-sm text-text-secondary hover:text-primary transition-micro">
+                        Reset
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Sector Filter -->
+                <div>
+                    <label class="block text-sm font-medium text-text-secondary mb-2">Sector</label>
+                    <select id="sectorFilter" class="w-full px-3 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                        <option value="all">All Sectors</option>
+                        <option value="oil-gas">Oil & Gas</option>
+                        <option value="infrastructure">Infrastructure</option>
+                        <option value="energy">Energy</option>
+                        <option value="manufacturing">Manufacturing</option>
+                    </select>
+                </div>
+
+                <!-- Date Range -->
+                <div>
+                    <label class="block text-sm font-medium text-text-secondary mb-2">Date Range</label>
+                    <select id="dateRangeFilter" class="w-full px-3 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                        <option value="30">Last 30 Days</option>
+                        <option value="90">Last 90 Days</option>
+                        <option value="365">Last Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+
+                <!-- Employee Groups -->
+                <div>
+                    <label class="block text-sm font-medium text-text-secondary mb-2">Employee Groups</label>
+                    <select id="employeeGroupFilter" class="w-full px-3 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                        <option value="all">All Employees</option>
+                        <option value="executives">Executives</option>
+                        <option value="managers">Managers</option>
+                        <option value="safety-officers">Safety Officers</option>
+                        <option value="field-workers">Field Workers</option>
+                    </select>
+                </div>
+
+                <!-- Project Categories -->
+                <div>
+                    <label class="block text-sm font-medium text-text-secondary mb-2">Project Categories</label>
+                    <select id="projectCategoryFilter" class="w-full px-3 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                        <option value="all">All Projects</option>
+                        <option value="active">Active Projects</option>
+                        <option value="completed">Completed</option>
+                        <option value="at-risk">At Risk</option>
+                        <option value="delayed">Delayed</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Saved Filter Presets -->
+            <div class="mt-4 pt-4 border-t border-border">
+                <label class="block text-sm font-medium text-text-secondary mb-2">Saved Filter Presets</label>
+                <div class="flex flex-wrap gap-2">
+                    <button class="px-3 py-1 text-sm bg-primary-50 text-primary rounded-md hover:bg-primary-100 transition-micro">Executive Summary</button>
+                    <button class="px-3 py-1 text-sm bg-accent-50 text-accent rounded-md hover:bg-accent-100 transition-micro">Safety Focus</button>
+                    <button class="px-3 py-1 text-sm bg-success-50 text-success rounded-md hover:bg-success-100 transition-micro">Project Performance</button>
+                    <button class="px-3 py-1 text-sm bg-warning-50 text-warning rounded-md hover:bg-warning-100 transition-micro">Risk Analysis</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Report Builder Workspace (9 cols) -->
+            <div class="lg:col-span-9">
+                <!-- Report Type Selector -->
+                <div class="card p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Report Type Selection</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Executive Summary -->
+                        <div class="report-type-card border-2 border-border rounded-lg p-4 cursor-pointer hover:border-primary transition-micro" data-type="executive">
+                            <div class="flex items-center justify-center h-16 bg-primary-50 rounded-lg mb-3">
+                                <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-medium text-text-primary mb-1">Executive Summary</h4>
+                            <p class="text-sm text-text-secondary">High-level KPIs and trends</p>
+                        </div>
+
+                        <!-- Operational Details -->
+                        <div class="report-type-card border-2 border-border rounded-lg p-4 cursor-pointer hover:border-primary transition-micro" data-type="operational">
+                            <div class="flex items-center justify-center h-16 bg-accent-50 rounded-lg mb-3">
+                                <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-medium text-text-primary mb-1">Operational Details</h4>
+                            <p class="text-sm text-text-secondary">Detailed project metrics</p>
+                        </div>
+
+                        <!-- Safety Analytics -->
+                        <div class="report-type-card border-2 border-primary rounded-lg p-4 cursor-pointer bg-primary-50" data-type="safety">
+                            <div class="flex items-center justify-center h-16 bg-error-50 rounded-lg mb-3">
+                                <svg class="w-8 h-8 text-error" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-medium text-text-primary mb-1">Safety Analytics</h4>
+                            <p class="text-sm text-text-secondary">Incident tracking & trends</p>
+                        </div>
+
+                        <!-- Custom Report -->
+                        <div class="report-type-card border-2 border-border rounded-lg p-4 cursor-pointer hover:border-primary transition-micro" data-type="custom">
+                            <div class="flex items-center justify-center h-16 bg-success-50 rounded-lg mb-3">
+                                <svg class="w-8 h-8 text-success" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-medium text-text-primary mb-1">Custom Report</h4>
+                            <p class="text-sm text-text-secondary">Build your own template</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Report Builder -->
+                <div class="card p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Report Builder - Safety Analytics</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">Preview</button>
+                            <button class="px-3 py-1 text-sm border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">Configure</button>
+                        </div>
+                    </div>
+
+                    <!-- Drag & Drop Metric Selection -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <!-- Available Metrics -->
+                        <div>
+                            <h4 class="text-sm font-medium text-text-secondary mb-3">Available Metrics</h4>
+                            <div class="space-y-2 max-h-48 overflow-y-auto">
+                                <div class="metric-item p-3 border border-border rounded-md cursor-move hover:bg-secondary-50 transition-micro" draggable="true">
+                                    <div class="flex items-center space-x-3">
+                                        <svg class="w-4 h-4 text-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 16a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+                                        </svg>
+                                        <span class="text-sm font-medium">Total Safety Incidents</span>
+                                    </div>
+                                </div>
+                                <div class="metric-item p-3 border border-border rounded-md cursor-move hover:bg-secondary-50 transition-micro" draggable="true">
+                                    <div class="flex items-center space-x-3">
+                                        <svg class="w-4 h-4 text-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        <span class="text-sm font-medium">Near Miss Reports</span>
+                                    </div>
+                                </div>
+                                <div class="metric-item p-3 border border-border rounded-md cursor-move hover:bg-secondary-50 transition-micro" draggable="true">
+                                    <div class="flex items-center space-x-3">
+                                        <svg class="w-4 h-4 text-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <span class="text-sm font-medium">Safety Training Compliance</span>
+                                    </div>
+                                </div>
+                                <div class="metric-item p-3 border border-border rounded-md cursor-move hover:bg-secondary-50 transition-micro" draggable="true">
+                                    <div class="flex items-center space-x-3">
+                                        <svg class="w-4 h-4 text-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <span class="text-sm font-medium">Risk Assessment Scores</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Selected Metrics -->
+                        <div>
+                            <h4 class="text-sm font-medium text-text-secondary mb-3">Selected Metrics</h4>
+                            <div id="selectedMetrics" class="min-h-48 p-4 border-2 border-dashed border-border rounded-md bg-secondary-50">
+                                <div class="selected-metric p-3 bg-white border border-border rounded-md mb-2">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <svg class="w-4 h-4 text-error" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 16a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+                                            </svg>
+                                            <span class="text-sm font-medium">Total Safety Incidents</span>
+                                        </div>
+                                        <button class="text-text-secondary hover:text-error transition-micro">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="selected-metric p-3 bg-white border border-border rounded-md">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <svg class="w-4 h-4 text-warning" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            <span class="text-sm font-medium">Near Miss Reports</span>
+                                        </div>
+                                        <button class="text-text-secondary hover:text-error transition-micro">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Configuration -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-text-secondary mb-2">Chart Type</label>
+                            <select id="chartType" class="w-full px-3 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                                <option value="line">Line Chart</option>
+                                <option value="bar">Bar Chart</option>
+                                <option value="pie">Pie Chart</option>
+                                <option value="doughnut">Doughnut Chart</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-secondary mb-2">Aggregation</label>
+                            <select id="aggregation" class="w-full px-3 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                                <option value="sum">Sum</option>
+                                <option value="average">Average</option>
+                                <option value="count">Count</option>
+                                <option value="max">Maximum</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-secondary mb-2">Group By</label>
+                            <select id="groupBy" class="w-full px-3 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                                <option value="sector">Sector</option>
+                                <option value="month">Month</option>
+                                <option value="project">Project</option>
+                                <option value="severity">Severity</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Chart Preview -->
+                    <div class="bg-secondary-50 rounded-lg p-4">
+                        <h4 class="text-sm font-medium text-text-secondary mb-3">Chart Preview</h4>
+                        <div class="relative h-64">
+                            <canvas id="reportPreviewChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generated Report Preview -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Safety Analytics Report</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                                <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                                Export HTML
+                            </button>
+                            <button class="px-3 py-1 text-sm border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                                <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"/>
+                                </svg>
+                                Export PDF
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Report Summary Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-error-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-error">Total Incidents</p>
+                                    <p class="text-2xl font-bold text-error mt-1">23</p>
+                                </div>
+                                <div class="p-2 bg-error-100 rounded-lg">
+                                    <svg class="w-6 h-6 text-error" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-warning-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-warning">Near Misses</p>
+                                    <p class="text-2xl font-bold text-warning mt-1">47</p>
+                                </div>
+                                <div class="p-2 bg-warning-100 rounded-lg">
+                                    <svg class="w-6 h-6 text-warning" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-success-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-success">Training Compliance</p>
+                                    <p class="text-2xl font-bold text-success mt-1">94.2%</p>
+                                </div>
+                                <div class="p-2 bg-success-100 rounded-lg">
+                                    <svg class="w-6 h-6 text-success" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-accent-50 p-4 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-accent">Risk Score</p>
+                                    <p class="text-2xl font-bold text-accent mt-1">7.3</p>
+                                </div>
+                                <div class="p-2 bg-accent-100 rounded-lg">
+                                    <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Table -->
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-border">
+                            <thead class="bg-secondary-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-micro">
+                                        Sector
+                                        <svg class="w-4 h-4 inline ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                                        </svg>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-micro">
+                                        Incidents
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-micro">
+                                        Near Misses
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-micro">
+                                        Compliance %
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+                                        Trend
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-border">
+                                <tr class="hover:bg-secondary-50 transition-micro">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-text-primary">Oil & Gas</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">8</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">15</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">92.1%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span class="text-sm text-success">Improving</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-secondary-50 transition-micro">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-text-primary">Infrastructure</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">12</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">23</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">89.7%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <svg class="w-4 h-4 text-error mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span class="text-sm text-error">Declining</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-secondary-50 transition-micro">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-2 h-2 bg-success rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-text-primary">Energy</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">3</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">9</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">96.8%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span class="text-sm text-success">Improving</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between mt-4">
+                        <div class="text-sm text-text-secondary">
+                            Showing 1 to 3 of 3 results
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm border border-border text-text-secondary rounded-md cursor-not-allowed opacity-50">
+                                Previous
+                            </button>
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">1</button>
+                            <button class="px-3 py-1 text-sm border border-border text-text-secondary rounded-md cursor-not-allowed opacity-50">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar (3 cols) -->
+            <div class="lg:col-span-3">
+                <!-- Saved Reports Library -->
+                <div class="card p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Saved Reports</h3>
+                        <button class="text-primary hover:text-primary-700 transition-micro">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="p-3 border border-border rounded-md hover:bg-secondary-50 transition-micro cursor-pointer">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h4 class="text-sm font-medium text-text-primary">Executive Safety Summary</h4>
+                                    <p class="text-xs text-text-secondary mt-1">Last updated: Nov 1, 2025</p>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <button class="text-text-secondary hover:text-primary transition-micro">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="text-text-secondary hover:text-error transition-micro">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 border border-border rounded-md hover:bg-secondary-50 transition-micro cursor-pointer">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h4 class="text-sm font-medium text-text-primary">Monthly Project Status</h4>
+                                    <p class="text-xs text-text-secondary mt-1">Last updated: Oct 30, 2025</p>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <button class="text-text-secondary hover:text-primary transition-micro">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="text-text-secondary hover:text-error transition-micro">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 border border-border rounded-md hover:bg-secondary-50 transition-micro cursor-pointer">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h4 class="text-sm font-medium text-text-primary">Employee Analytics Q4</h4>
+                                    <p class="text-xs text-text-secondary mt-1">Last updated: Oct 28, 2025</p>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <button class="text-text-secondary hover:text-primary transition-micro">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="text-text-secondary hover:text-error transition-micro">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scheduled Reports -->
+                <div class="card p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Scheduled Reports</h3>
+                        <button class="text-primary hover:text-primary-700 transition-micro">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="p-3 border border-border rounded-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-sm font-medium text-text-primary">Weekly Safety Report</h4>
+                                <span class="px-2 py-1 text-xs bg-success-100 text-success rounded-full">Active</span>
+                            </div>
+                            <p class="text-xs text-text-secondary mb-2">Every Monday at 9:00 AM</p>
+                            <div class="flex items-center space-x-2">
+                                <img src="https://images.unsplash.com/photo-1628145957152-31170e9e73f7" 
+                                     alt="Safety manager profile" 
+                                     class="w-5 h-5 rounded-full object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <span class="text-xs text-text-secondary">Sarah Johnson</span>
+                            </div>
+                        </div>
+
+                        <div class="p-3 border border-border rounded-md">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-sm font-medium text-text-primary">Monthly Executive Summary</h4>
+                                <span class="px-2 py-1 text-xs bg-primary-100 text-primary rounded-full">Active</span>
+                            </div>
+                            <p class="text-xs text-text-secondary mb-2">1st of every month at 8:00 AM</p>
+                            <div class="flex items-center space-x-2">
+                                <img src="https://images.unsplash.com/photo-1628595556262-4cffd053a4bf" 
+                                     alt="Executive manager profile" 
+                                     class="w-5 h-5 rounded-full object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <span class="text-xs text-text-secondary">Michael Chen</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sharing Options -->
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Share & Export</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Email Distribution -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-secondary mb-2">Email Distribution List</label>
+                            <div class="flex space-x-2">
+                                <input type="email" placeholder="Enter email address" 
+                                       class="flex-1 px-3 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+                                <button class="px-3 py-2 bg-primary text-white rounded-md hover:bg-primary-700 transition-micro">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="mt-2 space-y-1">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-text-secondary">john.mitchell@company.com</span>
+                                    <button class="text-error hover:text-error-600 transition-micro">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-text-secondary">sarah.johnson@company.com</span>
+                                    <button class="text-error hover:text-error-600 transition-micro">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Export Formats -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-secondary mb-2">Export Formats</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="px-3 py-2 border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro text-sm">
+                                    <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                    HTML
+                                </button>
+                                <button class="px-3 py-2 border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro text-sm">
+                                    <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                    CSV
+                                </button>
+                                <button class="px-3 py-2 border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro text-sm">
+                                    <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"/>
+                                    </svg>
+                                    PDF
+                                </button>
+                                <button class="px-3 py-2 border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro text-sm">
+                                    <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Excel
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Branding -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-secondary mb-2">Custom Branding</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="includeLogo" class="mr-2">
+                                    <label for="includeLogo" class="text-sm text-text-secondary">Include company logo</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="customColors" class="mr-2" checked>
+                                    <label for="customColors" class="text-sm text-text-secondary">Use brand colors</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="watermark" class="mr-2">
+                                    <label for="watermark" class="text-sm text-text-secondary">Add watermark</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Send Report Button -->
+                        <button class="w-full px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-700 transition-micro">
+                            Send Report Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-border">
+        <div class="grid grid-cols-5 gap-1">
+            <a href="executive_overview.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                </svg>
+                <span class="text-xs mt-1">Overview</span>
+            </a>
+            <a href="project_portfolio.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <span class="text-xs mt-1">Projects</span>
+            </a>
+            <a href="employee_analytics.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H17c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v5h2z"/>
+                </svg>
+                <span class="text-xs mt-1">Employees</span>
+            </a>
+            <a href="safety_intelligence.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                </svg>
+                <span class="text-xs mt-1">Safety</span>
+            </a>
+            <a href="reports_center.html" class="flex flex-col items-center py-2 px-1 text-primary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+                <span class="text-xs mt-1">Reports</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js Configuration and Interactive Features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Report Preview Chart
+            const reportPreviewCtx = document.getElementById('reportPreviewChart').getContext('2d');
+            new Chart(reportPreviewCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Oil & Gas', 'Infrastructure', 'Energy', 'Manufacturing'],
+                    datasets: [{
+                        label: 'Safety Incidents',
+                        data: [8, 12, 3, 7],
+                        borderColor: '#EF4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Near Misses',
+                        data: [15, 23, 9, 18],
+                        borderColor: '#F59E0B',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Report Type Selection
+            document.querySelectorAll('.report-type-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove active state from all cards
+                    document.querySelectorAll('.report-type-card').forEach(c => {
+                        c.classList.remove('border-primary', 'bg-primary-50');
+                        c.classList.add('border-border');
+                    });
+                    
+                    // Add active state to clicked card
+                    this.classList.remove('border-border');
+                    this.classList.add('border-primary', 'bg-primary-50');
+                    
+                    const reportType = this.dataset.type;
+                    console.log('Selected report type:', reportType);
+                    
+                    // Update report builder based on selection
+                    updateReportBuilder(reportType);
+                });
+            });
+
+            // Filter change handlers
+            document.getElementById('sectorFilter').addEventListener('change', function() {
+                console.log('Sector filter changed to:', this.value);
+                updateReportData();
+            });
+
+            document.getElementById('dateRangeFilter').addEventListener('change', function() {
+                console.log('Date range changed to:', this.value);
+                updateReportData();
+            });
+
+            document.getElementById('employeeGroupFilter').addEventListener('change', function() {
+                console.log('Employee group changed to:', this.value);
+                updateReportData();
+            });
+
+            document.getElementById('projectCategoryFilter').addEventListener('change', function() {
+                console.log('Project category changed to:', this.value);
+                updateReportData();
+            });
+
+            // Chart configuration changes
+            document.getElementById('chartType').addEventListener('change', function() {
+                console.log('Chart type changed to:', this.value);
+                updateChartPreview();
+            });
+
+            document.getElementById('aggregation').addEventListener('change', function() {
+                console.log('Aggregation changed to:', this.value);
+                updateChartPreview();
+            });
+
+            document.getElementById('groupBy').addEventListener('change', function() {
+                console.log('Group by changed to:', this.value);
+                updateChartPreview();
+            });
+
+            // Drag and drop functionality for metrics
+            const metricItems = document.querySelectorAll('.metric-item');
+            const selectedMetrics = document.getElementById('selectedMetrics');
+
+            metricItems.forEach(item => {
+                item.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.setData('text/plain', this.innerHTML);
+                });
+            });
+
+            selectedMetrics.addEventListener('dragover', function(e) {
+                e.preventDefault();
+            });
+
+            selectedMetrics.addEventListener('drop', function(e) {
+                e.preventDefault();
+                const data = e.dataTransfer.getData('text/plain');
+                
+                // Create new selected metric element
+                const newMetric = document.createElement('div');
+                newMetric.className = 'selected-metric p-3 bg-white border border-border rounded-md mb-2';
+                newMetric.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        ${data}
+                        <button class="text-text-secondary hover:text-error transition-micro" onclick="this.parentElement.parentElement.remove()">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                
+                this.appendChild(newMetric);
+                updateChartPreview();
+            });
+
+            // Button event handlers
+            document.getElementById('newReportBtn').addEventListener('click', function() {
+                console.log('Creating new report...');
+                // Reset form and show report builder
+            });
+
+            document.getElementById('saveFilterBtn').addEventListener('click', function() {
+                console.log('Saving filter preset...');
+                // Save current filter configuration
+            });
+
+            document.getElementById('resetFilterBtn').addEventListener('click', function() {
+                console.log('Resetting filters...');
+                // Reset all filters to default values
+                document.getElementById('sectorFilter').value = 'all';
+                document.getElementById('dateRangeFilter').value = '30';
+                document.getElementById('employeeGroupFilter').value = 'all';
+                document.getElementById('projectCategoryFilter').value = 'all';
+                updateReportData();
+            });
+
+            // Helper functions
+            function updateReportBuilder(reportType) {
+                // Update report builder interface based on selected type
+                console.log('Updating report builder for:', reportType);
+            }
+
+            function updateReportData() {
+                // Refresh report data based on current filters
+                console.log('Updating report data...');
+            }
+
+            function updateChartPreview() {
+                // Update chart preview based on current configuration
+                console.log('Updating chart preview...');
+            }
+
+            // Auto-save functionality
+            setInterval(function() {
+                // Auto-save report configuration
+                console.log('Auto-saving report configuration...');
+            }, 30000); // Every 30 seconds
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

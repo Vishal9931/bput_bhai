@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopManagement Dashboard</title>
+    <title>Executive Management Portal</title>
     <link rel="stylesheet" href="css1/main.css">
     <style>
         body {
@@ -17,19 +17,31 @@
             align-items: center;
         }
         
-        .loading-container {
+        .redirect-container {
             text-align: center;
-            color: white;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
         }
         
         .loading-spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 20px auto;
         }
         
         @keyframes spin {
@@ -37,33 +49,57 @@
             100% { transform: rotate(360deg); }
         }
         
-        .loading-text {
-            font-size: 18px;
-            font-weight: 300;
-            margin-bottom: 10px;
+        .redirect-message {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
         }
         
-        .app-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 30px;
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            animation: progress 3s ease-in-out forwards;
+        }
+        
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
     </style>
-  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ftopmanagem2294back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fexecutive1323back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
   <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
   </head>
 <body>
-    <div class="loading-container">
-        <h1 class="app-title">TopManagement Dashboard</h1>
+    <div class="redirect-container">
+        <div class="logo">📊 EMP</div>
+        <h1>Executive Management Portal</h1>
+        <div class="redirect-message">Redirecting to Executive Overview...</div>
         <div class="loading-spinner"></div>
-        <div class="loading-text">Loading Dashboard...</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
     </div>
 
     <script>
-        // Redirect to dashboard page after a brief loading animation
+        // Redirect to executive overview page after 3 seconds
         setTimeout(function() {
-            window.location.href = 'pages1/dashboard.html';
-        }, 2000);
+            window.location.href = 'pages1/executive_overview.html';
+        }, 3000);
+        
+        // Optional: Allow immediate redirect on click
+        document.addEventListener('click', function() {
+            window.location.href = 'pages1/executive_overview.html';
+        });
     </script>
 <script id="dhws-dataInjector" src="/public/dhws-data-injector.js"></script>
 </body>

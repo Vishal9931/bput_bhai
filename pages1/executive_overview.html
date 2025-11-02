@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Overview - Executive Management Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fexecutive1323back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border shadow-executive-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-semibold text-text-primary">Executive Management Portal</h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="executive_overview.html" class="text-primary font-medium border-b-2 border-primary pb-1">Overview</a>
+                    <a href="project_portfolio.html" class="text-text-secondary hover:text-primary transition-micro">Projects</a>
+                    <a href="employee_analytics.html" class="text-text-secondary hover:text-primary transition-micro">Employees</a>
+                    <a href="safety_intelligence.html" class="text-text-secondary hover:text-primary transition-micro">Safety</a>
+                    <a href="reports_center.html" class="text-text-secondary hover:text-primary transition-micro">Reports</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-micro">
+                            <img src="https://images.unsplash.com/photo-1538155421123-6a79813f5deb" 
+                                 alt="Executive profile photo" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <span class="text-sm font-medium">John Mitchell</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-text-primary mb-2">Executive Overview</h2>
+                <p class="text-text-secondary">Real-time business intelligence across all operational sectors</p>
+            </div>
+            
+            <!-- Controls -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4 lg:mt-0">
+                <!-- Sector Filter -->
+                <select id="sectorFilter" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="all">All Sectors</option>
+                    <option value="oil-gas">Oil & Gas</option>
+                    <option value="infrastructure">Infrastructure</option>
+                    <option value="energy">Energy</option>
+                </select>
+
+                <!-- Time Range -->
+                <select id="timeRange" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="30">Last 30 Days</option>
+                    <option value="90">Last 90 Days</option>
+                    <option value="365">Last 365 Days</option>
+                </select>
+
+                <!-- Refresh Indicator -->
+                <div class="flex items-center space-x-2 text-text-secondary">
+                    <div class="w-2 h-2 bg-success rounded-full animate-pulse-subtle"></div>
+                    <span class="text-sm">Live</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Active Projects Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Active Projects</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">247</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+12.5%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-primary-50 rounded-lg">
+                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Count Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Total Employees</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">3,847</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+8.3%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-accent-50 rounded-lg">
+                        <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H17c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v5h2zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm2 16v-7H9V9.5C9 8.67 8.33 8 7.5 8H4c-.83 0-1.5.67-1.5 1.5V15H4v7h3.5z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safety Incidents Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Safety Incidents</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">23</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-error mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-error text-sm font-medium">-15.2%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-error-50 rounded-lg">
+                        <svg class="w-8 h-8 text-error" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Score Card -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Performance Score</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">94.2%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+3.1%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-success-50 rounded-lg">
+                        <svg class="w-8 h-8 text-success" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <!-- Main Visualization Area -->
+            <div class="lg:col-span-8">
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Project Health & Safety Trends</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">Projects</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Safety</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart Container -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Project Health Pie Chart -->
+                        <div>
+                            <h4 class="text-sm font-medium text-text-secondary mb-4">Project Health Distribution</h4>
+                            <div class="relative h-64">
+                                <canvas id="projectHealthChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Safety Incident Trend -->
+                        <div>
+                            <h4 class="text-sm font-medium text-text-secondary mb-4">Safety Incident Trend (30 Days)</h4>
+                            <div class="relative h-64">
+                                <canvas id="safetyTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority Alerts Sidebar -->
+            <div class="lg:col-span-4">
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Priority Alerts</h3>
+                        <span class="px-2 py-1 text-xs bg-error text-white rounded-full">3 Critical</span>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Critical Alert -->
+                        <div class="border-l-4 border-error bg-error-50 p-4 rounded-r-md">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-5 h-5 text-error mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-error">Safety Incident - Oil Rig Alpha</h4>
+                                    <p class="text-sm text-text-secondary mt-1">Equipment malfunction reported. Immediate attention required.</p>
+                                    <p class="text-xs text-text-secondary mt-2">2 minutes ago</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Warning Alert -->
+                        <div class="border-l-4 border-warning bg-warning-50 p-4 rounded-r-md">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-5 h-5 text-warning mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-warning">Project Delay - Infrastructure Beta</h4>
+                                    <p class="text-sm text-text-secondary mt-1">Timeline extension needed due to resource constraints.</p>
+                                    <p class="text-xs text-text-secondary mt-2">15 minutes ago</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info Alert -->
+                        <div class="border-l-4 border-accent bg-accent-50 p-4 rounded-r-md">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-5 h-5 text-accent mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-accent">Resource Optimization</h4>
+                                    <p class="text-sm text-text-secondary mt-1">Energy sector showing 15% efficiency improvement.</p>
+                                    <p class="text-xs text-text-secondary mt-2">1 hour ago</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Alert -->
+                        <div class="border-l-4 border-success bg-success-50 p-4 rounded-r-md">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-5 h-5 text-success mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-success">Milestone Achieved</h4>
+                                    <p class="text-sm text-text-secondary mt-1">Project Gamma completed ahead of schedule.</p>
+                                    <p class="text-xs text-text-secondary mt-2">3 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full mt-4 px-4 py-2 text-sm text-primary border border-primary rounded-md hover:bg-primary-50 transition-micro">
+                        View All Alerts
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sector Performance Comparison -->
+        <div class="card p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-text-primary">Sector Performance Comparison</h3>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">Performance</button>
+                    <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Revenue</button>
+                    <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Safety</button>
+                </div>
+            </div>
+            
+            <div class="relative h-80">
+                <canvas id="sectorComparisonChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Export Actions -->
+        <div class="flex flex-col sm:flex-row items-center justify-between mt-8 p-4 bg-secondary-50 rounded-lg">
+            <div class="flex items-center space-x-2 mb-4 sm:mb-0">
+                <svg class="w-5 h-5 text-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-text-secondary">Export Options</span>
+            </div>
+            <div class="flex space-x-3">
+                <button class="px-4 py-2 text-sm bg-primary text-white rounded-md hover:bg-primary-700 transition-micro">
+                    Executive Summary PDF
+                </button>
+                <button class="px-4 py-2 text-sm border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                    Screenshot
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-border">
+        <div class="grid grid-cols-5 gap-1">
+            <a href="executive_overview.html" class="flex flex-col items-center py-2 px-1 text-primary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                </svg>
+                <span class="text-xs mt-1">Overview</span>
+            </a>
+            <a href="project_portfolio.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <span class="text-xs mt-1">Projects</span>
+            </a>
+            <a href="employee_analytics.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H17c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v5h2z"/>
+                </svg>
+                <span class="text-xs mt-1">Employees</span>
+            </a>
+            <a href="safety_intelligence.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                </svg>
+                <span class="text-xs mt-1">Safety</span>
+            </a>
+            <a href="reports_center.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+                <span class="text-xs mt-1">Reports</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js Configuration and Data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Project Health Pie Chart
+            const projectHealthCtx = document.getElementById('projectHealthChart').getContext('2d');
+            new Chart(projectHealthCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['On Track', 'At Risk', 'Delayed', 'Completed'],
+                    datasets: [{
+                        data: [156, 45, 23, 23],
+                        backgroundColor: ['#10B981', '#F59E0B', '#EF4444', '#3B82F6'],
+                        borderWidth: 0,
+                        cutout: '60%'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Safety Trend Line Chart
+            const safetyTrendCtx = document.getElementById('safetyTrendChart').getContext('2d');
+            new Chart(safetyTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Safety Incidents',
+                        data: [8, 6, 4, 5],
+                        borderColor: '#EF4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Sector Comparison Bar Chart
+            const sectorComparisonCtx = document.getElementById('sectorComparisonChart').getContext('2d');
+            new Chart(sectorComparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Oil & Gas', 'Infrastructure', 'Energy', 'Manufacturing'],
+                    datasets: [{
+                        label: 'Performance Score',
+                        data: [94.2, 87.5, 91.8, 89.3],
+                        backgroundColor: ['#1E3A8A', '#0EA5E9', '#10B981', '#F59E0B'],
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: '#E2E8F0'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Auto-refresh functionality
+            setInterval(function() {
+                // Simulate data refresh
+                console.log('Data refreshed at:', new Date().toLocaleTimeString());
+            }, 300000); // 5 minutes
+
+            // Filter change handlers
+            document.getElementById('sectorFilter').addEventListener('change', function() {
+                console.log('Sector filter changed to:', this.value);
+                // Implement filter logic here
+            });
+
+            document.getElementById('timeRange').addEventListener('change', function() {
+                console.log('Time range changed to:', this.value);
+                // Implement time range logic here
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

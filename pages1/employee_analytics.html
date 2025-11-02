@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Analytics - Executive Management Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fexecutive1323back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border shadow-executive-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-semibold text-text-primary">Executive Management Portal</h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="executive_overview.html" class="text-text-secondary hover:text-primary transition-micro">Overview</a>
+                    <a href="project_portfolio.html" class="text-text-secondary hover:text-primary transition-micro">Projects</a>
+                    <a href="employee_analytics.html" class="text-primary font-medium border-b-2 border-primary pb-1">Employees</a>
+                    <a href="safety_intelligence.html" class="text-text-secondary hover:text-primary transition-micro">Safety</a>
+                    <a href="reports_center.html" class="text-text-secondary hover:text-primary transition-micro">Reports</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-micro">
+                            <img src="https://images.unsplash.com/photo-1676245437710-235b3ad836a4" 
+                                 alt="Executive profile photo" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <span class="text-sm font-medium">John Mitchell</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-text-primary mb-2">Employee Analytics</h2>
+                <p class="text-text-secondary">Comprehensive workforce insights and lifecycle management</p>
+            </div>
+            
+            <!-- Controls -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4 lg:mt-0">
+                <!-- Department Filter -->
+                <select id="departmentFilter" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="all">All Departments</option>
+                    <option value="oil-gas">Oil & Gas</option>
+                    <option value="infrastructure">Infrastructure</option>
+                    <option value="energy">Energy</option>
+                    <option value="manufacturing">Manufacturing</option>
+                </select>
+
+                <!-- Role Filter -->
+                <select id="roleFilter" class="px-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="all">All Roles</option>
+                    <option value="manager">Managers</option>
+                    <option value="engineer">Engineers</option>
+                    <option value="safety-officer">Safety Officers</option>
+                    <option value="technician">Technicians</option>
+                </select>
+
+                <!-- Search -->
+                <div class="relative">
+                    <input type="text" id="employeeSearch" placeholder="Search employees..." 
+                           class="pl-10 pr-4 py-2 border border-border rounded-md bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:border-primary">
+                    <svg class="absolute left-3 top-2.5 h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+
+                <!-- Add Employee Button -->
+                <button id="addEmployeeBtn" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-700 transition-micro flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    <span>Add Employee</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Key Metrics Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Headcount -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro cursor-pointer" onclick="drillDownMetric('headcount')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Total Headcount</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">3,847</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+8.3%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-primary-50 rounded-lg">
+                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H17c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v5h2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sector Distribution -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro cursor-pointer" onclick="drillDownMetric('sectors')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Active Sectors</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">4</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-accent text-sm font-medium">Oil & Gas: 42%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-accent-50 rounded-lg">
+                        <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role Hierarchy -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro cursor-pointer" onclick="drillDownMetric('roles')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Management Roles</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">287</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-warning text-sm font-medium">7.5% of workforce</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-warning-50 rounded-lg">
+                        <svg class="w-8 h-8 text-warning" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turnover Rate -->
+            <div class="card p-6 hover:shadow-card-hover transition-micro cursor-pointer" onclick="drillDownMetric('turnover')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Turnover Rate</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">4.2%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="w-4 h-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">-2.1%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-success-50 rounded-lg">
+                        <svg class="w-8 h-8 text-success" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <!-- Main Visualization Area -->
+            <div class="lg:col-span-9">
+                <div class="card p-6 mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Workforce Distribution Analysis</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">Distribution</button>
+                            <button class="px-3 py-1 text-sm text-text-secondary hover:bg-secondary-100 rounded-md transition-micro">Trends</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart Container -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Sector Distribution Donut Chart -->
+                        <div>
+                            <h4 class="text-sm font-medium text-text-secondary mb-4">Employee Distribution by Sector</h4>
+                            <div class="relative h-64">
+                                <canvas id="sectorDistributionChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Role Assignment Bar Chart -->
+                        <div>
+                            <h4 class="text-sm font-medium text-text-secondary mb-4">Role Assignment Breakdown</h4>
+                            <div class="relative h-64">
+                                <canvas id="roleAssignmentChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee Data Table -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Employee Directory</h3>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm text-text-secondary">Showing 1-10 of 3,847 employees</span>
+                            <button class="px-3 py-1 text-sm border border-border rounded-md hover:bg-secondary-50 transition-micro">
+                                Export Table
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-secondary-50 border-b border-border">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-text-secondary cursor-pointer hover:text-text-primary">
+                                        Employee ID
+                                        <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                                        </svg>
+                                    </th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-text-secondary cursor-pointer hover:text-text-primary">
+                                        Name & Photo
+                                    </th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-text-secondary cursor-pointer hover:text-text-primary">
+                                        Designation
+                                    </th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-text-secondary cursor-pointer hover:text-text-primary">
+                                        Sector
+                                    </th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-text-secondary cursor-pointer hover:text-text-primary">
+                                        Project
+                                    </th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-text-secondary cursor-pointer hover:text-text-primary">
+                                        Safety Training
+                                    </th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-text-secondary">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border">
+                                <!-- Employee Row 1 -->
+                                <tr class="hover:bg-secondary-50 transition-micro">
+                                    <td class="px-4 py-4 text-sm font-data text-text-primary">EMP-2024-001</td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="https://images.unsplash.com/photo-1617554980793-009061cdbb4f" 
+                                                 alt="Sarah Johnson profile photo" 
+                                                 class="h-10 w-10 rounded-full object-cover"
+                                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                            <div>
+                                                <p class="text-sm font-medium text-text-primary">Sarah Johnson</p>
+                                                <p class="text-sm text-text-secondary">sarah.johnson@company.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-text-primary">Senior Safety Officer</td>
+                                    <td class="px-4 py-4">
+                                        <span class="px-2 py-1 text-xs bg-primary-100 text-primary rounded-full">Oil & Gas</span>
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-text-primary">Alpha Drilling Platform</td>
+                                    <td class="px-4 py-4">
+                                        <span class="px-2 py-1 text-xs bg-success-100 text-success rounded-full">Certified</span>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-accent hover:text-accent-600 transition-micro" onclick="editEmployee('EMP-2024-001')">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error hover:text-error-600 transition-micro" onclick="deleteEmployee('EMP-2024-001')">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Employee Row 2 -->
+                                <tr class="hover:bg-secondary-50 transition-micro">
+                                    <td class="px-4 py-4 text-sm font-data text-text-primary">EMP-2024-002</td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="https://images.unsplash.com/photo-1645817095143-01b4feb70470" 
+                                                 alt="Michael Chen profile photo" 
+                                                 class="h-10 w-10 rounded-full object-cover"
+                                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                            <div>
+                                                <p class="text-sm font-medium text-text-primary">Michael Chen</p>
+                                                <p class="text-sm text-text-secondary">michael.chen@company.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-text-primary">Project Manager</td>
+                                    <td class="px-4 py-4">
+                                        <span class="px-2 py-1 text-xs bg-accent-100 text-accent rounded-full">Infrastructure</span>
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-text-primary">Bridge Construction Beta</td>
+                                    <td class="px-4 py-4">
+                                        <span class="px-2 py-1 text-xs bg-warning-100 text-warning rounded-full">Pending</span>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-accent hover:text-accent-600 transition-micro" onclick="editEmployee('EMP-2024-002')">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error hover:text-error-600 transition-micro" onclick="deleteEmployee('EMP-2024-002')">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Employee Row 3 -->
+                                <tr class="hover:bg-secondary-50 transition-micro">
+                                    <td class="px-4 py-4 text-sm font-data text-text-primary">EMP-2024-003</td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="https://images.unsplash.com/photo-1603122855585-d6c6c90ce382" 
+                                                 alt="Emily Rodriguez profile photo" 
+                                                 class="h-10 w-10 rounded-full object-cover"
+                                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                            <div>
+                                                <p class="text-sm font-medium text-text-primary">Emily Rodriguez</p>
+                                                <p class="text-sm text-text-secondary">emily.rodriguez@company.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-text-primary">Energy Engineer</td>
+                                    <td class="px-4 py-4">
+                                        <span class="px-2 py-1 text-xs bg-success-100 text-success rounded-full">Energy</span>
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-text-primary">Solar Farm Gamma</td>
+                                    <td class="px-4 py-4">
+                                        <span class="px-2 py-1 text-xs bg-success-100 text-success rounded-full">Certified</span>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-accent hover:text-accent-600 transition-micro" onclick="editEmployee('EMP-2024-003')">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error hover:text-error-600 transition-micro" onclick="deleteEmployee('EMP-2024-003')">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between mt-6">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-text-secondary">Rows per page:</span>
+                            <select class="px-2 py-1 border border-border rounded text-sm">
+                                <option>10</option>
+                                <option>25</option>
+                                <option>50</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-3 py-1 text-sm border border-border rounded hover:bg-secondary-50 transition-micro">Previous</button>
+                            <span class="px-3 py-1 text-sm bg-primary text-white rounded">1</span>
+                            <span class="px-3 py-1 text-sm text-text-secondary">2</span>
+                            <span class="px-3 py-1 text-sm text-text-secondary">3</span>
+                            <button class="px-3 py-1 text-sm border border-border rounded hover:bg-secondary-50 transition-micro">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="lg:col-span-3">
+                <!-- Quick Actions -->
+                <div class="card p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button id="quickAddBtn" class="w-full px-4 py-3 bg-primary text-white rounded-md hover:bg-primary-700 transition-micro flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            <span>Add New Employee</span>
+                        </button>
+                        <button class="w-full px-4 py-3 border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                            </svg>
+                            <span>Import CSV</span>
+                        </button>
+                        <button class="w-full px-4 py-3 border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <span>Export Report</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Additions -->
+                <div class="card p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Additions</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1629272039203-7d76fdaf1324" 
+                                 alt="David Kim profile photo" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-text-primary">David Kim</p>
+                                <p class="text-xs text-text-secondary">Safety Technician • 2 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1585066047759-3438c34cf676" 
+                                 alt="Alex Thompson profile photo" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-text-primary">Alex Thompson</p>
+                                <p class="text-xs text-text-secondary">Field Engineer • 5 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1668049221607-1f2df20621cc" 
+                                 alt="Lisa Wang profile photo" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-text-primary">Lisa Wang</p>
+                                <p class="text-xs text-text-secondary">Operations Manager • 1 day ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee Lifecycle Statistics -->
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Lifecycle Statistics</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">New Hires (30 days)</span>
+                            <span class="text-sm font-medium text-text-primary">47</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Departures (30 days)</span>
+                            <span class="text-sm font-medium text-text-primary">23</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Promotions (30 days)</span>
+                            <span class="text-sm font-medium text-text-primary">15</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-text-secondary">Training Completed</span>
+                            <span class="text-sm font-medium text-text-primary">89%</span>
+                        </div>
+                        <div class="w-full bg-secondary-200 rounded-full h-2 mt-2">
+                            <div class="bg-success h-2 rounded-full" style="width: 89%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Employee Modal -->
+    <div id="addEmployeeModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay fixed inset-0" onclick="closeModal()"></div>
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="card max-w-2xl w-full p-6 transform transition-modal">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-text-primary">Add New Employee</h3>
+                    <button onclick="closeModal()" class="text-text-secondary hover:text-text-primary transition-micro">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <form id="addEmployeeForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Employee ID (Auto-generated) -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Employee ID</label>
+                            <input type="text" id="employeeId" value="EMP-2024-004" readonly 
+                                   class="w-full px-3 py-2 border border-border rounded-md bg-secondary-50 text-text-secondary">
+                        </div>
+
+                        <!-- Full Name -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Full Name *</label>
+                            <input type="text" id="fullName" required 
+                                   class="w-full px-3 py-2 border border-border rounded-md focus:ring-2 focus:ring-primary focus:border-primary">
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Email Address *</label>
+                            <input type="email" id="email" required 
+                                   class="w-full px-3 py-2 border border-border rounded-md focus:ring-2 focus:ring-primary focus:border-primary">
+                            <p id="emailError" class="text-error text-xs mt-1 hidden">Email already exists</p>
+                        </div>
+
+                        <!-- Designation -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Designation *</label>
+                            <select id="designation" required 
+                                    class="w-full px-3 py-2 border border-border rounded-md focus:ring-2 focus:ring-primary focus:border-primary">
+                                <option value="">Select Designation</option>
+                                <option value="Safety Officer">Safety Officer</option>
+                                <option value="Project Manager">Project Manager</option>
+                                <option value="Engineer">Engineer</option>
+                                <option value="Technician">Technician</option>
+                                <option value="Supervisor">Supervisor</option>
+                            </select>
+                        </div>
+
+                        <!-- Sector -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Sector *</label>
+                            <select id="sector" required 
+                                    class="w-full px-3 py-2 border border-border rounded-md focus:ring-2 focus:ring-primary focus:border-primary">
+                                <option value="">Select Sector</option>
+                                <option value="oil-gas">Oil & Gas</option>
+                                <option value="infrastructure">Infrastructure</option>
+                                <option value="energy">Energy</option>
+                                <option value="manufacturing">Manufacturing</option>
+                            </select>
+                        </div>
+
+                        <!-- Project Assignment -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Project Assignment</label>
+                            <select id="projectAssignment" 
+                                    class="w-full px-3 py-2 border border-border rounded-md focus:ring-2 focus:ring-primary focus:border-primary">
+                                <option value="">Select Project</option>
+                                <option value="alpha-drilling">Alpha Drilling Platform</option>
+                                <option value="bridge-beta">Bridge Construction Beta</option>
+                                <option value="solar-gamma">Solar Farm Gamma</option>
+                                <option value="manufacturing-delta">Manufacturing Delta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex items-center justify-end space-x-4 pt-6 border-t border-border">
+                        <button type="button" onclick="closeModal()" 
+                                class="px-4 py-2 border border-border text-text-primary rounded-md hover:bg-secondary-50 transition-micro">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-700 transition-micro">
+                            Add Employee
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-border">
+        <div class="grid grid-cols-5 gap-1">
+            <a href="executive_overview.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                </svg>
+                <span class="text-xs mt-1">Overview</span>
+            </a>
+            <a href="project_portfolio.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <span class="text-xs mt-1">Projects</span>
+            </a>
+            <a href="employee_analytics.html" class="flex flex-col items-center py-2 px-1 text-primary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H17c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v5h2z"/>
+                </svg>
+                <span class="text-xs mt-1">Employees</span>
+            </a>
+            <a href="safety_intelligence.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.7C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                </svg>
+                <span class="text-xs mt-1">Safety</span>
+            </a>
+            <a href="reports_center.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+                <span class="text-xs mt-1">Reports</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js Configuration and Data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sector Distribution Donut Chart
+            const sectorDistributionCtx = document.getElementById('sectorDistributionChart').getContext('2d');
+            new Chart(sectorDistributionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Oil & Gas', 'Infrastructure', 'Energy', 'Manufacturing'],
+                    datasets: [{
+                        data: [1615, 1154, 770, 308],
+                        backgroundColor: ['#1E3A8A', '#0EA5E9', '#10B981', '#F59E0B'],
+                        borderWidth: 0,
+                        cutout: '60%'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    onClick: function(event, elements) {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const sector = this.data.labels[index];
+                            filterBySector(sector);
+                        }
+                    }
+                }
+            });
+
+            // Role Assignment Bar Chart
+            const roleAssignmentCtx = document.getElementById('roleAssignmentChart').getContext('2d');
+            new Chart(roleAssignmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Managers', 'Engineers', 'Safety Officers', 'Technicians', 'Supervisors'],
+                    datasets: [{
+                        label: 'Employee Count',
+                        data: [287, 1245, 523, 1456, 336],
+                        backgroundColor: ['#1E3A8A', '#0EA5E9', '#10B981', '#F59E0B', '#EF4444'],
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    onClick: function(event, elements) {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const role = this.data.labels[index];
+                            filterByRole(role);
+                        }
+                    }
+                }
+            });
+
+            // Initialize form handlers
+            initializeFormHandlers();
+            initializeSearch();
+            initializeFilters();
+        });
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('addEmployeeModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            generateEmployeeId();
+        }
+
+        function closeModal() {
+            document.getElementById('addEmployeeModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            document.getElementById('addEmployeeForm').reset();
+            document.getElementById('emailError').classList.add('hidden');
+        }
+
+        function generateEmployeeId() {
+            const currentYear = new Date().getFullYear();
+            const nextId = String(Math.floor(Math.random() * 1000) + 1).padStart(3, '0');
+            document.getElementById('employeeId').value = `EMP-${currentYear}-${nextId}`;
+        }
+
+        // Form Handlers
+        function initializeFormHandlers() {
+            // Add Employee Button
+            document.getElementById('addEmployeeBtn').addEventListener('click', openModal);
+            document.getElementById('quickAddBtn').addEventListener('click', openModal);
+
+            // Form Submission
+            document.getElementById('addEmployeeForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    id: document.getElementById('employeeId').value,
+                    name: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    designation: document.getElementById('designation').value,
+                    sector: document.getElementById('sector').value,
+                    project: document.getElementById('projectAssignment').value
+                };
+
+                // Email validation
+                if (validateEmail(formData.email)) {
+                    addEmployee(formData);
+                    closeModal();
+                    showSuccessMessage('Employee added successfully!');
+                } else {
+                    document.getElementById('emailError').classList.remove('hidden');
+                }
+            });
+
+            // Email validation on input
+            document.getElementById('email').addEventListener('input', function() {
+                document.getElementById('emailError').classList.add('hidden');
+            });
+        }
+
+        // Search Functionality
+        function initializeSearch() {
+            const searchInput = document.getElementById('employeeSearch');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                filterEmployees(searchTerm);
+            });
+        }
+
+        // Filter Functions
+        function initializeFilters() {
+            document.getElementById('departmentFilter').addEventListener('change', function() {
+                applyFilters();
+            });
+
+            document.getElementById('roleFilter').addEventListener('change', function() {
+                applyFilters();
+            });
+        }
+
+        function applyFilters() {
+            const department = document.getElementById('departmentFilter').value;
+            const role = document.getElementById('roleFilter').value;
+            console.log('Applying filters:', { department, role });
+            // Implement filter logic here
+        }
+
+        function filterBySector(sector) {
+            document.getElementById('departmentFilter').value = sector.toLowerCase().replace(' & ', '-');
+            applyFilters();
+        }
+
+        function filterByRole(role) {
+            document.getElementById('roleFilter').value = role.toLowerCase();
+            applyFilters();
+        }
+
+        function filterEmployees(searchTerm) {
+            // Implement search logic here
+            console.log('Searching for:', searchTerm);
+        }
+
+        // CRUD Operations
+        function addEmployee(data) {
+            // Save to localStorage
+            let employees = JSON.parse(localStorage.getItem('employees') || '[]');
+            employees.push({
+                ...data,
+                dateAdded: new Date().toISOString(),
+                safetyTraining: 'Pending'
+            });
+            localStorage.setItem('employees', JSON.stringify(employees));
+            
+            // Update UI optimistically
+            updateEmployeeTable();
+        }
+
+        function editEmployee(employeeId) {
+            console.log('Editing employee:', employeeId);
+            // Implement edit functionality
+        }
+
+        function deleteEmployee(employeeId) {
+            if (confirm('Are you sure you want to delete this employee?')) {
+                console.log('Deleting employee:', employeeId);
+                // Implement delete functionality
+            }
+        }
+
+        // Utility Functions
+        function validateEmail(email) {
+            const existingEmployees = JSON.parse(localStorage.getItem('employees') || '[]');
+            return !existingEmployees.some(emp => emp.email === email);
+        }
+
+        function updateEmployeeTable() {
+            // Refresh table data
+            console.log('Updating employee table...');
+        }
+
+        function showSuccessMessage(message) {
+            // Create and show success notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-success text-white px-6 py-3 rounded-md shadow-lg z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Drill-down Functions
+        function drillDownMetric(metric) {
+            console.log('Drilling down into metric:', metric);
+            // Implement drill-down functionality
+        }
+
+        // Export Functions
+        function exportEmployeeData() {
+            const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+            const csvContent = convertToCSV(employees);
+            downloadCSV(csvContent, 'employee_data.csv');
+        }
+
+        function convertToCSV(data) {
+            if (!data.length) return '';
+            
+            const headers = Object.keys(data[0]);
+            const csvRows = [headers.join(',')];
+            
+            for (const row of data) {
+                const values = headers.map(header => {
+                    const escaped = ('' + row[header]).replace(/"/g, '\\"');
+                    return `"${escaped}"`;
+                });
+                csvRows.push(values.join(','));
+            }
+            
+            return csvRows.join('\n');
+        }
+
+        function downloadCSV(content, filename) {
+            const blob = new Blob([content], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
